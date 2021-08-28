@@ -1,0 +1,104 @@
+package analizadores;
+import Errores.Excepciones;
+import java_cup.runtime.Symbol;
+import java.util.ArrayList; 
+
+%% 
+%class Lexico
+%public 
+%cupsym sym
+%line 
+%char 
+%cup 
+%unicode
+%ignorecase
+
+%{
+    public ArrayList<Excepciones> Errores; 
+%}
+
+%init{ 
+    yyline = 1; 
+    yychar = 1;
+    Errores = new ArrayList();
+%init} 
+
+BLANCOS = [ \r\t\n]+
+COMENTLINEA = ("//".*\n)|("//".*\r\n)|("//".*\r)
+COMENTMULTILINEA = "<!""!"*([^!>]|[^!]">"|"!"[^>])*"!"*"!>"
+ESPECIALES =  [\\]("n"|"'"|"\"")+
+ENTERO=[0-9]+
+DD=[0-9]+("."[  |0-9]+)?
+LETRA = [a-zA-Z]
+IDENTIFICADOR = {LETRA}({LETRA}|"_"|{ENTERO})*
+CASOA = [0-9]+"~"[0-9]+
+CASOB = [A-Z]+"~"[A-Z]+
+CASOC = [a-z]+"~"[a-z]+
+CASOE = (["!"-"/"]|[":"-"@"]|["["-"`"]|["{"-"}"])+"~"+(["!"-"/"]|[":"-"@"]|["["-"`"]|["{"-"}"])
+CASOD = ([0-9]|[A-Z]|[a-z])+"~"([0-9]|[A-Z]|[a-z])+
+CUERPOCONJUNTO = {CASOA}|{CASOB}|{CASOC}|{CASOE}|{CASOD}
+BPCADENA = "\""[^"\""]*"\""
+
+
+%%
+
+{BLANCOS} {} 
+{COMENTLINEA} {}
+{COMENTMULTILINEA} {}
+{ESPECIALES} {return new Symbol(sym.ESPECIALES,yyline,yychar, yytext());}
+
+"class" {return new Symbol(sym.BPCLASS,yyline,yychar,yytect());}
+"var" {return new Symbol(sym.BPVAR,yyline,yychar,yytect());}
+"let" {return new Symbol(sym.BPLET,yyline,yychar,yytect());}
+"const" {return new Symbol(sym.BPCNST,yyline,yychar,yytect());}
+"if" {return new Symbol(sym.BPIF,yyline,yychar,yytect());}
+"else" {return new Symbol(sym.BPELSE,yyline,yychar,yytect());}
+"for" {return new Symbol(sym.BPFOR,yyline,yychar,yytect());}
+"while" {return new Symbol(sym.BPWHILE,yyline,yychar,yytect());}
+"do" {return new Symbol(sym.BPDO,yyline,yychar,yytect());}
+"switch" {return new Symbol(sym.BPSWITCH,yyline,yychar,yytect());}
+"case" {return new Symbol(sym.BPCASE,yyline,yychar,yytect());}
+"console" {return new Symbol(sym.BPCONS,yyline,yychar,yytect());}
+"log" {return new Symbol(sym.BPLOG,yyline,yychar,yytect());}
+"require" {return new Symbol(sym.BPRQRE,yyline,yychar,yytect());}
+";" {return new Symbol(sym.BPPTCOMA,yyline,yychar, yytext());}
+":" {return new Symbol(sym.BPDOSPUNTOS,yyline,yychar, yytext());} 
+"." {return new Symbol(sym.BPPUNTO,yyline,yychar, yytext());} 
+"," {return new Symbol(sym.BPCOMA,yyline,yychar, yytext());} 
+"(" {return new Symbol(sym.BPPARIZQ,yyline,yychar, yytext());} 
+")" {return new Symbol(sym.BPPARDER,yyline,yychar, yytext());} 
+"{" {return new Symbol(sym.BPLLAIZQ,yyline,yychar, yytext());} 
+"}" {return new Symbol(sym.BPLLADER,yyline,yychar, yytext());} 
+"+" {return new Symbol(sym.BPMAS,yyline,yychar, yytext());} 
+"-" {return new Symbol(sym.BPGUION,yyline,yychar, yytext());} 
+"*" {return new Symbol(sym.BPPOR,yyline,yychar, yytext());} 
+"**" {return new Symbol(sym.BPPON,yyline,yychar, yytext());} 
+"/" {return new Symbol(sym.BPDIVIDIR,yyline,yychar, yytext());}
+">" {return new Symbol(sym.BPMAYOR,yyline,yychar, yytext());}
+"<" {return new Symbol(sym.BPMENOR,yyline,yychar, yytext());}
+"?" {return new Symbol(sym.BPPREGUNTA,yyline,yychar, yytext());}
+"%" {return new Symbol(sym.BPMOD,yyline,yychar, yytext());}
+"&" {return new Symbol(sym.BPYAND,yyline,yychar, yytext());}
+"||" {return new Symbol(sym.BPOOR,yyline,yychar, yytext());}
+"=" {return new Symbol(sym.BPEQUAL,yyline,yychar, yytext());}
+"!" {return new Symbol(sym.BPNEG,yyline,yychar, yytext());}
+ 
+\n {yychar=1;}
+\n {yyline=1;}
+
+
+{ENTERO} {return new Symbol(sym.ENTERO,yyline,yychar, yytext());} 
+{DD} {return new Symbol(sym.DECIMAL,yyline,yychar, yytext());}
+{IDENTIFICADOR} {return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
+{CUERPOCONJUNTO} {return new Symbol(sym.CUERPOCONJUNTO,yyline,yychar, yytext());}
+{BPCADENA} {return new Symbol(sym.EECADENA,yyline,yychar, yytext());}
+
+
+ 
+. {
+    Errores.add(new Excepciones("Léxico", "Caracter no válido detectado: " + yytext(), yyline + "", yychar + ""));
+    /*
+     *System.out.println("Este es un error lexico: "+yytext()+
+     *", en la linea: "+yyline+", en la columna: "+yychar);
+     */
+  }

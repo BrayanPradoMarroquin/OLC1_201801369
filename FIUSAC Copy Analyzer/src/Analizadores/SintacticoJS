@@ -1,0 +1,76 @@
+package analizadores;
+import java_cup.runtime.*;
+import java.util.ArrayList;
+
+parser code 
+{:
+    public String Resulto = "";
+    
+    
+:} 
+
+terminal String BPCLASS, BPVAR, BPLET, BPCNST;
+terminal String BPIF,BPELSE, BPFOR;
+terminal String BPWHILE, BPDO, BPSWITCH, BPCASE;
+terminal String BPCONS,BPLOG;
+terminal String BPRQRE, BPPTCOMA, BPDOSPUNTOS;
+terminal String BPPUNTO, BPCOMA, BPPARIZQ, BPPARDER;
+terminal String BPLLAIZQ, BPLLADER;
+terminal String BPMAS, BPGUION, BPPOR, BPPON, BPDIVIDIR, BPMAYOR, BPMENOR;
+terminal String BPPREGUNTA, BPMOD, BPYAND, BPOOR, BPEQUAL, BPNEG;
+terminal String IDENTIFICADOR, BPCADENA, DD;
+
+
+non terminal nodo ini, contenidogeneral ,cuerpo, graficas, titulos, ejesx, contenidox, valoresbarras, contenidov, titulosx, tituloy, Arch;
+
+precedence left BPDEG,BPGBARRAS,BPGPIE,BPGLINEAS;
+precedence left BPGRE;
+
+start with ini;
+
+ini::=BPGRE BPLLAIZQ contenidogeneral BPLLADER {};
+
+contenidogeneral::=BPDEG BPLLAIZQ cuerpo BPLLADER graficas {};
+
+cuerpo::=BPSTG IDENTIFICADOR BPEQUAL BPCADENA BPPTCOMA {}
+        |BPDOUBLE IDENTIFICADOR BPEQUAL DD BPPTCOMA {}
+        | cuerpo {}
+;
+
+graficas::=BPGBARRAS BPLLAIZQ titulos ejesx valoresbarras titulosx tituloy BPLLADER {}
+            |BPGPIE BPLLAIZQ titulos ejesx valoresbarras BPLLADER {}
+            |BPGLINEAS BPLLAIZQ titulos Arch BPLLADER {}
+            |graficas {}
+;
+
+titulos::=BPTITULO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {}
+                |BPTITULO BPDOSPUNTOS BPCADENA BPPTCOMA {}
+;
+
+ejesx::=BPEJEX BPDOSPUNTOS BPCORIZQ contenidox BPCORDER {};
+
+contenidox::=BPCADENA {}
+            |BPCOMA {}
+            |IDENTIFICADOR {}
+            |contenidox {}
+;
+
+valoresbarras::=BPVALORES BPDOSPUNTOS BPCORIZQ contenidov BPCORDER {};
+
+contenidov::=DD {}
+            |BPCOMA {}
+            |IDENTIFICADOR {}
+            |contenidov {}
+;
+
+titulosx::=BPTTX BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {}
+         |BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA {}
+;
+
+tituloy::=BPTTY BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {}
+         |BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA {}
+;
+
+Arch::=BPARCHIVO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {}
+      |BPARCHIVO BPDOSPUNTOS BPCADENA BPPTCOMA {}
+;

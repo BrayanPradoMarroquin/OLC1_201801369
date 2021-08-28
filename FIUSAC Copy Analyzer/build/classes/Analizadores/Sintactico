@@ -1,0 +1,74 @@
+package analizadores;
+import java_cup.runtime.*;
+import java.util.ArrayList;
+
+parser code 
+{:
+    public String Resulto = "";
+    
+    
+:} 
+
+terminal String BPDEG, BPGRE, BPSTG, BPDOUBLE;
+terminal String BPGBARRAS,BPTITULO, BPEJEX;
+terminal String BPVALORES, BPTTX, BPTTY, BPGPIE;
+terminal String BPGLINEAS,BPARCHIVO;
+terminal String BPPTCOMA, BPDOSPUNTOS, BPCOMA;
+terminal String BPCORIZQ, BPCORDER, BPLLAIZQ, BPLLADER;
+terminal String BPEQUAL;
+terminal String IDENTIFICADOR, BPCADENA, DD;
+
+
+non terminal nodo ini, contenidogeneral ,cuerpo, graficas, titulos, ejesx, contenidox, valoresbarras, contenidov, titulosx, tituloy, Arch;
+
+precedence left BPDEG,BPGBARRAS,BPGPIE,BPGLINEAS;
+precedence left BPGRE;
+
+start with ini;
+
+ini::=BPGRE BPLLAIZQ contenidogeneral BPLLADER {};
+
+contenidogeneral::=BPDEG BPLLAIZQ cuerpo BPLLADER graficas {};
+
+cuerpo::=BPSTG IDENTIFICADOR BPEQUAL BPCADENA BPPTCOMA {}
+        |BPDOUBLE IDENTIFICADOR BPEQUAL DD BPPTCOMA {}
+        | cuerpo {}
+;
+
+graficas::=BPGBARRAS BPLLAIZQ titulos ejesx valoresbarras titulosx tituloy BPLLADER {}
+            |BPGPIE BPLLAIZQ titulos ejesx valoresbarras BPLLADER {}
+            |BPGLINEAS BPLLAIZQ titulos Arch BPLLADER {}
+            |graficas {}
+;
+
+titulos::=BPTITULO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {}
+         |BPTITULO BPDOSPUNTOS BPCADENA BPPTCOMA {}
+;
+
+ejesx::=BPEJEX BPDOSPUNTOS BPCORIZQ contenidox BPCORDER {};
+
+contenidox::=BPCADENA {}
+            |BPCOMA {}
+            |IDENTIFICADOR {}
+            |contenidox {}
+;
+
+valoresbarras::=BPVALORES BPDOSPUNTOS BPCORIZQ contenidov BPCORDER {};
+
+contenidov::=DD {}
+            |BPCOMA {}
+            |IDENTIFICADOR {}
+            |contenidov {}
+;
+
+titulosx::=BPTTX BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {}
+         |BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA {}
+;
+
+tituloy::=BPTTY BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {}
+         |BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA {}
+;
+
+Arch::=BPARCHIVO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {}
+      |BPARCHIVO BPDOSPUNTOS BPCADENA BPPTCOMA {}
+;
