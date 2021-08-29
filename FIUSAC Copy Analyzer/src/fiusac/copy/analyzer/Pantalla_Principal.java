@@ -5,12 +5,21 @@
  */
 package fiusac.copy.analyzer;
 
+import analizadores.Lexico;
+import analizadores.Sintactico;
+import analizadores.sym;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import fiusac.copy.analyzer.Pestañas;
 import java.awt.MenuComponent;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.Reader;
+import java.io.StringReader;
+import java.nio.file.Files;
+import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -46,7 +55,8 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         JT_1 = new javax.swing.JTextArea();
-        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JL_Console = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         JM_Abrir = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -84,8 +94,10 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
         JPPestañas.addTab("Datos Generados", jPanel2);
 
-        jLabel3.setBackground(new java.awt.Color(153, 153, 153));
-        jLabel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        JL_Console.setColumns(20);
+        JL_Console.setRows(5);
+        JL_Console.setEnabled(false);
+        jScrollPane1.setViewportView(JL_Console);
 
         JM_Abrir.setText("Abrir");
         JM_Abrir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -122,6 +134,11 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jMenuBar1.add(jMenu3);
 
         JM_Ejecutar.setText("Ejecutar");
+        JM_Ejecutar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JM_EjecutarMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(JM_Ejecutar);
 
         JM_Reportes.setText("Reportes");
@@ -150,8 +167,8 @@ public class Pantalla_Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(JPPestañas, javax.swing.GroupLayout.PREFERRED_SIZE, 526, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -161,11 +178,15 @@ public class Pantalla_Principal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JPPestañas)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(JPPestañas)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
@@ -188,28 +209,23 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
     private void JM_AbrirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JM_AbrirMouseClicked
         // TODO add your handling code here:
+        analizadores.Sintactico pars;
         JFileChooser abrir = new JFileChooser();
         
-        FileNameExtensionFilter extension = new FileNameExtensionFilter(".txt", "txt");
-        
+        FileNameExtensionFilter extension = new FileNameExtensionFilter(".fca", "fca");
         abrir.setFileFilter(extension);
+        abrir.showOpenDialog(this);
+        File archivo = new File(abrir.getSelectedFile().getAbsolutePath());
         
-        int seleccion = abrir.showOpenDialog(this);
-        
-        if (seleccion == JFileChooser.APPROVE_OPTION) {
-            
-            File fichero = abrir.getSelectedFile();
-            
-            try (FileReader fr = new FileReader(fichero)){        
-                int valor = fr.read();
-                while (valor != -1) {                    
-                    cadena = cadena + (char) valor;
-                    valor = fr.read();
-                }
-                JT_1.setText(cadena);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        try {            
+            String st  = new String(Files.readAllBytes(archivo.toPath()));
+            JT_1.setText(st);
+            //pars = new analizadores.Sintactico(new analizadores.Lexico(new FileInputStream(abrir.getSelectedFile())));
+            //pars.parse();
+            JL_Console.setText(JL_Console.getText()+"Si accedio :) \n");
+        } catch (Exception e) {
+            System.out.println("Error fatal en compilación de entrada.");
+            System.out.println("Causa: "+e.getCause());
         }
     }//GEN-LAST:event_JM_AbrirMouseClicked
 
@@ -222,6 +238,11 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_JM_AbrirActionPerformed
+
+    private void JM_EjecutarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JM_EjecutarMouseClicked
+        // TODO add your handling code here:
+        analizer();
+    }//GEN-LAST:event_JM_EjecutarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -259,6 +280,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea JL_Console;
     private javax.swing.JMenu JM_Abrir;
     private javax.swing.JMenu JM_Cerrar;
     private javax.swing.JMenu JM_Ejecutar;
@@ -267,11 +289,26 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     private javax.swing.JTextArea JT_1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
+
+    private void analizer() {
+        String texto = JT_1.getText();
+        JL_Console.setText("Iniciando Analisis \n");
+        Sintactico sintax = new Sintactico(new Lexico(new StringReader(texto)));
+        try {
+            sintax.parse();
+            System.out.println(JL_Console.getText()+ "Analisis Correctamente \n");
+        } catch (Exception e) {
+            JL_Console.setText(JL_Console.getText()+"Error en el analisis Lexico \n");
+            Symbol sym = sintax.getS();
+            JL_Console.setText(JL_Console.getText()+ "Error de Sintaxis Linea: " + (sym.right+1) + " Columna: " + (sym.left+1) + " Texto: \"" + sym.value + "\"");
+        }
+        JL_Console.setText(JL_Console.getText()+"Analisis Finalizado \n");
+    } 
 }

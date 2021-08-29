@@ -5,8 +5,15 @@ import java.util.ArrayList;
 parser code 
 {:
     public String Resulto = "";
+    private Symbol s;
+
+    public void error_sintax(Symbol s){
+        this.s = s;
+    }
     
-    
+    public Symbol getS(){
+        return this.s;
+    }
 :} 
 
 terminal String BPDEG, BPGRE, BPSTG, BPDOUBLE;
@@ -19,56 +26,55 @@ terminal String BPEQUAL;
 terminal String IDENTIFICADOR, BPCADENA, DD;
 
 
-non terminal nodo ini, contenidogeneral ,cuerpo, graficas, titulos, ejesx, contenidox, valoresbarras, contenidov, titulosx, tituloy, Arch;
-
-precedence left BPDEG,BPGBARRAS,BPGPIE,BPGLINEAS;
-precedence left BPGRE;
+non terminal ini, contenidogeneral ,cuerpo, graficas, titulos, ejesx, contenidox, valoresbarras, contenidov, titulosx, tituloy, Arch;
 
 start with ini;
 
-ini::=BPGRE BPLLAIZQ contenidogeneral BPLLADER {};
+ini::=BPGRE BPLLAIZQ contenidogeneral BPLLADER {::};
 
-contenidogeneral::=BPDEG BPLLAIZQ cuerpo BPLLADER graficas {};
+contenidogeneral::=BPDEG BPLLAIZQ cuerpo graficas {::};
 
-cuerpo::=BPSTG IDENTIFICADOR BPEQUAL BPCADENA BPPTCOMA {}
-        |BPDOUBLE IDENTIFICADOR BPEQUAL DD BPPTCOMA {}
-        | cuerpo {}
+cuerpo::=BPSTG IDENTIFICADOR BPEQUAL BPCADENA BPPTCOMA {::}
+        |BPDOUBLE IDENTIFICADOR BPEQUAL DD BPPTCOMA {::}
+        |cuerpo BPLLADER {::}
+        |BPLLADER {::}
 ;
 
-graficas::=BPGBARRAS BPLLAIZQ titulos ejesx valoresbarras titulosx tituloy BPLLADER {}
-            |BPGPIE BPLLAIZQ titulos ejesx valoresbarras BPLLADER {}
-            |BPGLINEAS BPLLAIZQ titulos Arch BPLLADER {}
-            |graficas {}
+graficas::=BPGBARRAS BPLLAIZQ titulos ejesx valoresbarras titulosx tituloy BPLLADER{::}
+            |BPGPIE BPLLAIZQ titulos ejesx valoresbarras BPLLADER {::}
+            |BPGLINEAS BPLLAIZQ titulos Arch BPLLADER {::}
 ;
 
-titulos::=BPTITULO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {}
-         |BPTITULO BPDOSPUNTOS BPCADENA BPPTCOMA {}
+titulos::=BPTITULO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {::}
+         |BPTITULO BPDOSPUNTOS BPCADENA BPPTCOMA {::}
 ;
 
-ejesx::=BPEJEX BPDOSPUNTOS BPCORIZQ contenidox BPCORDER {};
+ejesx::=BPEJEX BPDOSPUNTOS BPCORIZQ contenidox {::};
 
-contenidox::=BPCADENA {}
-            |BPCOMA {}
-            |IDENTIFICADOR {}
-            |contenidox {}
+contenidox::=BPCADENA {::}
+            |BPCOMA {::}
+            |IDENTIFICADOR {::}
+            |contenidox BPCORDER {::}
+            |BPCORDER {::}
 ;
 
-valoresbarras::=BPVALORES BPDOSPUNTOS BPCORIZQ contenidov BPCORDER {};
+valoresbarras::=BPVALORES BPDOSPUNTOS BPCORIZQ contenidov {::};
 
-contenidov::=DD {}
-            |BPCOMA {}
-            |IDENTIFICADOR {}
-            |contenidov {}
+contenidov::=DD {::}
+            |BPCOMA {::}
+            |IDENTIFICADOR {::}
+            |contenidov BPCORDER {::}
+            |BPCORDER {::}
 ;
 
-titulosx::=BPTTX BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {}
-         |BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA {}
+titulosx::=BPTTX BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {::}
+         |BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA {::}
 ;
 
-tituloy::=BPTTY BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {}
-         |BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA {}
+tituloy::=BPTTY BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {::}
+         |BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA {::}
 ;
 
-Arch::=BPARCHIVO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {}
-      |BPARCHIVO BPDOSPUNTOS BPCADENA BPPTCOMA {}
+Arch::=BPARCHIVO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {::}
+      |BPARCHIVO BPDOSPUNTOS BPCADENA BPPTCOMA {::}
 ;

@@ -47,7 +47,7 @@ BPCADENA = "\""[^"\""]*"\""
 {COMENTMULTILINEA} {}
 {ESPECIALES} {return new Symbol(sym.ESPECIALES,yyline,yychar, yytext());}
 
-"class" {return new Symbol(sym.BPCLASS,yyline,yychar,yytect());}
+"Class" {return new Symbol(sym.BPCLASS,yyline,yychar,yytect());}
 "var" {return new Symbol(sym.BPVAR,yyline,yychar,yytect());}
 "let" {return new Symbol(sym.BPLET,yyline,yychar,yytect());}
 "const" {return new Symbol(sym.BPCNST,yyline,yychar,yytect());}
