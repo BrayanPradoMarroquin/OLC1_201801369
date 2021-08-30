@@ -26,49 +26,54 @@ terminal String BPEQUAL;
 terminal String IDENTIFICADOR, BPCADENA, DD;
 
 
-non terminal ini, contenidogeneral ,cuerpo, graficas, titulos, ejesx, contenidox, valoresbarras, contenidov, titulosx, tituloy, Arch;
+non terminal ini, contenidogeneral ,cuerpo, graficas, titulos, ejesx, contenidox, valores, contenidov, titulox, tituloy, Arch;
 
 start with ini;
 
 ini::=BPGRE BPLLAIZQ contenidogeneral BPLLADER {::};
 
-contenidogeneral::=BPDEG BPLLAIZQ cuerpo graficas {::};
+contenidogeneral::=BPDEG BPLLAIZQ cuerpo BPLLADER graficas {::};
 
-cuerpo::=BPSTG IDENTIFICADOR BPEQUAL BPCADENA BPPTCOMA {::}
+cuerpo::=BPSTG IDENTIFICADOR BPEQUAL BPCADENA BPPTCOMA  {::}
         |BPDOUBLE IDENTIFICADOR BPEQUAL DD BPPTCOMA {::}
-        |cuerpo BPLLADER {::}
-        |BPLLADER {::}
+        |cuerpo BPSTG IDENTIFICADOR BPEQUAL BPCADENA BPPTCOMA {::}
+        |cuerpo BPDOUBLE IDENTIFICADOR BPEQUAL DD BPPTCOMA {::}
 ;
 
-graficas::=BPGBARRAS BPLLAIZQ titulos ejesx valoresbarras titulosx tituloy BPLLADER{::}
-            |BPGPIE BPLLAIZQ titulos ejesx valoresbarras BPLLADER {::}
+graficas::=BPGBARRAS BPLLAIZQ titulos ejesx valores titulox tituloy BPLLADER {::}
+            |BPGPIE BPLLAIZQ titulos ejesx valores BPLLADER {::}
             |BPGLINEAS BPLLAIZQ titulos Arch BPLLADER {::}
+            |graficas BPGBARRAS BPLLAIZQ titulos ejesx valores titulox tituloy BPLLADER {::}
+            |graficas BPGPIE BPLLAIZQ titulos ejesx valores BPLLADER {::}
+            |graficas BPGLINEAS BPLLAIZQ titulos Arch BPLLADER {::}
 ;
 
 titulos::=BPTITULO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {::}
          |BPTITULO BPDOSPUNTOS BPCADENA BPPTCOMA {::}
 ;
 
-ejesx::=BPEJEX BPDOSPUNTOS BPCORIZQ contenidox {::};
+ejesx::=BPEJEX BPDOSPUNTOS BPCORIZQ contenidox BPCORDER BPPTCOMA {::};
 
-contenidox::=BPCADENA {::}
-            |BPCOMA {::}
+contenidox::=
+            contenidox BPCADENA {::}
+            |contenidox IDENTIFICADOR {::}
+            |contenidox BPCOMA {::}
+            |BPCADENA {::}
             |IDENTIFICADOR {::}
-            |contenidox BPCORDER {::}
-            |BPCORDER {::}
 ;
 
-valoresbarras::=BPVALORES BPDOSPUNTOS BPCORIZQ contenidov {::};
+valores::=BPVALORES BPDOSPUNTOS BPCORIZQ contenidov BPCORDER BPPTCOMA{::};
 
-contenidov::=DD {::}
-            |BPCOMA {::}
+contenidov::=
+            contenidov DD {::}
+            |contenidov IDENTIFICADOR {::}
+            |contenidov BPCOMA {::}
+            |DD {::}
             |IDENTIFICADOR {::}
-            |contenidov BPCORDER {::}
-            |BPCORDER {::}
 ;
 
-titulosx::=BPTTX BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {::}
-         |BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA {::}
+titulox::=BPTTX BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {::}
+         |BPTTX BPDOSPUNTOS BPCADENA BPPTCOMA {::}
 ;
 
 tituloy::=BPTTY BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {::}

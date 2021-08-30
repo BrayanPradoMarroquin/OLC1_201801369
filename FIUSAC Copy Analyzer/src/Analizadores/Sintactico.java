@@ -32,16 +32,17 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\036\000\002\002\004\000\002\002\006\000\002\003" +
-    "\006\000\002\004\007\000\002\004\007\000\002\004\004" +
-    "\000\002\004\003\000\002\005\012\000\002\005\010\000" +
-    "\002\005\007\000\002\006\006\000\002\006\006\000\002" +
-    "\007\006\000\002\010\003\000\002\010\003\000\002\010" +
-    "\003\000\002\010\004\000\002\010\003\000\002\011\006" +
-    "\000\002\012\003\000\002\012\003\000\002\012\003\000" +
-    "\002\012\004\000\002\012\003\000\002\013\006\000\002" +
-    "\013\006\000\002\014\006\000\002\014\006\000\002\015" +
-    "\006\000\002\015\006" });
+    "\000\041\000\002\002\004\000\002\002\006\000\002\003" +
+    "\007\000\002\004\007\000\002\004\007\000\002\004\010" +
+    "\000\002\004\010\000\002\005\012\000\002\005\010\000" +
+    "\002\005\007\000\002\005\013\000\002\005\011\000\002" +
+    "\005\010\000\002\006\006\000\002\006\006\000\002\007" +
+    "\010\000\002\010\004\000\002\010\004\000\002\010\004" +
+    "\000\002\010\003\000\002\010\003\000\002\011\010\000" +
+    "\002\012\004\000\002\012\004\000\002\012\004\000\002" +
+    "\012\003\000\002\012\003\000\002\013\006\000\002\013" +
+    "\006\000\002\014\006\000\002\014\006\000\002\015\006" +
+    "\000\002\015\006" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -49,55 +50,72 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\126\000\004\005\005\001\002\000\004\002\130\001" +
+    "\000\164\000\004\005\005\001\002\000\004\002\166\001" +
     "\002\000\004\026\006\001\002\000\004\004\007\001\002" +
     "\000\004\026\012\001\002\000\004\027\011\001\002\000" +
-    "\004\002\000\001\002\000\010\006\016\007\015\027\014" +
-    "\001\002\000\012\010\033\016\027\017\030\027\032\001" +
-    "\002\000\012\010\ufffb\016\ufffb\017\ufffb\027\ufffb\001\002" +
-    "\000\004\031\023\001\002\000\004\031\017\001\002\000" +
-    "\004\030\020\001\002\000\004\032\021\001\002\000\004" +
-    "\021\022\001\002\000\012\010\ufffe\016\ufffe\017\ufffe\027" +
-    "\ufffe\001\002\000\004\030\024\001\002\000\004\033\025" +
-    "\001\002\000\004\021\026\001\002\000\012\010\ufffd\016" +
-    "\ufffd\017\ufffd\027\ufffd\001\002\000\004\026\123\001\002" +
-    "\000\004\026\111\001\002\000\004\027\uffff\001\002\000" +
-    "\012\010\ufffc\016\ufffc\017\ufffc\027\ufffc\001\002\000\004" +
-    "\026\034\001\002\000\004\011\036\001\002\000\004\012" +
-    "\044\001\002\000\004\022\037\001\002\000\006\031\041" +
-    "\032\040\001\002\000\004\021\043\001\002\000\004\021" +
-    "\042\001\002\000\006\012\ufff7\020\ufff7\001\002\000\006" +
-    "\012\ufff6\020\ufff6\001\002\000\004\022\101\001\002\000" +
-    "\004\013\047\001\002\000\006\014\062\015\061\001\002" +
-    "\000\004\022\050\001\002\000\004\024\051\001\002\000" +
-    "\012\023\055\025\053\031\054\033\052\001\002\000\012" +
-    "\014\uffee\015\uffee\025\uffee\027\uffee\001\002\000\012\014" +
-    "\uffea\015\uffea\025\uffea\027\uffea\001\002\000\012\014\uffec" +
-    "\015\uffec\025\uffec\027\uffec\001\002\000\012\014\uffed\015" +
-    "\uffed\025\uffed\027\uffed\001\002\000\012\014\uffef\015\uffef" +
-    "\025\057\027\uffef\001\002\000\012\014\uffeb\015\uffeb\025" +
-    "\uffeb\027\uffeb\001\002\000\004\015\072\001\002\000\004" +
-    "\022\066\001\002\000\004\022\063\001\002\000\004\031" +
-    "\064\001\002\000\004\021\065\001\002\000\004\015\uffe9" +
-    "\001\002\000\004\032\067\001\002\000\004\021\070\001" +
-    "\002\000\004\015\uffe8\001\002\000\004\027\100\001\002" +
-    "\000\004\022\073\001\002\000\006\031\075\032\074\001" +
-    "\002\000\004\021\077\001\002\000\004\021\076\001\002" +
-    "\000\004\027\uffe7\001\002\000\004\027\uffe6\001\002\000" +
-    "\004\027\ufffa\001\002\000\004\024\102\001\002\000\012" +
-    "\023\106\025\103\031\105\032\104\001\002\000\006\013" +
-    "\ufff0\025\ufff0\001\002\000\006\013\ufff4\025\ufff4\001\002" +
-    "\000\006\013\ufff2\025\ufff2\001\002\000\006\013\ufff3\025" +
-    "\ufff3\001\002\000\006\013\ufff5\025\110\001\002\000\006" +
-    "\013\ufff1\025\ufff1\001\002\000\004\011\036\001\002\000" +
-    "\004\020\114\001\002\000\004\027\122\001\002\000\004" +
-    "\022\115\001\002\000\006\031\117\032\116\001\002\000" +
-    "\004\021\121\001\002\000\004\021\120\001\002\000\004" +
-    "\027\uffe5\001\002\000\004\027\uffe4\001\002\000\004\027" +
-    "\ufff8\001\002\000\004\011\036\001\002\000\004\012\044" +
-    "\001\002\000\004\013\047\001\002\000\004\027\127\001" +
-    "\002\000\004\027\ufff9\001\002\000\004\002\001\001\002" +
-    "" });
+    "\004\002\000\001\002\000\006\006\015\007\014\001\002" +
+    "\000\010\006\030\007\027\027\026\001\002\000\004\031" +
+    "\022\001\002\000\004\031\016\001\002\000\004\030\017" +
+    "\001\002\000\004\032\020\001\002\000\004\021\021\001" +
+    "\002\000\010\006\ufffe\007\ufffe\027\ufffe\001\002\000\004" +
+    "\030\023\001\002\000\004\033\024\001\002\000\004\021" +
+    "\025\001\002\000\010\006\ufffd\007\ufffd\027\ufffd\001\002" +
+    "\000\010\010\044\016\041\017\042\001\002\000\004\031" +
+    "\035\001\002\000\004\031\031\001\002\000\004\030\032" +
+    "\001\002\000\004\032\033\001\002\000\004\021\034\001" +
+    "\002\000\010\006\ufffc\007\ufffc\027\ufffc\001\002\000\004" +
+    "\030\036\001\002\000\004\033\037\001\002\000\004\021" +
+    "\040\001\002\000\010\006\ufffb\007\ufffb\027\ufffb\001\002" +
+    "\000\004\026\161\001\002\000\004\026\155\001\002\000" +
+    "\012\010\126\016\124\017\125\027\uffff\001\002\000\004" +
+    "\026\045\001\002\000\004\011\047\001\002\000\004\012" +
+    "\055\001\002\000\004\022\050\001\002\000\006\031\052" +
+    "\032\051\001\002\000\004\021\054\001\002\000\004\021" +
+    "\053\001\002\000\006\012\ufff4\020\ufff4\001\002\000\006" +
+    "\012\ufff3\020\ufff3\001\002\000\004\022\112\001\002\000" +
+    "\004\013\057\001\002\000\004\022\100\001\002\000\004" +
+    "\014\062\001\002\000\004\015\071\001\002\000\004\022" +
+    "\063\001\002\000\006\031\065\032\064\001\002\000\004" +
+    "\021\067\001\002\000\004\021\066\001\002\000\004\015" +
+    "\uffe6\001\002\000\004\015\uffe5\001\002\000\004\027\077" +
+    "\001\002\000\004\022\072\001\002\000\006\031\074\032" +
+    "\073\001\002\000\004\021\076\001\002\000\004\021\075" +
+    "\001\002\000\004\027\uffe4\001\002\000\004\027\uffe3\001" +
+    "\002\000\012\010\ufffa\016\ufffa\017\ufffa\027\ufffa\001\002" +
+    "\000\004\024\101\001\002\000\006\031\103\033\102\001" +
+    "\002\000\012\023\uffe8\025\uffe8\031\uffe8\033\uffe8\001\002" +
+    "\000\012\023\uffe7\025\uffe7\031\uffe7\033\uffe7\001\002\000" +
+    "\012\023\110\025\106\031\107\033\105\001\002\000\012" +
+    "\023\uffeb\025\uffeb\031\uffeb\033\uffeb\001\002\000\004\021" +
+    "\111\001\002\000\012\023\uffea\025\uffea\031\uffea\033\uffea" +
+    "\001\002\000\012\023\uffe9\025\uffe9\031\uffe9\033\uffe9\001" +
+    "\002\000\006\014\uffec\027\uffec\001\002\000\004\024\113" +
+    "\001\002\000\006\031\115\032\114\001\002\000\012\023" +
+    "\uffee\025\uffee\031\uffee\032\uffee\001\002\000\012\023\uffed" +
+    "\025\uffed\031\uffed\032\uffed\001\002\000\012\023\122\025" +
+    "\117\031\121\032\120\001\002\000\004\021\123\001\002" +
+    "\000\012\023\ufff1\025\ufff1\031\ufff1\032\ufff1\001\002\000" +
+    "\012\023\ufff0\025\ufff0\031\ufff0\032\ufff0\001\002\000\012" +
+    "\023\uffef\025\uffef\031\uffef\032\uffef\001\002\000\004\013" +
+    "\ufff2\001\002\000\004\026\150\001\002\000\004\026\136" +
+    "\001\002\000\004\026\127\001\002\000\004\011\047\001" +
+    "\002\000\004\012\055\001\002\000\004\013\057\001\002" +
+    "\000\004\014\062\001\002\000\004\015\071\001\002\000" +
+    "\004\027\135\001\002\000\012\010\ufff7\016\ufff7\017\ufff7" +
+    "\027\ufff7\001\002\000\004\011\047\001\002\000\004\020" +
+    "\140\001\002\000\004\022\143\001\002\000\004\027\142" +
+    "\001\002\000\012\010\ufff5\016\ufff5\017\ufff5\027\ufff5\001" +
+    "\002\000\006\031\145\032\144\001\002\000\004\021\147" +
+    "\001\002\000\004\021\146\001\002\000\004\027\uffe2\001" +
+    "\002\000\004\027\uffe1\001\002\000\004\011\047\001\002" +
+    "\000\004\012\055\001\002\000\004\013\057\001\002\000" +
+    "\004\027\154\001\002\000\012\010\ufff6\016\ufff6\017\ufff6" +
+    "\027\ufff6\001\002\000\004\011\047\001\002\000\004\020" +
+    "\140\001\002\000\004\027\160\001\002\000\012\010\ufff8" +
+    "\016\ufff8\017\ufff8\027\ufff8\001\002\000\004\011\047\001" +
+    "\002\000\004\012\055\001\002\000\004\013\057\001\002" +
+    "\000\004\027\165\001\002\000\012\010\ufff9\016\ufff9\017" +
+    "\ufff9\027\ufff9\001\002\000\004\002\001\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -105,36 +123,46 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\126\000\004\002\003\001\001\000\002\001\001\000" +
+    "\000\164\000\004\002\003\001\001\000\002\001\001\000" +
     "\002\001\001\000\004\003\007\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\004\004\012\001" +
-    "\001\000\004\005\030\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\004\006\034\001\001\000" +
-    "\004\007\044\001\001\000\002\001\001\000\002\001\001" +
-    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\011\045\001\001" +
-    "\000\004\013\057\001\001\000\002\001\001\000\002\001" +
-    "\001\000\004\012\055\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\004\014\070\001\001\000\002" +
+    "\001\001\000\002\001\001\000\004\005\042\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
     "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\004\006\045\001\001\000\004\007\055" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\004\011\057\001\001\000\002\001" +
+    "\001\000\004\013\060\001\001\000\004\014\067\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\004\010\106\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\004\006\111\001\001\000\004" +
-    "\015\112\001\001\000\002\001\001\000\002\001\001\000" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\004\012\103\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
+    "\010\115\001\001\000\002\001\001\000\002\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\004\006" +
-    "\123\001\001\000\004\007\124\001\001\000\004\011\125" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001" });
+    "\001\000\002\001\001\000\002\001\001\000\004\006\127" +
+    "\001\001\000\004\007\130\001\001\000\004\011\131\001" +
+    "\001\000\004\013\132\001\001\000\004\014\133\001\001" +
+    "\000\002\001\001\000\002\001\001\000\004\006\136\001" +
+    "\001\000\004\015\140\001\001\000\002\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\006\150\001\001\000\004\007\151\001\001\000" +
+    "\004\011\152\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\006\155\001\001\000\004\015\156\001\001\000" +
+    "\002\001\001\000\002\001\001\000\004\006\161\001\001" +
+    "\000\004\007\162\001\001\000\004\011\163\001\001\000" +
+    "\002\001\001\000\002\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -233,11 +261,11 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 2: // contenidogeneral ::= BPDEG BPLLAIZQ cuerpo graficas 
+          case 2: // contenidogeneral ::= BPDEG BPLLAIZQ cuerpo BPLLADER graficas 
             {
               Object RESULT =null;
 		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidogeneral",1, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidogeneral",1, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
@@ -260,25 +288,25 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 5: // cuerpo ::= cuerpo BPLLADER 
+          case 5: // cuerpo ::= cuerpo BPSTG IDENTIFICADOR BPEQUAL BPCADENA BPPTCOMA 
             {
               Object RESULT =null;
 		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("cuerpo",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("cuerpo",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 6: // cuerpo ::= BPLLADER 
+          case 6: // cuerpo ::= cuerpo BPDOUBLE IDENTIFICADOR BPEQUAL DD BPPTCOMA 
             {
               Object RESULT =null;
 		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("cuerpo",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("cuerpo",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 7: // graficas ::= BPGBARRAS BPLLAIZQ titulos ejesx valoresbarras titulosx tituloy BPLLADER 
+          case 7: // graficas ::= BPGBARRAS BPLLAIZQ titulos ejesx valores titulox tituloy BPLLADER 
             {
               Object RESULT =null;
 		
@@ -287,7 +315,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 8: // graficas ::= BPGPIE BPLLAIZQ titulos ejesx valoresbarras BPLLADER 
+          case 8: // graficas ::= BPGPIE BPLLAIZQ titulos ejesx valores BPLLADER 
             {
               Object RESULT =null;
 		
@@ -305,7 +333,34 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 10: // titulos ::= BPTITULO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA 
+          case 10: // graficas ::= graficas BPGBARRAS BPLLAIZQ titulos ejesx valores titulox tituloy BPLLADER 
+            {
+              Object RESULT =null;
+		
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-8)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 11: // graficas ::= graficas BPGPIE BPLLAIZQ titulos ejesx valores BPLLADER 
+            {
+              Object RESULT =null;
+		
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 12: // graficas ::= graficas BPGLINEAS BPLLAIZQ titulos Arch BPLLADER 
+            {
+              Object RESULT =null;
+		
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 13: // titulos ::= BPTITULO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA 
             {
               Object RESULT =null;
 		
@@ -314,7 +369,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 11: // titulos ::= BPTITULO BPDOSPUNTOS BPCADENA BPPTCOMA 
+          case 14: // titulos ::= BPTITULO BPDOSPUNTOS BPCADENA BPPTCOMA 
             {
               Object RESULT =null;
 		
@@ -323,43 +378,16 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 12: // ejesx ::= BPEJEX BPDOSPUNTOS BPCORIZQ contenidox 
+          case 15: // ejesx ::= BPEJEX BPDOSPUNTOS BPCORIZQ contenidox BPCORDER BPPTCOMA 
             {
               Object RESULT =null;
 		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("ejesx",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("ejesx",5, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 13: // contenidox ::= BPCADENA 
-            {
-              Object RESULT =null;
-		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidox",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
-            }
-          return CUP$Sintactico$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 14: // contenidox ::= BPCOMA 
-            {
-              Object RESULT =null;
-		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidox",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
-            }
-          return CUP$Sintactico$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 15: // contenidox ::= IDENTIFICADOR 
-            {
-              Object RESULT =null;
-		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidox",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
-            }
-          return CUP$Sintactico$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 16: // contenidox ::= contenidox BPCORDER 
+          case 16: // contenidox ::= contenidox BPCADENA 
             {
               Object RESULT =null;
 		
@@ -368,7 +396,25 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 17: // contenidox ::= BPCORDER 
+          case 17: // contenidox ::= contenidox IDENTIFICADOR 
+            {
+              Object RESULT =null;
+		
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidox",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 18: // contenidox ::= contenidox BPCOMA 
+            {
+              Object RESULT =null;
+		
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidox",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 19: // contenidox ::= BPCADENA 
             {
               Object RESULT =null;
 		
@@ -377,43 +423,25 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 18: // valoresbarras ::= BPVALORES BPDOSPUNTOS BPCORIZQ contenidov 
+          case 20: // contenidox ::= IDENTIFICADOR 
             {
               Object RESULT =null;
 		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valoresbarras",7, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidox",6, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 19: // contenidov ::= DD 
+          case 21: // valores ::= BPVALORES BPDOSPUNTOS BPCORIZQ contenidov BPCORDER BPPTCOMA 
             {
               Object RESULT =null;
 		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidov",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valores",7, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 20: // contenidov ::= BPCOMA 
-            {
-              Object RESULT =null;
-		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidov",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
-            }
-          return CUP$Sintactico$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 21: // contenidov ::= IDENTIFICADOR 
-            {
-              Object RESULT =null;
-		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidov",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
-            }
-          return CUP$Sintactico$result;
-
-          /*. . . . . . . . . . . . . . . . . . . .*/
-          case 22: // contenidov ::= contenidov BPCORDER 
+          case 22: // contenidov ::= contenidov DD 
             {
               Object RESULT =null;
 		
@@ -422,7 +450,25 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 23: // contenidov ::= BPCORDER 
+          case 23: // contenidov ::= contenidov IDENTIFICADOR 
+            {
+              Object RESULT =null;
+		
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidov",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 24: // contenidov ::= contenidov BPCOMA 
+            {
+              Object RESULT =null;
+		
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidov",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 25: // contenidov ::= DD 
             {
               Object RESULT =null;
 		
@@ -431,25 +477,34 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 24: // titulosx ::= BPTTX BPDOSPUNTOS IDENTIFICADOR BPPTCOMA 
+          case 26: // contenidov ::= IDENTIFICADOR 
             {
               Object RESULT =null;
 		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("titulosx",9, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidov",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 25: // titulosx ::= BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA 
+          case 27: // titulox ::= BPTTX BPDOSPUNTOS IDENTIFICADOR BPPTCOMA 
             {
               Object RESULT =null;
 		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("titulosx",9, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("titulox",9, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 26: // tituloy ::= BPTTY BPDOSPUNTOS IDENTIFICADOR BPPTCOMA 
+          case 28: // titulox ::= BPTTX BPDOSPUNTOS BPCADENA BPPTCOMA 
+            {
+              Object RESULT =null;
+		
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("titulox",9, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 29: // tituloy ::= BPTTY BPDOSPUNTOS IDENTIFICADOR BPPTCOMA 
             {
               Object RESULT =null;
 		
@@ -458,7 +513,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 27: // tituloy ::= BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA 
+          case 30: // tituloy ::= BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA 
             {
               Object RESULT =null;
 		
@@ -467,7 +522,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 28: // Arch ::= BPARCHIVO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA 
+          case 31: // Arch ::= BPARCHIVO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA 
             {
               Object RESULT =null;
 		
@@ -476,7 +531,7 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 29: // Arch ::= BPARCHIVO BPDOSPUNTOS BPCADENA BPPTCOMA 
+          case 32: // Arch ::= BPARCHIVO BPDOSPUNTOS BPCADENA BPPTCOMA 
             {
               Object RESULT =null;
 		

@@ -303,11 +303,12 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         Sintactico sintax = new Sintactico(new Lexico(new StringReader(texto)));
         try {
             sintax.parse();
-            System.out.println(JL_Console.getText()+ "Analisis Correctamente \n");
+            JL_Console.setText(JL_Console.getText()+ "Analisis Correcto \n");
+            
         } catch (Exception e) {
-            JL_Console.setText(JL_Console.getText()+"Error en el analisis Lexico \n");
-            Symbol sym = sintax.getS();
-            JL_Console.setText(JL_Console.getText()+ "Error de Sintaxis Linea: " + (sym.right+1) + " Columna: " + (sym.left+1) + " Texto: \"" + sym.value + "\"");
+            Symbol syma = sintax.getS();
+            JL_Console.setText(JL_Console.getText()+"Error en el analisis Sintactico  \n");
+            //JL_Console.setText(JL_Console.getText()+ "Error de Sintaxis Linea: " + (syma.right+1) + " Columna: " + (syma.left+1) + " Texto: \"" + syma.value + "\" \n");
         }
         JL_Console.setText(JL_Console.getText()+"Analisis Finalizado \n");
     } 
