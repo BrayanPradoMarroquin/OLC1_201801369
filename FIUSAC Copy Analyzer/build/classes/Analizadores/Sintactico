@@ -32,12 +32,13 @@ terminal String BPPTCOMA, BPDOSPUNTOS, BPCOMA;
 terminal String BPCORIZQ, BPCORDER, BPLLAIZQ, BPLLADER;
 terminal String BPEQUAL;
 terminal String IDENTIFICADOR, BPCADENA, DD;
+terminal String BPPAA, BPPAC, BPRUTA, BPCOMPARE, BPPUGE, BPPUES;
 
 
 non terminal ini, contenidogeneral, titulos;
 non terminal ArrayList<NodoVariable> cuerpo;
 non terminal ArrayList<NodoGrafica> graficas;
-non terminal datosgraficabarra, datosgraficapie, datosgraficalineal; 
+non terminal datosgraficabarra, datosgraficapie, datosgraficalineal, compara; 
 non terminal titulox, tituloy, Arch;
 non terminal ArrayList<String> contenidox, contenidov, ejesx, valores;
 
@@ -45,7 +46,8 @@ start with ini;
 
 ini::=BPGRE BPLLAIZQ contenidogeneral BPLLADER {::};
 
-contenidogeneral::=BPDEG BPLLAIZQ cuerpo BPLLADER graficas {::};
+contenidogeneral::=BPDEG BPLLAIZQ cuerpo BPLLADER graficas {::}
+                |compara BPDEG BPLLAIZQ cuerpo BPLLADER graficas {::};
 
 cuerpo::=BPSTG IDENTIFICADOR:var1 BPEQUAL BPCADENA:var2 BPPTCOMA  {:ListaVariables.add(new NodoVariable(var1, var2));:}
         |BPDOUBLE IDENTIFICADOR:var1 BPEQUAL DD:var2 BPPTCOMA {:ListaVariables.add(new NodoVariable(var1, var2));:}
@@ -128,3 +130,5 @@ tituloy::=BPTTY BPDOSPUNTOS IDENTIFICADOR:var1 BPPTCOMA {:RESULT=var1;:}
 Arch::=BPARCHIVO BPDOSPUNTOS IDENTIFICADOR:var1 BPPTCOMA {:RESULT=var1;:}
       |BPARCHIVO BPDOSPUNTOS BPCADENA:var1 BPPTCOMA {:RESULT=var1;:}
 ;
+
+compara::=BPCOMPARE;

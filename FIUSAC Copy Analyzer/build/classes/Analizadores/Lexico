@@ -25,6 +25,7 @@ DD=[0-9]+("."[  |0-9]+)?
 LETRA = [a-zA-Z]
 IDENTIFICADOR = {LETRA}({LETRA}|"_"|{ENTERO})*
 BPCADENA = "\""[^"\""]*"\""
+BPRUTA = "\'"[^"\'"]*"\'"
 
 
 %%
@@ -33,6 +34,9 @@ BPCADENA = "\""[^"\""]*"\""
 {COMENTLINEA} {}
 {COMENTMULTILINEA} {}
 
+PuntajeGeneral {return new Symbol(sym.BPPUGE,yyline,yychar,yytext());}
+PuntajeEspecifico {return new Symbol(sym.BPPUES,yyline,yychar,yytext());}
+"Compare" {return new Symbol(sym.BPCOMPARE,yyline,yychar,yytext());}
 DefinirGlobales {return new Symbol(sym.BPDEG,yyline,yychar,yytext());}
 GenerarReporteEstadistico {return new Symbol(sym.BPGRE,yyline,yychar,yytext());}
 string {return new Symbol(sym.BPSTG,yyline,yychar,yytext());}
@@ -50,7 +54,9 @@ Archivo {return new Symbol(sym.BPARCHIVO,yyline,yychar,yytext());}
 ":" {return new Symbol(sym.BPDOSPUNTOS,yyline,yychar, yytext());}  
 "," {return new Symbol(sym.BPCOMA,yyline,yychar, yytext());}  
 "{" {return new Symbol(sym.BPLLAIZQ,yyline,yychar, yytext());} 
-"}" {return new Symbol(sym.BPLLADER,yyline,yychar, yytext());} 
+"}" {return new Symbol(sym.BPLLADER,yyline,yychar, yytext());}
+"(" {return new Symbol(sym.BPPAA,yyline,yychar,yytext());} 
+")" {return new Symbol(sym.BPPAC,yyline,yychar,yytext());} 
 "[" {return new Symbol(sym.BPCORIZQ,yyline,yychar, yytext());} 
 "]" {return new Symbol(sym.BPCORDER,yyline,yychar, yytext());} 
 "=" {return new Symbol(sym.BPEQUAL,yyline,yychar, yytext());}
@@ -62,6 +68,7 @@ Archivo {return new Symbol(sym.BPARCHIVO,yyline,yychar,yytext());}
 {DD} {return new Symbol(sym.DD,yyline,yychar, yytext());}
 {IDENTIFICADOR} {return new Symbol(sym.IDENTIFICADOR,yyline,yychar, yytext());}
 {BPCADENA} {return new Symbol(sym.BPCADENA,yyline,yychar, yytext());}
+{BPRUTA} {return new Symbol(sym.BPRUTA,yyline,yychar, yytext());}
 
 
  

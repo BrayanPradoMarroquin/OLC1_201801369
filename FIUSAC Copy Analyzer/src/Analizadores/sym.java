@@ -12,16 +12,22 @@ public class sym {
   public static final int BPEQUAL = 22;
   public static final int BPCORIZQ = 18;
   public static final int BPCORDER = 19;
+  public static final int BPCOMPARE = 29;
+  public static final int BPRUTA = 28;
   public static final int BPDEG = 2;
   public static final int BPDOUBLE = 5;
   public static final int BPCOMA = 17;
   public static final int BPGRE = 3;
   public static final int BPCADENA = 24;
+  public static final int BPPUGE = 30;
+  public static final int BPPUES = 31;
   public static final int BPDOSPUNTOS = 16;
   public static final int BPARCHIVO = 14;
   public static final int BPGLINEAS = 13;
   public static final int EOF = 0;
+  public static final int BPPAC = 27;
   public static final int BPEJEX = 8;
+  public static final int BPPAA = 26;
   public static final int BPSTG = 4;
   public static final int BPVALORES = 9;
   public static final int DD = 25;
@@ -60,7 +66,13 @@ public class sym {
   "BPEQUAL",
   "IDENTIFICADOR",
   "BPCADENA",
-  "DD"
+  "DD",
+  "BPPAA",
+  "BPPAC",
+  "BPRUTA",
+  "BPCOMPARE",
+  "BPPUGE",
+  "BPPUES"
   };
 }
 
