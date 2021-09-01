@@ -47,7 +47,7 @@ start with ini;
 ini::=BPGRE BPLLAIZQ contenidogeneral BPLLADER {::};
 
 contenidogeneral::=BPDEG BPLLAIZQ cuerpo BPLLADER graficas {::}
-                |compara BPDEG BPLLAIZQ cuerpo BPLLADER graficas {::};
+                  |BPCOMPARE BPDEG BPLLAIZQ cuerpo BPLLADER graficas {::};
 
 cuerpo::=BPSTG IDENTIFICADOR:var1 BPEQUAL BPCADENA:var2 BPPTCOMA  {:ListaVariables.add(new NodoVariable(var1, var2));:}
         |BPDOUBLE IDENTIFICADOR:var1 BPEQUAL DD:var2 BPPTCOMA {:ListaVariables.add(new NodoVariable(var1, var2));:}
@@ -130,5 +130,3 @@ tituloy::=BPTTY BPDOSPUNTOS IDENTIFICADOR:var1 BPPTCOMA {:RESULT=var1;:}
 Arch::=BPARCHIVO BPDOSPUNTOS IDENTIFICADOR:var1 BPPTCOMA {:RESULT=var1;:}
       |BPARCHIVO BPDOSPUNTOS BPCADENA:var1 BPPTCOMA {:RESULT=var1;:}
 ;
-
-compara::=BPCOMPARE;
