@@ -52,7 +52,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     "\016\004\000\002\016\004\000\002\016\003\000\002\016" +
     "\003\000\002\012\006\000\002\012\006\000\002\013\006" +
     "\000\002\013\006\000\002\014\006\000\002\014\006\000" +
-    "\002\021\006" });
+    "\002\021\011" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -60,9 +60,9 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\214\000\004\005\005\001\002\000\004\002\216\001" +
+    "\000\217\000\004\005\005\001\002\000\004\002\221\001" +
     "\002\000\004\026\006\001\002\000\006\004\011\037\010" +
-    "\001\002\000\004\004\211\001\002\000\004\034\206\001" +
+    "\001\002\000\004\004\214\001\002\000\004\034\206\001" +
     "\002\000\004\026\014\001\002\000\004\027\013\001\002" +
     "\000\004\002\000\001\002\000\006\006\017\007\016\001" +
     "\002\000\010\006\032\007\031\027\030\001\002\000\004" +
@@ -161,13 +161,14 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     "\001\002\000\014\010\ufff6\016\ufff6\017\ufff6\027\ufff6\037" +
     "\010\001\002\000\012\010\ufff5\016\ufff5\017\ufff5\027\ufff5" +
     "\001\002\000\012\010\140\016\136\017\137\027\ufffd\001" +
-    "\002\000\004\035\207\001\002\000\004\021\210\001\002" +
-    "\000\014\004\uffc4\010\uffc4\016\uffc4\017\uffc4\027\uffc4\001" +
-    "\002\000\004\026\212\001\002\000\006\006\017\007\016" +
-    "\001\002\000\010\006\032\007\031\027\214\001\002\000" +
-    "\010\010\047\016\044\017\045\001\002\000\012\010\140" +
-    "\016\136\017\137\027\ufffe\001\002\000\004\002\001\001" +
-    "\002" });
+    "\002\000\004\032\207\001\002\000\004\023\210\001\002" +
+    "\000\004\032\211\001\002\000\004\035\212\001\002\000" +
+    "\004\021\213\001\002\000\014\004\uffc4\010\uffc4\016\uffc4" +
+    "\017\uffc4\027\uffc4\001\002\000\004\026\215\001\002\000" +
+    "\006\006\017\007\016\001\002\000\010\006\032\007\031" +
+    "\027\217\001\002\000\010\010\047\016\044\017\045\001" +
+    "\002\000\012\010\140\016\136\017\137\027\ufffe\001\002" +
+    "\000\004\002\001\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -175,7 +176,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\214\000\004\002\003\001\001\000\002\001\001\000" +
+    "\000\217\000\004\002\003\001\001\000\002\001\001\000" +
     "\002\001\001\000\006\003\011\021\006\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\004\005\014\001\001\000\002" +
@@ -226,8 +227,9 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     "\000\010\004\167\017\170\020\172\001\001\000\004\021" +
     "\203\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\004\005\212\001\001\000\002\001\001\000\004" +
-    "\006\214\001\001\000\002\001\001\000\002\001\001" });
+    "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
+    "\000\004\005\215\001\001\000\002\001\001\000\004\006" +
+    "\217\001\001\000\002\001\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -1044,11 +1046,11 @@ class CUP$Sintactico$actions {
           return CUP$Sintactico$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
-          case 61: // compara ::= BPCOMPARE BPPAA BPPAC BPPTCOMA 
+          case 61: // compara ::= BPCOMPARE BPPAA BPCADENA BPCOMA BPCADENA BPPAC BPPTCOMA 
             {
               ArrayList<String> RESULT =null;
 		
-              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("compara",15, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("compara",15, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
 
