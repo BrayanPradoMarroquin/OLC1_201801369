@@ -53,10 +53,10 @@ cuerpo::=BPSTG IDENTIFICADOR:var1 BPEQUAL BPCADENA:var2 BPPTCOMA  {:ListaVariabl
         |cuerpo BPDOUBLE IDENTIFICADOR:var1 BPEQUAL DD:var2 BPPTCOMA {:ListaVariables.add(new NodoVariable(var1, var2));:}
 ;
 
-graficas::=BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER {::}
+graficas::=BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER {:graficabarras.tipo=var1;:}
             |BPGPIE:var1 BPLLAIZQ datosgraficapie BPLLADER {::}
             |BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER {::}
-            |graficas BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER {::}
+            |graficas BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER {:graficabarras.tipo=var1;:}
             |graficas BPGPIE:var1 BPLLAIZQ datosgraficapie BPLLADER {::}
             |graficas BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER {::}
 ;
