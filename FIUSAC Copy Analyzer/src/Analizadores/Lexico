@@ -1,6 +1,5 @@
 package analizadores;
-import java_cup.runtime.*;
-
+import java_cup.runtime.*; 
 
 %% 
 %class Lexico
@@ -67,5 +66,6 @@ Archivo {return new Symbol(sym.BPARCHIVO,yyline,yychar,yytext());}
 
  
 . {
-    System.out.println("Este es un error lexico: " + yytext()+ ", en la linea: "+yyline+", en la columna: "+yychar);
-}
+    
+    System.out.println("Este es un error lexico: "+yytext()+", en la linea: "+yyline+", en la columna: "+yychar);
+  }

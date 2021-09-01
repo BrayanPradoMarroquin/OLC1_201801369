@@ -1,11 +1,19 @@
 package analizadores;
 import java_cup.runtime.*;
 import java.util.ArrayList;
+import Errores.*;
 
 parser code 
 {:
     public String Resulto = "";
     private Symbol s;
+    public ArrayList<NodoVariable> ListaVariables = new ArrayList();
+    public ArrayList<NodoGrafica> GraficasEjecutar = new ArrayList();
+    public ArrayList<String> Ejes = new ArrayList();
+    public ArrayList<String> valores = new ArrayList();
+    public NodoGrafica graficabarras = new NodoGrafica();
+    public NodoGrafica graficapie = new NodoGrafica();
+    public NodoGrafica graficalineas = new NodoGrafica();
 
     public void error_sintax(Symbol s){
         this.s = s;
@@ -13,7 +21,7 @@ parser code
     
     public Symbol getS(){
         return this.s;
-    }
+    } 
 :} 
 
 terminal String BPDEG, BPGRE, BPSTG, BPDOUBLE;
@@ -26,7 +34,12 @@ terminal String BPEQUAL;
 terminal String IDENTIFICADOR, BPCADENA, DD;
 
 
-non terminal ini, contenidogeneral ,cuerpo, graficas, titulos, ejesx, contenidox, valores, contenidov, titulox, tituloy, Arch;
+non terminal ini, contenidogeneral, titulos;
+non terminal ArrayList<NodoVariable> cuerpo;
+non terminal ArrayList<NodoGrafica> graficas;
+non terminal datosgraficabarra, datosgraficapie, datosgraficalineal; 
+non terminal titulox, tituloy, Arch;
+non terminal ArrayList<String> contenidox, contenidov, ejesx, valores;
 
 start with ini;
 
@@ -34,52 +47,78 @@ ini::=BPGRE BPLLAIZQ contenidogeneral BPLLADER {::};
 
 contenidogeneral::=BPDEG BPLLAIZQ cuerpo BPLLADER graficas {::};
 
-cuerpo::=BPSTG IDENTIFICADOR BPEQUAL BPCADENA BPPTCOMA  {::}
-        |BPDOUBLE IDENTIFICADOR BPEQUAL DD BPPTCOMA {::}
-        |cuerpo BPSTG IDENTIFICADOR BPEQUAL BPCADENA BPPTCOMA {::}
-        |cuerpo BPDOUBLE IDENTIFICADOR BPEQUAL DD BPPTCOMA {::}
+cuerpo::=BPSTG IDENTIFICADOR:var1 BPEQUAL BPCADENA:var2 BPPTCOMA  {:ListaVariables.add(new NodoVariable(var1, var2));:}
+        |BPDOUBLE IDENTIFICADOR:var1 BPEQUAL DD:var2 BPPTCOMA {:ListaVariables.add(new NodoVariable(var1, var2));:}
+        |cuerpo BPSTG IDENTIFICADOR:var1 BPEQUAL BPCADENA:var2 BPPTCOMA {:ListaVariables.add(new NodoVariable(var1, var2));:}
+        |cuerpo BPDOUBLE IDENTIFICADOR:var1 BPEQUAL DD:var2 BPPTCOMA {:ListaVariables.add(new NodoVariable(var1, var2));:}
 ;
 
-graficas::=BPGBARRAS BPLLAIZQ titulos ejesx valores titulox tituloy BPLLADER {::}
-            |BPGPIE BPLLAIZQ titulos ejesx valores BPLLADER {::}
-            |BPGLINEAS BPLLAIZQ titulos Arch BPLLADER {::}
-            |graficas BPGBARRAS BPLLAIZQ titulos ejesx valores titulox tituloy BPLLADER {::}
-            |graficas BPGPIE BPLLAIZQ titulos ejesx valores BPLLADER {::}
-            |graficas BPGLINEAS BPLLAIZQ titulos Arch BPLLADER {::}
+graficas::=BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER {::}
+            |BPGPIE:var1 BPLLAIZQ datosgraficapie BPLLADER {::}
+            |BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER {::}
+            |graficas BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER {::}
+            |graficas BPGPIE:var1 BPLLAIZQ datosgraficapie BPLLADER {::}
+            |graficas BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER {::}
 ;
 
-titulos::=BPTITULO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {::}
-         |BPTITULO BPDOSPUNTOS BPCADENA BPPTCOMA {::}
+datosgraficabarra::=datosgraficabarra titulos:var1 {:graficabarras.titulo=(String) var1;:}
+            |datosgraficabarra ejesx:var1 {:graficabarras.Ejes=var1;:}
+            |datosgraficabarra valores:var1 {:graficabarras.Valores=var1;:}
+            |datosgraficabarra titulox:var1 {:graficabarras.Titulox=(String) var1;:}
+            |datosgraficabarra tituloy:var1 {:graficabarras.Tituloy=(String) var1;:}
+            |titulos:var1 {:graficabarras.titulo=(String) var1;:}
+            |ejesx:var1 {:graficabarras.Ejes=var1;:}
+            |valores:var1 {:graficabarras.Valores=var1;:}
+            |titulox:var1 {:graficabarras.Titulox=(String) var1;:}
+            |tituloy:var1 {:graficabarras.Tituloy=(String) var1;:}
 ;
 
-ejesx::=BPEJEX BPDOSPUNTOS BPCORIZQ contenidox BPCORDER BPPTCOMA {::};
+datosgraficapie::=datosgraficapie titulos:var1 {:graficapie.titulo=(String) var1;:}
+            |datosgraficapie ejesx:var1 {:graficapie.Ejes=var1;:}
+            |datosgraficapie valores:var1 {:graficapie.Valores=var1;:}
+            |titulos:var1 {:graficapie.titulo=(String) var1;:}
+            |ejesx:var1 {:graficapie.Ejes=var1;:}
+            |valores:var1 {:graficapie.Valores=var1;:}
+;
+
+datosgraficalineal::=datosgraficalineal titulos:var1 {:graficalineas.titulo=(String) var1;:}
+            |datosgraficalineal Arch:var1 {:graficalineas.Titulox=(String) var1;:}
+            |titulos:var1 {:graficalineas.titulo=(String) var1;:}
+            |Arch:var1 {:graficalineas.Titulox=(String) var1;:}
+;
+
+titulos::=BPTITULO BPDOSPUNTOS IDENTIFICADOR:var1 BPPTCOMA {:RESULT=var1;:}
+         |BPTITULO BPDOSPUNTOS BPCADENA:var1 BPPTCOMA {:RESULT=var1;:}
+;
+
+ejesx::=BPEJEX BPDOSPUNTOS BPCORIZQ contenidox BPCORDER BPPTCOMA {:RESULT=Ejes;:};
 
 contenidox::=
-            contenidox BPCADENA {::}
-            |contenidox IDENTIFICADOR {::}
+            contenidox BPCADENA:var1 {:Ejes.add(var1);:}
+            |contenidox IDENTIFICADOR:var1 {:Ejes.add(var1);:}
             |contenidox BPCOMA {::}
-            |BPCADENA {::}
-            |IDENTIFICADOR {::}
+            |BPCADENA:var1 {:Ejes.add(var1);:}
+            |IDENTIFICADOR:var1 {:Ejes.add(var1);:}
 ;
 
-valores::=BPVALORES BPDOSPUNTOS BPCORIZQ contenidov BPCORDER BPPTCOMA{::};
+valores::=BPVALORES BPDOSPUNTOS BPCORIZQ contenidov BPCORDER BPPTCOMA{:RESULT=valores;:};
 
 contenidov::=
-            contenidov DD {::}
-            |contenidov IDENTIFICADOR {::}
+            contenidov DD:var1 {:valores.add((String) var1);:}
+            |contenidov IDENTIFICADOR:var1 {:valores.add( var1);:}
             |contenidov BPCOMA {::}
-            |DD {::}
-            |IDENTIFICADOR {::}
+            |DD:var1 {:valores.add((String) var1);:}
+            |IDENTIFICADOR:var1 {:valores.add( var1);:}
 ;
 
-titulox::=BPTTX BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {::}
-         |BPTTX BPDOSPUNTOS BPCADENA BPPTCOMA {::}
+titulox::=BPTTX BPDOSPUNTOS IDENTIFICADOR:var1 BPPTCOMA {:RESULT=var1;:}
+         |BPTTX BPDOSPUNTOS BPCADENA:var1 BPPTCOMA {:RESULT=var1;:}
 ;
 
-tituloy::=BPTTY BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {::}
-         |BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA {::}
+tituloy::=BPTTY BPDOSPUNTOS IDENTIFICADOR:var1 BPPTCOMA {:RESULT=var1;:}
+         |BPTTY BPDOSPUNTOS BPCADENA:var1 BPPTCOMA {:RESULT=var1;:}
 ;
 
-Arch::=BPARCHIVO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA {::}
-      |BPARCHIVO BPDOSPUNTOS BPCADENA BPPTCOMA {::}
+Arch::=BPARCHIVO BPDOSPUNTOS IDENTIFICADOR:var1 BPPTCOMA {:RESULT=var1;:}
+      |BPARCHIVO BPDOSPUNTOS BPCADENA:var1 BPPTCOMA {:RESULT=var1;:}
 ;

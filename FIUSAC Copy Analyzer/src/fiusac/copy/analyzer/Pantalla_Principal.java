@@ -303,8 +303,8 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         Sintactico sintax = new Sintactico(new Lexico(new StringReader(texto)));
         try {
             sintax.parse();
+            JL_Console.setText(JL_Console.getText()+ "Hay "+Integer.toString(sintax.ListaVariables.size())+" variables Globales \n"); 
             JL_Console.setText(JL_Console.getText()+ "Analisis Correcto \n");
-            
         } catch (Exception e) {
             Symbol syma = sintax.getS();
             JL_Console.setText(JL_Console.getText()+"Error en el analisis Sintactico  \n");

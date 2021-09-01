@@ -1,0 +1,138 @@
+package analizadores;
+import java_cup.runtime.*;
+import java.util.ArrayList;
+
+parser code 
+{:
+    public String Resulto = "";
+    
+    
+:} 
+
+terminal String BPCLASS, BPVAR, BPLET, BPCNST;
+terminal String BPIF,BPELSE, BPFOR;
+terminal String BPWHILE, BPDO, BPSWITCH, BPCASE;
+terminal String BPCONS,BPLOG;
+terminal String BPRQRE, BPBREAK, BPPTCOMA, BPDOSPUNTOS;
+terminal String BPPUNTO, BPCOMA, BPPARIZQ, BPPARDER;
+terminal String BPLLAIZQ, BPLLADER, BPDEFAULT;
+terminal String BPMAS, BPGUION, BPPOR, BPPON, BPDIVIDIR, BPMAYOR, BPMENOR;
+terminal String BPPREGUNTA, BPMOD, BPYAND, BPOOR, BPEQUAL, BPEQUALCONDITION;
+terminal String BPNOTEQUALS, BPMAYOREQUALS, BPMENOREQUALS, BPNEG;
+terminal String IDENTIFICADOR, BPCADENA, DD, ENTERO, BPFALSE, BPTRUE;
+
+
+non terminal ini, event, cuerpoclase, params, data, condicion, binario, cond, declaracion, tipo, par, inc, cuerpocase;
+
+start with ini;
+
+ini::= event ;
+
+event::=
+        BPCLASS IDENTIFICADOR BPLLAIZQ cuerpoclase BPLLADER {::}
+        |IDENTIFICADOR BPPARIZQ params BPPARDER BPLLAIZQ cuerpoclase BPLLADER{::}
+        |IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ cuerpoclase BPLLADER {::}
+;
+
+cuerpoclase::=
+            cuerpoclase BPVAR IDENTIFICADOR BPEQUAL data BPPTCOMA{::}
+            |cuerpoclase BPLET IDENTIFICADOR BPEQUAL data BPPTCOMA{::}
+            |cuerpoclase BPCNST IDENTIFICADOR BPEQUAL data BPPTCOMA{::}
+            |cuerpoclase BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER {::}
+            |cuerpoclase BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER BPELSE BPLLAIZQ cuerpoclase BPLLADER{::}
+            |cuerpoclase BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER BPELSE BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER{::}
+            |cuerpoclase BPFOR BPPARIZQ declaracion BPPTCOMA par BPPTCOMA inc BPPARDER BPLLAIZQ cuerpoclase BPLLADER {::}
+            |cuerpoclase BPWHILE BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPBREAK BPLLADER {::}
+            |cuerpoclase BPWHILE BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER {::}
+            |cuerpoclase BPDO BPLLAIZQ cuerpoclase BPLLADER BPWHILE BPPARIZQ condicion BPPARDER BPPTCOMA {::}
+            |cuerpoclase BPSWITCH BPPARIZQ IDENTIFICADOR BPPARDER BPLLAIZQ cuerpocase BPLLADER {::}
+            |cuerpoclase IDENTIFICADOR BPPARIZQ params BPPARDER BPPTCOMA {::}
+            |cuerpoclase IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA {::}
+            |cuerpoclase BPVAR IDENTIFICADOR BPEQUAL BPRQRE BPPARIZQ BPCADENA BPPARDER {::}
+            |cuerpoclase BPLET IDENTIFICADOR BPEQUAL BPRQRE BPPARIZQ BPCADENA BPPARDER {::}
+            |cuerpoclase BPCNST IDENTIFICADOR BPEQUAL BPRQRE BPPARIZQ BPCADENA BPPARDER {::}
+            |cuerpoclase BPCONS BPPUNTO BPLOG BPPARIZQ consola BPPARDER BPPTCOMA {::}
+            |BPVAR IDENTIFICADOR BPEQUAL data BPPTCOMA{::}
+            |BPLET IDENTIFICADOR BPEQUAL data BPPTCOMA{::}
+            |BPCNST IDENTIFICADOR BPEQUAL data BPPTCOMA{::}
+            |BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER {::}
+            |BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER BPELSE BPLLAIZQ cuerpoclase BPLLADER{::}
+            |BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER BPELSE BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER{::}
+            |BPFOR BPPARIZQ declaracion BPPTCOMA par BPPTCOMA inc BPPARDER BPLLAIZQ cuerpo BPLLADER {::}
+            |BPWHILE BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpo BPLLADER {::}
+            |BPDO BPLLAIZQ cuerpoclase BPLLADER BPWHILE BPPARIZQ condicion BPPARDER BPPTCOMA {::}
+            |BPSWITCH BPPARIZQ IDENTIFICADOR BPPARDER BPLLAIZQ cuerpocase BPLLADER {::}
+            |IDENTIFICADOR BPPARIZQ params BPPARDER BPPTCOMA {::}
+            |IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA {::}
+            |BPVAR IDENTIFICADOR BPEQUAL BPRQRE BPPARIZQ BPCADENA BPPARDER {::}
+            |BPLET IDENTIFICADOR BPEQUAL BPRQRE BPPARIZQ BPCADENA BPPARDER {::}
+            |BPCNST IDENTIFICADOR BPEQUAL BPRQRE BPPARIZQ BPCADENA BPPARDER {::}
+            |BPCONS BPPUNTO BPLOG BPPARIZQ consola BPPARDER BPPTCOMA {::}
+;
+
+params::=
+        params IDENTIFICADOR {::}
+        |params BPCOMA {::}
+        |IDENTIFICADOR {::}
+;
+
+data::=
+        ENTERO {::}
+        |DECIMAL {::}
+        |BPCADENA {::}
+        |IDENTIFICADOR {::}
+        |BPTRUE {::}
+        |BPFALSE {::}
+;
+
+condicion::=
+            condicion binario IDENTIFICADOR cond data {::}
+            |IDENTIFICADOR cond data {::}
+            |BPNEG IDENTIFICADOR cond data {::}
+;
+
+binario::=
+            BPYAND {::}
+            |BPOOR {::}
+            |BPNEG {::}
+;
+
+cond::=
+        BPEQUALCONDITION {::}
+        |BPNOTEQUALS {::}
+        |BPMENOR {::}
+        |BPMAYOR {::}
+        |BPMENOREQUALS {::}
+        |BPMAYOREQUALS {::}
+;
+
+declaracion::=
+            tipo IDENTIFICADOR BPEQUAL data {::}
+            |IDENTIFICADOR BPEQUAL data {::}
+
+tipo::=
+        BPVAR {::}
+        |BPLET {::}
+        |BPCNST {::}
+;
+
+par::=
+        IDENTIFICADOR cond IDENTIFICADOR {::}
+        |IDENTIFICADOR cond ENTERO {::}
+;
+
+inc::=
+        IDENTIFICADOR BPMAS BPMAS {::}
+        |IDENTIFICADOR BPMAS ENTERO {::}
+        |IDENTIFICADOR BPGUION BPGUION {::}
+        |IDENTIFICADOR BPGUION ENTERO {::}
+        |BPMAS BPMAS IDENTIFICADOR {::}
+        |BPGUION BPGUION IDENTIFICADOR {::}
+;
+
+cuerpocase::=
+            cuerpocase BPCASE ENTERO BPDOSPUNTOS cuerpoclase BPBREAK BPPTCOMA {::}
+            |BPCASE ENTERO BPDOSPUNTOS cuerpoclase BPBREAK BPPTCOMA {::}
+            |BPDEFAULT BPDOSPUNTOS cuerpoclase BPBREAK BPPTCOMA {::}
+;
+            
