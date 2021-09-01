@@ -58,12 +58,20 @@ cuerpo::=BPSTG IDENTIFICADOR:var1 BPEQUAL BPCADENA:var2 BPPTCOMA  {:ListaVariabl
 
 graficas::=BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER {:graficabarras.tipo=var1;
                                                                 GraficasEjecutar.add(graficabarras);:}
+
+          |BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER BPCOMPARE {:graficabarras.tipo=var1;
+                                                                GraficasEjecutar.add(graficabarras);:}
+
             |BPGPIE:var1 BPLLAIZQ datosgraficapie BPLLADER {:graficapie.tipo=var1;
                                                                 GraficasEjecutar.add(graficapie);:}
             |BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER {:graficalineas.tipo=var1;
                                                                 GraficasEjecutar.add(graficalineas);:}
+            |graficas BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER BPCOMPARE {:graficabarras.tipo=var1;
+                                                                           GraficasEjecutar.add(graficabarras);:}
+
             |graficas BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER {:graficabarras.tipo=var1;
                                                                            GraficasEjecutar.add(graficabarras);:}
+
             |graficas BPGPIE:var1 BPLLAIZQ datosgraficapie BPLLADER {:graficapie.tipo=var1;
                                                                 GraficasEjecutar.add(graficapie);:}
             |graficas BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER {:graficalineas.tipo=var1;
