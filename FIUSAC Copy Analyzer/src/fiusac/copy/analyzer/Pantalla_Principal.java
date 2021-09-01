@@ -7,9 +7,6 @@ package fiusac.copy.analyzer;
 
 import analizadores.Lexico;
 import analizadores.Sintactico;
-import analizadores.sym;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import fiusac.copy.analyzer.Pestañas;
 import java.awt.MenuComponent;
 import java.io.BufferedReader;
