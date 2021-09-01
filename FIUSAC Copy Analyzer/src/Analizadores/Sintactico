@@ -70,6 +70,10 @@ graficas::=BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER {:graficabarras.ti
 
             |BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER {:graficalineas.tipo=var1;
                                                                 GraficasEjecutar.add(graficalineas);:}
+
+            |BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER BPCOMPARE{:graficalineas.tipo=var1;
+                                                                GraficasEjecutar.add(graficalineas);:}
+
             |graficas BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER BPCOMPARE {:graficabarras.tipo=var1;
                                                                            GraficasEjecutar.add(graficabarras);:}
 
@@ -83,6 +87,9 @@ graficas::=BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER {:graficabarras.ti
                                                                 GraficasEjecutar.add(graficapie);:}
 
             |graficas BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER {:graficalineas.tipo=var1;
+                                                                GraficasEjecutar.add(graficalineas);:}
+
+            |graficas BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER BPCOMPARE {:graficalineas.tipo=var1;
                                                                 GraficasEjecutar.add(graficalineas);:}
 ;
 
