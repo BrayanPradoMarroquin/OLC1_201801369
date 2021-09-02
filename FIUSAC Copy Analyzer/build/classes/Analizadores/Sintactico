@@ -10,6 +10,7 @@ parser code
     public ArrayList<NodoVariable> ListaVariables = new ArrayList();
     public ArrayList<NodoGrafica> GraficasEjecutar = new ArrayList();
     public ArrayList<String> Ejes = new ArrayList();
+    public ArrayList<String> Direcciones = new ArrayList();
     public ArrayList<String> valores = new ArrayList();
     public NodoGrafica graficabarras = new NodoGrafica();
     public NodoGrafica graficapie = new NodoGrafica();
@@ -155,4 +156,4 @@ Arch::=BPARCHIVO BPDOSPUNTOS IDENTIFICADOR:var1 BPPTCOMA {:RESULT=var1;:}
       |BPARCHIVO BPDOSPUNTOS BPCADENA:var1 BPPTCOMA {:RESULT=var1;:}
 ;
 
-compara::=BPCOMPARE BPPAA BPCADENA BPCOMA BPCADENA BPPAC BPPTCOMA{::};
+compara::=BPCOMPARE BPPAA BPCADENA:var1 BPCOMA BPCADENA:var2 BPPAC BPPTCOMA{:Direcciones.add(var1); Direcciones.add(var2);:};

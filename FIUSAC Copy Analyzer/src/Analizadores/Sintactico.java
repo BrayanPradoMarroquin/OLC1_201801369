@@ -273,6 +273,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     public ArrayList<NodoVariable> ListaVariables = new ArrayList();
     public ArrayList<NodoGrafica> GraficasEjecutar = new ArrayList();
     public ArrayList<String> Ejes = new ArrayList();
+    public ArrayList<String> Direcciones = new ArrayList();
     public ArrayList<String> valores = new ArrayList();
     public NodoGrafica graficabarras = new NodoGrafica();
     public NodoGrafica graficapie = new NodoGrafica();
@@ -1049,7 +1050,13 @@ class CUP$Sintactico$actions {
           case 61: // compara ::= BPCOMPARE BPPAA BPCADENA BPCOMA BPCADENA BPPAC BPPTCOMA 
             {
               ArrayList<String> RESULT =null;
-		
+		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
+		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
+		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		Direcciones.add(var1); Direcciones.add(var2);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("compara",15, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
