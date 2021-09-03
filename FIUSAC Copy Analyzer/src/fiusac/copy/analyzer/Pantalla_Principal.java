@@ -16,6 +16,7 @@ import java.io.FileReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -26,7 +27,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class Pantalla_Principal extends javax.swing.JFrame {
     String cadena = "";
-
+    Sintactico sintax;
     private MenuComponent Pestañas;
 
     /**
@@ -139,6 +140,11 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         jMenuBar1.add(JM_Ejecutar);
 
         JM_Reportes.setText("Reportes");
+        JM_Reportes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JM_ReportesMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(JM_Reportes);
 
         JM_Cerrar.setText("Cerrar Aplicacion");
@@ -241,6 +247,10 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         analizer();
     }//GEN-LAST:event_JM_EjecutarMouseClicked
 
+    private void JM_ReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JM_ReportesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JM_ReportesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -297,10 +307,15 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     private void analizer() {
         String texto = JT_1.getText();
         JL_Console.setText("Iniciando Analisis \n");
-        Sintactico sintax = new Sintactico(new Lexico(new StringReader(texto)));
+        sintax = new Sintactico(new Lexico(new StringReader(texto)));
         try {
             sintax.parse();
             JL_Console.setText(JL_Console.getText()+ "Hay "+Integer.toString(sintax.ListaVariables.size())+" variables Globales \n"); 
+            JL_Console.setText(JL_Console.getText()+ "Hay "+Integer.toString(sintax.GraficasEjecutar.size())+" graficas a Realizar \n");
+            JL_Console.setText(JL_Console.getText()+" Obtención de Rutas exitosa. \n");
+            JL_Console.setText(JL_Console.getText()+" entrada de archivos.  \n");
+            BusquedadeRutas(sintax.Direcciones);
+            JL_Console.setText(JL_Console.getText()+" archivos analizados. \n");
             JL_Console.setText(JL_Console.getText()+ "Analisis Correcto \n");
         } catch (Exception e) {
             Symbol syma = sintax.getS();
@@ -309,4 +324,9 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         }
         JL_Console.setText(JL_Console.getText()+"Analisis Finalizado \n");
     } 
+
+    private void BusquedadeRutas(ArrayList<String> Direcciones) {
+        File rut1 = new File(Direcciones.get(0));
+        File rut2 = new File(Direcciones.get(1));
+    }
 }

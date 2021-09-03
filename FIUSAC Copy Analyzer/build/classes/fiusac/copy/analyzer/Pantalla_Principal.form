@@ -42,6 +42,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Reportes"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JM_ReportesMouseClicked"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="JM_Cerrar">
           <Properties>

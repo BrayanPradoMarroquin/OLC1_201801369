@@ -37,22 +37,22 @@ BPCADENA = ["\""|"\'"][^"\""|"\'"]*["\""|"\'"]
 {COMENTMULTILINEA} {}
 {ESPECIALES} {return new Symbol(sym.ESPECIALES,yyline,yychar, yytext());}
 
-"class" {return new Symbol(sym.BPCLASS,yyline,yychar,yytect());}
-"var" {return new Symbol(sym.BPVAR,yyline,yychar,yytect());}
-"let" {return new Symbol(sym.BPLET,yyline,yychar,yytect());}
-"const" {return new Symbol(sym.BPCNST,yyline,yychar,yytect());}
-"if" {return new Symbol(sym.BPIF,yyline,yychar,yytect());}
-"else" {return new Symbol(sym.BPELSE,yyline,yychar,yytect());}
-"for" {return new Symbol(sym.BPFOR,yyline,yychar,yytect());}
-"while" {return new Symbol(sym.BPWHILE,yyline,yychar,yytect());}
-"do" {return new Symbol(sym.BPDO,yyline,yychar,yytect());}
-"switch" {return new Symbol(sym.BPSWITCH,yyline,yychar,yytect());}
-"case" {return new Symbol(sym.BPCASE,yyline,yychar,yytect());}
-"console" {return new Symbol(sym.BPCONS,yyline,yychar,yytect());}
-"log" {return new Symbol(sym.BPLOG,yyline,yychar,yytect());}
-"require" {return new Symbol(sym.BPRQRE,yyline,yychar,yytect());}
-"break" {return new Symbol(sym.BPBREAK,yyline,yychar,yytect());}
-"default" {return new Symbol(sym.BPDEFAULT,yyline,yychar,yytect());}
+"class" {return new Symbol(sym.BPCLASS,yyline,yychar,yytext());}
+"var" {return new Symbol(sym.BPVAR,yyline,yychar,yytext());}
+"let" {return new Symbol(sym.BPLET,yyline,yychar,yytext());}
+"const" {return new Symbol(sym.BPCNST,yyline,yychar,yytext());}
+"if" {return new Symbol(sym.BPIF,yyline,yychar,yytext());}
+"else" {return new Symbol(sym.BPELSE,yyline,yychar,yytext());}
+"for" {return new Symbol(sym.BPFOR,yyline,yychar,yytext());}
+"while" {return new Symbol(sym.BPWHILE,yyline,yychar,yytext());}
+"do" {return new Symbol(sym.BPDO,yyline,yychar,yytext());}
+"switch" {return new Symbol(sym.BPSWITCH,yyline,yychar,yytext());}
+"case" {return new Symbol(sym.BPCASE,yyline,yychar,yytext());}
+"console" {return new Symbol(sym.BPCONS,yyline,yychar,yytext());}
+"log" {return new Symbol(sym.BPLOG,yyline,yychar,yytext());}
+"require" {return new Symbol(sym.BPRQRE,yyline,yychar,yytext());}
+"break" {return new Symbol(sym.BPBREAK,yyline,yychar,yytext());}
+"default" {return new Symbol(sym.BPDEFAULT,yyline,yychar,yytext());}
 ";" {return new Symbol(sym.BPPTCOMA,yyline,yychar, yytext());}
 ":" {return new Symbol(sym.BPDOSPUNTOS,yyline,yychar, yytext());} 
 "." {return new Symbol(sym.BPPUNTO,yyline,yychar, yytext());} 
