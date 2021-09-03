@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.Reader;
+import Errores.*;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -249,6 +250,21 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
     private void JM_ReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JM_ReportesMouseClicked
         // TODO add your handling code here:
+        for (int i = 0; i < sintax.GraficasEjecutar.size(); i++) {
+            if (sintax.GraficasEjecutar.get(i).tipo.equals("GraficaBarras")) {
+                NodoGrafica barras = new NodoGrafica();
+                barras = sintax.GraficasEjecutar.get(i);
+                
+            }else if (sintax.GraficasEjecutar.get(i).tipo.equals("GraficaPie")) {
+                NodoGrafica circular = new NodoGrafica();
+                circular = sintax.GraficasEjecutar.get(i);
+                
+            }else if (sintax.GraficasEjecutar.get(i).tipo.equals("GraficaLineas")) {
+                NodoGrafica lineal = new NodoGrafica();
+                lineal = sintax.GraficasEjecutar.get(i);
+                
+            }
+        }
     }//GEN-LAST:event_JM_ReportesMouseClicked
 
     /**
@@ -334,11 +350,13 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         String[] carpeta1 = rut1.list();
         String[] carpeta2 = rut2.list();
         
+        JL_Console.setText(JL_Console.getText()+" Detectando Archivos con el mismo nombre. \n");
         for (int i = 0; i < carpeta1.length; i++) {
-            System.out.println(carpeta1[i]+"\n");
-        }
-        for (int i = 0; i < carpeta2.length; i++) {
-            System.out.println(carpeta2[i]+"\n");
+            for (int j = 0; j < carpeta2.length; j++) {
+                if (carpeta1[i].equals(carpeta2[j])) {
+                    System.out.println(carpeta1[i]+ " == " + carpeta2[j]);
+                }
+            }
         }
     }
 }
