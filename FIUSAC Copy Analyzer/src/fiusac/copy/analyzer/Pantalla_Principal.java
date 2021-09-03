@@ -326,7 +326,19 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     } 
 
     private void BusquedadeRutas(ArrayList<String> Direcciones) {
-        File rut1 = new File(Direcciones.get(0));
-        File rut2 = new File(Direcciones.get(1));
+        String rut1validar1 = Direcciones.get(0);
+        String rut1validar2 = Direcciones.get(1);
+        File rut1 = new File(rut1validar1.substring(1, rut1validar1.length()-1));
+        File rut2 = new File(rut1validar2.substring(1, rut1validar2.length()-1));
+        
+        String[] carpeta1 = rut1.list();
+        String[] carpeta2 = rut2.list();
+        
+        for (int i = 0; i < carpeta1.length; i++) {
+            System.out.println(carpeta1[i]+"\n");
+        }
+        for (int i = 0; i < carpeta2.length; i++) {
+            System.out.println(carpeta2[i]+"\n");
+        }
     }
 }
