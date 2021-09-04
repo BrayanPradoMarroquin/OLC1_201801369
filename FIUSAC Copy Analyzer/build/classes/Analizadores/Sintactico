@@ -12,6 +12,7 @@ parser code
     public ArrayList<String> Ejes = new ArrayList();
     public ArrayList<String> Direcciones = new ArrayList();
     public ArrayList<String> valores = new ArrayList();
+    public ArrayList<String> ListaTokens = new ArrayList();
     public NodoGrafica graficabarras = new NodoGrafica();
     public NodoGrafica graficapie = new NodoGrafica();
     public NodoGrafica graficalineas = new NodoGrafica();
@@ -22,7 +23,7 @@ parser code
     
     public Symbol getS(){
         return this.s;
-    } 
+    }  
 :} 
 
 terminal String BPDEG, BPGRE, BPSTG, BPDOUBLE;
@@ -45,53 +46,88 @@ non terminal ArrayList<String> contenidox, contenidov, ejesx, valores, compara;
 
 start with ini;
 
-ini::=BPGRE BPLLAIZQ contenidogeneral BPLLADER {::};
+ini::=BPGRE:var1 BPLLAIZQ:var2 contenidogeneral BPLLADER:var3 {:ListaTokens.add(var1); ListaTokens.add(var2); ListaTokens.add(var3);:};
 
-contenidogeneral::=BPDEG BPLLAIZQ cuerpo BPLLADER graficas {::}
-                  |compara BPDEG BPLLAIZQ cuerpo BPLLADER graficas {::}
-                  |BPDEG BPLLAIZQ cuerpo BPLLADER compara graficas {::};
+contenidogeneral::=BPDEG:var1 BPLLAIZQ:var2 cuerpo BPLLADER:var3 graficas {:ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                            ListaTokens.add(var3);:}
+                  |compara BPDEG:var1 BPLLAIZQ:var2 cuerpo BPLLADER:var3 graficas {:ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                    ListaTokens.add(var3);:}
+                  |BPDEG:var1 BPLLAIZQ:var2 cuerpo BPLLADER:var3 compara graficas {:ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                    ListaTokens.add(var3);:};
 
-cuerpo::=BPSTG IDENTIFICADOR:var1 BPEQUAL BPCADENA:var2 BPPTCOMA  {:ListaVariables.add(new NodoVariable(var1, var2));:}
-        |BPDOUBLE IDENTIFICADOR:var1 BPEQUAL DD:var2 BPPTCOMA {:ListaVariables.add(new NodoVariable(var1, var2));:}
-        |cuerpo BPSTG IDENTIFICADOR:var1 BPEQUAL BPCADENA:var2 BPPTCOMA {:ListaVariables.add(new NodoVariable(var1, var2));:}
-        |cuerpo BPDOUBLE IDENTIFICADOR:var1 BPEQUAL DD:var2 BPPTCOMA {:ListaVariables.add(new NodoVariable(var1, var2));:}
+cuerpo::=BPSTG:var3 IDENTIFICADOR:var1 BPEQUAL:var4 BPCADENA:var2 BPPTCOMA:var5  {:ListaVariables.add(new NodoVariable(var1, var2));
+                                                                                   ListaTokens.add(var3); ListaTokens.add(var4);
+                                                                                   ListaTokens.add(var5);:}
+        |BPDOUBLE:var3 IDENTIFICADOR:var1 BPEQUAL:var4 DD:var2 BPPTCOMA:var5 {:ListaVariables.add(new NodoVariable(var1, var2));
+                                                                               ListaTokens.add(var3); ListaTokens.add(var4);
+                                                                               ListaTokens.add(var5);:}
+        |cuerpo BPSTG:var3 IDENTIFICADOR:var1 BPEQUAL:var4 BPCADENA:var2 BPPTCOMA:var5 {:ListaVariables.add(new NodoVariable(var1, var2));
+                                                                         ListaTokens.add(var3); ListaTokens.add(var4);
+                                                                         ListaTokens.add(var5);:}
+        |cuerpo BPDOUBLE:var3 IDENTIFICADOR:var1 BPEQUAL:var4 DD:var2 BPPTCOMA:var5 {:ListaVariables.add(new NodoVariable(var1, var2));
+                                                                                      ListaTokens.add(var3); ListaTokens.add(var4);
+                                                                                      ListaTokens.add(var5);:}
 ;
 
-graficas::=BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER {:graficabarras.tipo=var1;
-                                                                GraficasEjecutar.add(graficabarras);:}
+graficas::=BPGBARRAS:var1 BPLLAIZQ:var2 datosgraficabarra BPLLADER:var3 {:graficabarras.tipo=var1;
+                                                                          GraficasEjecutar.add(graficabarras);
+                                                                          ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                          ListaTokens.add(var3);:}
 
-          |BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER compara {:graficabarras.tipo=var1;
-                                                                GraficasEjecutar.add(graficabarras);:}
+          |BPGBARRAS:var1 BPLLAIZQ:var2 datosgraficabarra BPLLADER:var3 compara {:graficabarras.tipo=var1;
+                                                                                GraficasEjecutar.add(graficabarras);
+                                                                                ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                ListaTokens.add(var3);:}
 
-            |BPGPIE:var1 BPLLAIZQ datosgraficapie BPLLADER {:graficapie.tipo=var1;
-                                                                GraficasEjecutar.add(graficapie);:}
+            |BPGPIE:var1 BPLLAIZQ:var2 datosgraficapie BPLLADER:var3 {:graficapie.tipo=var1;
+                                                                        GraficasEjecutar.add(graficapie);
+                                                                        ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                         ListaTokens.add(var3);:}
 
-            |BPGPIE:var1 BPLLAIZQ datosgraficapie BPLLADER compara {:graficapie.tipo=var1;
-                                                                GraficasEjecutar.add(graficapie);:}
+            |BPGPIE:var1 BPLLAIZQ:var2 datosgraficapie BPLLADER:var3 compara {:graficapie.tipo=var1;
+                                                                               GraficasEjecutar.add(graficapie);
+                                                                               ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                               ListaTokens.add(var3);:}
 
-            |BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER {:graficalineas.tipo=var1;
-                                                                GraficasEjecutar.add(graficalineas);:}
+            |BPGLINEAS:var1 BPLLAIZQ:var2 datosgraficalineal BPLLADER:var3 {:graficalineas.tipo=var1;
+                                                                            GraficasEjecutar.add(graficalineas);
+                                                                            ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                            ListaTokens.add(var3);:}
 
-            |BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER compara{:graficalineas.tipo=var1;
-                                                                GraficasEjecutar.add(graficalineas);:}
+            |BPGLINEAS:var1 BPLLAIZQ:var2 datosgraficalineal BPLLADER:var3 compara{:graficalineas.tipo=var1;
+                                                                                    GraficasEjecutar.add(graficalineas);
+                                                                                    ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                    ListaTokens.add(var3);:}
 
-            |graficas BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER compara {:graficabarras.tipo=var1;
-                                                                           GraficasEjecutar.add(graficabarras);:}
+            |graficas BPGBARRAS:var1 BPLLAIZQ:var2 datosgraficabarra BPLLADER:var3 compara {:graficabarras.tipo=var1;
+                                                                                            GraficasEjecutar.add(graficabarras);
+                                                                                            ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                            ListaTokens.add(var3);:}
 
-            |graficas BPGBARRAS:var1 BPLLAIZQ datosgraficabarra BPLLADER {:graficabarras.tipo=var1;
-                                                                           GraficasEjecutar.add(graficabarras);:}
+            |graficas BPGBARRAS:var1 BPLLAIZQ:var2 datosgraficabarra BPLLADER:var3 {:graficabarras.tipo=var1;
+                                                                                    GraficasEjecutar.add(graficabarras);
+                                                                                    ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                    ListaTokens.add(var3);:}
 
-            |graficas BPGPIE:var1 BPLLAIZQ datosgraficapie BPLLADER {:graficapie.tipo=var1;
-                                                                GraficasEjecutar.add(graficapie);:}
+            |graficas BPGPIE:var1 BPLLAIZQ:var2 datosgraficapie BPLLADER:var3 {:graficapie.tipo=var1;
+                                                                                GraficasEjecutar.add(graficapie);
+                                                                                ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                ListaTokens.add(var3);:}
 
-            |graficas BPGPIE:var1 BPLLAIZQ datosgraficapie BPLLADER compara {:graficapie.tipo=var1;
-                                                                GraficasEjecutar.add(graficapie);:}
+            |graficas BPGPIE:var1 BPLLAIZQ:var2 datosgraficapie BPLLADER:var3 compara {:graficapie.tipo=var1;
+                                                                                        GraficasEjecutar.add(graficapie);
+                                                                                        ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                        ListaTokens.add(var3);:}
 
-            |graficas BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER {:graficalineas.tipo=var1;
-                                                                GraficasEjecutar.add(graficalineas);:}
+            |graficas BPGLINEAS:var1 BPLLAIZQ:var2 datosgraficalineal BPLLADER:var3 {:graficalineas.tipo=var1;
+                                                                                    GraficasEjecutar.add(graficalineas);
+                                                                                    ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                    ListaTokens.add(var3);:}
 
-            |graficas BPGLINEAS:var1 BPLLAIZQ datosgraficalineal BPLLADER compara {:graficalineas.tipo=var1;
-                                                                GraficasEjecutar.add(graficalineas);:}
+            |graficas BPGLINEAS:var1 BPLLAIZQ:var2 datosgraficalineal BPLLADER:var3 compara {:graficalineas.tipo=var1;
+                                                                                            GraficasEjecutar.add(graficalineas);
+                                                                                            ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                            ListaTokens.add(var3);:}
 ;
 
 datosgraficabarra::=datosgraficabarra titulos:var1 {:graficabarras.titulo=(String) var1;:}
@@ -120,40 +156,63 @@ datosgraficalineal::=datosgraficalineal titulos:var1 {:graficalineas.titulo=(Str
             |Arch:var1 {:graficalineas.Titulox=(String) var1;:}
 ;
 
-titulos::=BPTITULO BPDOSPUNTOS IDENTIFICADOR:var1 BPPTCOMA {:RESULT=var1;:}
-         |BPTITULO BPDOSPUNTOS BPCADENA:var1 BPPTCOMA {:RESULT=var1;:}
+titulos::=BPTITULO:var2 BPDOSPUNTOS:var3 IDENTIFICADOR:var1 BPPTCOMA:var4 {:RESULT=var1; 
+                                                                            ListaTokens.add(var2); ListaTokens.add(var3);
+                                                                            ListaTokens.add(var4);:}
+         |BPTITULO:var2 BPDOSPUNTOS:var3 BPCADENA:var1 BPPTCOMA:var4 {:RESULT=var1;
+                                                                      ListaTokens.add(var2); ListaTokens.add(var3);
+                                                                      ListaTokens.add(var4);:}
 ;
 
-ejesx::=BPEJEX BPDOSPUNTOS BPCORIZQ contenidox BPCORDER BPPTCOMA {:RESULT=Ejes;:};
+ejesx::=BPEJEX:var1 BPDOSPUNTOS:var2 BPCORIZQ:var3 contenidox BPCORDER:var4 BPPTCOMA:var5 {:RESULT=Ejes;
+                                                                                           ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                           ListaTokens.add(var3); ListaTokens.add(var4);
+                                                                                           ListaTokens.add(var5);:};
 
 contenidox::=
             contenidox BPCADENA:var1 {:Ejes.add(var1);:}
             |contenidox IDENTIFICADOR:var1 {:Ejes.add(var1);:}
-            |contenidox BPCOMA {::}
+            |contenidox BPCOMA:var1 {:ListaTokens.add(var1);:}
             |BPCADENA:var1 {:Ejes.add(var1);:}
             |IDENTIFICADOR:var1 {:Ejes.add(var1);:}
 ;
 
-valores::=BPVALORES BPDOSPUNTOS BPCORIZQ contenidov BPCORDER BPPTCOMA{:RESULT=valores;:};
+valores::=BPVALORES:var1 BPDOSPUNTOS:var2 BPCORIZQ:var3 contenidov BPCORDER:var4 BPPTCOMA:var5 {:RESULT=valores;
+                                                                                                ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                                ListaTokens.add(var3); ListaTokens.add(var4);
+                                                                                                ListaTokens.add(var5);:};
 
 contenidov::=
             contenidov DD:var1 {:valores.add((String) var1);:}
             |contenidov IDENTIFICADOR:var1 {:valores.add( var1);:}
-            |contenidov BPCOMA {::}
+            |contenidov BPCOMA:var1 {:ListaTokens.add(var1);:}
             |DD:var1 {:valores.add((String) var1);:}
             |IDENTIFICADOR:var1 {:valores.add( var1);:}
 ;
 
-titulox::=BPTTX BPDOSPUNTOS IDENTIFICADOR:var1 BPPTCOMA {:RESULT=var1;:}
-         |BPTTX BPDOSPUNTOS BPCADENA:var1 BPPTCOMA {:RESULT=var1;:}
+titulox::=BPTTX:var2 BPDOSPUNTOS:var3 IDENTIFICADOR:var1 BPPTCOMA:var4 {:RESULT=var1; ListaTokens.add(var2); ListaTokens.add(var3);
+                                                                        ListaTokens.add(var4);:}
+         |BPTTX:var2 BPDOSPUNTOS:var3 BPCADENA:var1 BPPTCOMA:var4 {:RESULT=var1; ListaTokens.add(var2); ListaTokens.add(var3); 
+                                                                    ListaTokens.add(var4);:}
 ;
 
-tituloy::=BPTTY BPDOSPUNTOS IDENTIFICADOR:var1 BPPTCOMA {:RESULT=var1;:}
-         |BPTTY BPDOSPUNTOS BPCADENA:var1 BPPTCOMA {:RESULT=var1;:}
+tituloy::=BPTTY:var2 BPDOSPUNTOS:var3 IDENTIFICADOR:var1 BPPTCOMA:var4 {:RESULT=var1; ListaTokens.add(var2); ListaTokens.add(var3); 
+                                                                        ListaTokens.add(var4);:}
+         |BPTTY:var2 BPDOSPUNTOS:var3 BPCADENA:var1 BPPTCOMA:var4 {:RESULT=var1; ListaTokens.add(var2); ListaTokens.add(var3); 
+                                                                    ListaTokens.add(var4);:}
 ;
 
-Arch::=BPARCHIVO BPDOSPUNTOS IDENTIFICADOR:var1 BPPTCOMA {:RESULT=var1;:}
-      |BPARCHIVO BPDOSPUNTOS BPCADENA:var1 BPPTCOMA {:RESULT=var1;:}
+Arch::=BPARCHIVO:var2 BPDOSPUNTOS:var3 IDENTIFICADOR:var1 BPPTCOMA:var4 {:RESULT=var1; ListaTokens.add(var2); ListaTokens.add(var3); 
+                                                                         ListaTokens.add(var4);:}
+      |BPARCHIVO:var2 BPDOSPUNTOS:var3 BPCADENA:var1 BPPTCOMA:var4 {:RESULT=var1; ListaTokens.add(var2); ListaTokens.add(var3); 
+                                                                     ListaTokens.add(var4);:}
 ;
 
-compara::=BPCOMPARE BPPAA BPCADENA:var1 BPCOMA BPCADENA:var2 BPPAC BPPTCOMA{:Direcciones.add(var1); Direcciones.add(var2);:};
+compara::=BPCOMPARE:var3 BPPAA:var4 BPCADENA:var1 BPCOMA:var5 BPCADENA:var2 BPPAC:var6 BPPTCOMA:var7 {:Direcciones.add(var1); Direcciones.add(var2);
+                                                                                                        ListaTokens.add(var3); ListaTokens.add(var4); 
+                                                                                                        ListaTokens.add(var5); ListaTokens.add(var6);
+                                                                                                        ListaTokens.add(var7);:}
+         |BPCOMPARE:var3 BPPAA:var4 BPRUTA:var1 BPCOMA:var5 BPRUTA:var2 BPPAC:var6 BPPTCOMA:var7 {:Direcciones.add(var1); Direcciones.add(var2);
+                                                                                                        ListaTokens.add(var3); ListaTokens.add(var4); 
+                                                                                                        ListaTokens.add(var5); ListaTokens.add(var6);
+                                                                                                        ListaTokens.add(var7);:};

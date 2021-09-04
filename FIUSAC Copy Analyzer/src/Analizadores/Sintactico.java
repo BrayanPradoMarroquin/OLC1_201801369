@@ -33,7 +33,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** Production table. */
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
-    "\000\076\000\002\002\004\000\002\002\006\000\002\003" +
+    "\000\077\000\002\002\004\000\002\002\006\000\002\003" +
     "\007\000\002\003\010\000\002\003\010\000\002\005\007" +
     "\000\002\005\007\000\002\005\010\000\002\005\010\000" +
     "\002\006\006\000\002\006\007\000\002\006\006\000\002" +
@@ -52,7 +52,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     "\016\004\000\002\016\004\000\002\016\003\000\002\016" +
     "\003\000\002\012\006\000\002\012\006\000\002\013\006" +
     "\000\002\013\006\000\002\014\006\000\002\014\006\000" +
-    "\002\021\011" });
+    "\002\021\011\000\002\021\011" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -60,9 +60,9 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** Parse-action table. */
   protected static final short[][] _action_table = 
     unpackFromStrings(new String[] {
-    "\000\217\000\004\005\005\001\002\000\004\002\221\001" +
+    "\000\224\000\004\005\005\001\002\000\004\002\226\001" +
     "\002\000\004\026\006\001\002\000\006\004\011\037\010" +
-    "\001\002\000\004\004\214\001\002\000\004\034\206\001" +
+    "\001\002\000\004\004\221\001\002\000\004\034\206\001" +
     "\002\000\004\026\014\001\002\000\004\027\013\001\002" +
     "\000\004\002\000\001\002\000\006\006\017\007\016\001" +
     "\002\000\010\006\032\007\031\027\030\001\002\000\004" +
@@ -161,14 +161,17 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     "\001\002\000\014\010\ufff6\016\ufff6\017\ufff6\027\ufff6\037" +
     "\010\001\002\000\012\010\ufff5\016\ufff5\017\ufff5\027\ufff5" +
     "\001\002\000\012\010\140\016\136\017\137\027\ufffd\001" +
-    "\002\000\004\032\207\001\002\000\004\023\210\001\002" +
-    "\000\004\032\211\001\002\000\004\035\212\001\002\000" +
-    "\004\021\213\001\002\000\014\004\uffc4\010\uffc4\016\uffc4" +
-    "\017\uffc4\027\uffc4\001\002\000\004\026\215\001\002\000" +
-    "\006\006\017\007\016\001\002\000\010\006\032\007\031" +
-    "\027\217\001\002\000\010\010\047\016\044\017\045\001" +
-    "\002\000\012\010\140\016\136\017\137\027\ufffe\001\002" +
-    "\000\004\002\001\001\002" });
+    "\002\000\006\032\207\036\210\001\002\000\004\023\215" +
+    "\001\002\000\004\023\211\001\002\000\004\036\212\001" +
+    "\002\000\004\035\213\001\002\000\004\021\214\001\002" +
+    "\000\014\004\uffc3\010\uffc3\016\uffc3\017\uffc3\027\uffc3\001" +
+    "\002\000\004\032\216\001\002\000\004\035\217\001\002" +
+    "\000\004\021\220\001\002\000\014\004\uffc4\010\uffc4\016" +
+    "\uffc4\017\uffc4\027\uffc4\001\002\000\004\026\222\001\002" +
+    "\000\006\006\017\007\016\001\002\000\010\006\032\007" +
+    "\031\027\224\001\002\000\010\010\047\016\044\017\045" +
+    "\001\002\000\012\010\140\016\136\017\137\027\ufffe\001" +
+    "\002\000\004\002\001\001\002" });
 
   /** Access to parse-action table. */
   public short[][] action_table() {return _action_table;}
@@ -176,7 +179,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\217\000\004\002\003\001\001\000\002\001\001\000" +
+    "\000\224\000\004\002\003\001\001\000\002\001\001\000" +
     "\002\001\001\000\006\003\011\021\006\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\004\005\014\001\001\000\002" +
@@ -228,8 +231,10 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     "\203\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\004\005\215\001\001\000\002\001\001\000\004\006" +
-    "\217\001\001\000\002\001\001\000\002\001\001" });
+    "\000\002\001\001\000\002\001\001\000\002\001\001\000" +
+    "\002\001\001\000\002\001\001\000\004\005\222\001\001" +
+    "\000\002\001\001\000\004\006\224\001\001\000\002\001" +
+    "\001\000\002\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
   public short[][] reduce_table() {return _reduce_table;}
@@ -275,6 +280,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     public ArrayList<String> Ejes = new ArrayList();
     public ArrayList<String> Direcciones = new ArrayList();
     public ArrayList<String> valores = new ArrayList();
+    public ArrayList<String> ListaTokens = new ArrayList();
     public NodoGrafica graficabarras = new NodoGrafica();
     public NodoGrafica graficapie = new NodoGrafica();
     public NodoGrafica graficalineas = new NodoGrafica();
@@ -285,7 +291,7 @@ public class Sintactico extends java_cup.runtime.lr_parser {
     
     public Symbol getS(){
         return this.s;
-    } 
+    }  
 
 
 /** Cup generated class to encapsulate user supplied action code.*/
@@ -330,7 +336,16 @@ class CUP$Sintactico$actions {
           case 1: // ini ::= BPGRE BPLLAIZQ contenidogeneral BPLLADER 
             {
               Object RESULT =null;
-		
+		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		ListaTokens.add(var1); ListaTokens.add(var2); ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("ini",0, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -339,7 +354,17 @@ class CUP$Sintactico$actions {
           case 2: // contenidogeneral ::= BPDEG BPLLAIZQ cuerpo BPLLADER graficas 
             {
               Object RESULT =null;
-		
+		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
+		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
+		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                            ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidogeneral",1, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -348,7 +373,17 @@ class CUP$Sintactico$actions {
           case 3: // contenidogeneral ::= compara BPDEG BPLLAIZQ cuerpo BPLLADER graficas 
             {
               Object RESULT =null;
-		
+		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
+		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
+		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                    ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidogeneral",1, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -357,7 +392,17 @@ class CUP$Sintactico$actions {
           case 4: // contenidogeneral ::= BPDEG BPLLAIZQ cuerpo BPLLADER compara graficas 
             {
               Object RESULT =null;
-		
+		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).left;
+		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).right;
+		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                    ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidogeneral",1, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -366,13 +411,24 @@ class CUP$Sintactico$actions {
           case 5: // cuerpo ::= BPSTG IDENTIFICADOR BPEQUAL BPCADENA BPPTCOMA 
             {
               ArrayList<NodoVariable> RESULT =null;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		int var5left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var5right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var5 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		ListaVariables.add(new NodoVariable(var1, var2));
+                                                                                   ListaTokens.add(var3); ListaTokens.add(var4);
+                                                                                   ListaTokens.add(var5);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("cuerpo",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -381,13 +437,24 @@ class CUP$Sintactico$actions {
           case 6: // cuerpo ::= BPDOUBLE IDENTIFICADOR BPEQUAL DD BPPTCOMA 
             {
               ArrayList<NodoVariable> RESULT =null;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		int var5left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var5right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var5 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		ListaVariables.add(new NodoVariable(var1, var2));
+                                                                               ListaTokens.add(var3); ListaTokens.add(var4);
+                                                                               ListaTokens.add(var5);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("cuerpo",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -396,13 +463,24 @@ class CUP$Sintactico$actions {
           case 7: // cuerpo ::= cuerpo BPSTG IDENTIFICADOR BPEQUAL BPCADENA BPPTCOMA 
             {
               ArrayList<NodoVariable> RESULT =null;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		int var5left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var5right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var5 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		ListaVariables.add(new NodoVariable(var1, var2));
+                                                                         ListaTokens.add(var3); ListaTokens.add(var4);
+                                                                         ListaTokens.add(var5);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("cuerpo",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -411,13 +489,24 @@ class CUP$Sintactico$actions {
           case 8: // cuerpo ::= cuerpo BPDOUBLE IDENTIFICADOR BPEQUAL DD BPPTCOMA 
             {
               ArrayList<NodoVariable> RESULT =null;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		int var5left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var5right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var5 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		ListaVariables.add(new NodoVariable(var1, var2));
+                                                                                      ListaTokens.add(var3); ListaTokens.add(var4);
+                                                                                      ListaTokens.add(var5);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("cuerpo",3, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -429,8 +518,16 @@ class CUP$Sintactico$actions {
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		graficabarras.tipo=var1;
-                                                                GraficasEjecutar.add(graficabarras);
+                                                                          GraficasEjecutar.add(graficabarras);
+                                                                          ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                          ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -442,8 +539,16 @@ class CUP$Sintactico$actions {
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
 		graficabarras.tipo=var1;
-                                                                GraficasEjecutar.add(graficabarras);
+                                                                                GraficasEjecutar.add(graficabarras);
+                                                                                ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -455,8 +560,16 @@ class CUP$Sintactico$actions {
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		graficapie.tipo=var1;
-                                                                GraficasEjecutar.add(graficapie);
+                                                                        GraficasEjecutar.add(graficapie);
+                                                                        ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                         ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -468,8 +581,16 @@ class CUP$Sintactico$actions {
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
 		graficapie.tipo=var1;
-                                                                GraficasEjecutar.add(graficapie);
+                                                                               GraficasEjecutar.add(graficapie);
+                                                                               ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                               ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -481,8 +602,16 @@ class CUP$Sintactico$actions {
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		graficalineas.tipo=var1;
-                                                                GraficasEjecutar.add(graficalineas);
+                                                                            GraficasEjecutar.add(graficalineas);
+                                                                            ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                            ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -494,8 +623,16 @@ class CUP$Sintactico$actions {
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
 		graficalineas.tipo=var1;
-                                                                GraficasEjecutar.add(graficalineas);
+                                                                                    GraficasEjecutar.add(graficalineas);
+                                                                                    ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                    ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -507,8 +644,16 @@ class CUP$Sintactico$actions {
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
 		graficabarras.tipo=var1;
-                                                                           GraficasEjecutar.add(graficabarras);
+                                                                                            GraficasEjecutar.add(graficabarras);
+                                                                                            ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                            ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -520,8 +665,16 @@ class CUP$Sintactico$actions {
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		graficabarras.tipo=var1;
-                                                                           GraficasEjecutar.add(graficabarras);
+                                                                                    GraficasEjecutar.add(graficabarras);
+                                                                                    ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                    ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -533,8 +686,16 @@ class CUP$Sintactico$actions {
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		graficapie.tipo=var1;
-                                                                GraficasEjecutar.add(graficapie);
+                                                                                GraficasEjecutar.add(graficapie);
+                                                                                ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -546,8 +707,16 @@ class CUP$Sintactico$actions {
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
 		graficapie.tipo=var1;
-                                                                GraficasEjecutar.add(graficapie);
+                                                                                        GraficasEjecutar.add(graficapie);
+                                                                                        ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                        ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -559,8 +728,16 @@ class CUP$Sintactico$actions {
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		graficalineas.tipo=var1;
-                                                                GraficasEjecutar.add(graficalineas);
+                                                                                    GraficasEjecutar.add(graficalineas);
+                                                                                    ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                    ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -572,8 +749,16 @@ class CUP$Sintactico$actions {
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
 		graficalineas.tipo=var1;
-                                                                GraficasEjecutar.add(graficalineas);
+                                                                                            GraficasEjecutar.add(graficalineas);
+                                                                                            ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                            ListaTokens.add(var3);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -822,10 +1007,21 @@ class CUP$Sintactico$actions {
           case 41: // titulos ::= BPTITULO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA 
             {
               Object RESULT =null;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
-		RESULT=var1;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		RESULT=var1; 
+                                                                            ListaTokens.add(var2); ListaTokens.add(var3);
+                                                                            ListaTokens.add(var4);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("titulos",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -834,10 +1030,21 @@ class CUP$Sintactico$actions {
           case 42: // titulos ::= BPTITULO BPDOSPUNTOS BPCADENA BPPTCOMA 
             {
               Object RESULT =null;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		RESULT=var1;
+                                                                      ListaTokens.add(var2); ListaTokens.add(var3);
+                                                                      ListaTokens.add(var4);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("titulos",2, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -846,7 +1053,25 @@ class CUP$Sintactico$actions {
           case 43: // ejesx ::= BPEJEX BPDOSPUNTOS BPCORIZQ contenidox BPCORDER BPPTCOMA 
             {
               ArrayList<String> RESULT =null;
+		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).left;
+		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).right;
+		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		int var5left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var5right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var5 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		RESULT=Ejes;
+                                                                                           ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                           ListaTokens.add(var3); ListaTokens.add(var4);
+                                                                                           ListaTokens.add(var5);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("ejesx",13, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -879,7 +1104,10 @@ class CUP$Sintactico$actions {
           case 46: // contenidox ::= contenidox BPCOMA 
             {
               ArrayList<String> RESULT =null;
-		
+		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		ListaTokens.add(var1);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidox",11, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -912,7 +1140,25 @@ class CUP$Sintactico$actions {
           case 49: // valores ::= BPVALORES BPDOSPUNTOS BPCORIZQ contenidov BPCORDER BPPTCOMA 
             {
               ArrayList<String> RESULT =null;
+		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).left;
+		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).right;
+		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		int var5left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var5right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var5 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		RESULT=valores;
+                                                                                                ListaTokens.add(var1); ListaTokens.add(var2);
+                                                                                                ListaTokens.add(var3); ListaTokens.add(var4);
+                                                                                                ListaTokens.add(var5);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("valores",14, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -945,7 +1191,10 @@ class CUP$Sintactico$actions {
           case 52: // contenidov ::= contenidov BPCOMA 
             {
               ArrayList<String> RESULT =null;
-		
+		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		ListaTokens.add(var1);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("contenidov",12, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -978,10 +1227,20 @@ class CUP$Sintactico$actions {
           case 55: // titulox ::= BPTTX BPDOSPUNTOS IDENTIFICADOR BPPTCOMA 
             {
               Object RESULT =null;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
-		RESULT=var1;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		RESULT=var1; ListaTokens.add(var2); ListaTokens.add(var3);
+                                                                        ListaTokens.add(var4);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("titulox",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -990,10 +1249,20 @@ class CUP$Sintactico$actions {
           case 56: // titulox ::= BPTTX BPDOSPUNTOS BPCADENA BPPTCOMA 
             {
               Object RESULT =null;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
-		RESULT=var1;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		RESULT=var1; ListaTokens.add(var2); ListaTokens.add(var3); 
+                                                                    ListaTokens.add(var4);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("titulox",8, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -1002,10 +1271,20 @@ class CUP$Sintactico$actions {
           case 57: // tituloy ::= BPTTY BPDOSPUNTOS IDENTIFICADOR BPPTCOMA 
             {
               Object RESULT =null;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
-		RESULT=var1;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		RESULT=var1; ListaTokens.add(var2); ListaTokens.add(var3); 
+                                                                        ListaTokens.add(var4);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("tituloy",9, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -1014,10 +1293,20 @@ class CUP$Sintactico$actions {
           case 58: // tituloy ::= BPTTY BPDOSPUNTOS BPCADENA BPPTCOMA 
             {
               Object RESULT =null;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
-		RESULT=var1;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		RESULT=var1; ListaTokens.add(var2); ListaTokens.add(var3); 
+                                                                    ListaTokens.add(var4);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("tituloy",9, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -1026,10 +1315,20 @@ class CUP$Sintactico$actions {
           case 59: // Arch ::= BPARCHIVO BPDOSPUNTOS IDENTIFICADOR BPPTCOMA 
             {
               Object RESULT =null;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
-		RESULT=var1;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		RESULT=var1; ListaTokens.add(var2); ListaTokens.add(var3); 
+                                                                         ListaTokens.add(var4);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("Arch",10, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -1038,10 +1337,20 @@ class CUP$Sintactico$actions {
           case 60: // Arch ::= BPARCHIVO BPDOSPUNTOS BPCADENA BPPTCOMA 
             {
               Object RESULT =null;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
-		RESULT=var1;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		RESULT=var1; ListaTokens.add(var2); ListaTokens.add(var3); 
+                                                                     ListaTokens.add(var4);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("Arch",10, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -1050,13 +1359,64 @@ class CUP$Sintactico$actions {
           case 61: // compara ::= BPCOMPARE BPPAA BPCADENA BPCOMA BPCADENA BPPAC BPPTCOMA 
             {
               ArrayList<String> RESULT =null;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)).value;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).value;
 		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
 		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
 		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var5left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var5right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var5 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
 		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
 		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
 		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		int var6left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int var6right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		String var6 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		int var7left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var7right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var7 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
 		Direcciones.add(var1); Direcciones.add(var2);
+                                                                                                        ListaTokens.add(var3); ListaTokens.add(var4); 
+                                                                                                        ListaTokens.add(var5); ListaTokens.add(var6);
+                                                                                                        ListaTokens.add(var7);
+              CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("compara",15, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
+            }
+          return CUP$Sintactico$result;
+
+          /*. . . . . . . . . . . . . . . . . . . .*/
+          case 62: // compara ::= BPCOMPARE BPPAA BPRUTA BPCOMA BPRUTA BPPAC BPPTCOMA 
+            {
+              ArrayList<String> RESULT =null;
+		int var3left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)).left;
+		int var3right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)).right;
+		String var3 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)).value;
+		int var4left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).left;
+		int var4right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).right;
+		String var4 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)).value;
+		int var1left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).left;
+		int var1right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).right;
+		String var1 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)).value;
+		int var5left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).left;
+		int var5right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).right;
+		String var5 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)).value;
+		int var2left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).left;
+		int var2right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).right;
+		String var2 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-2)).value;
+		int var6left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).left;
+		int var6right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).right;
+		String var6 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-1)).value;
+		int var7left = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).left;
+		int var7right = ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()).right;
+		String var7 = (String)((java_cup.runtime.Symbol) CUP$Sintactico$stack.peek()).value;
+		Direcciones.add(var1); Direcciones.add(var2);
+                                                                                                        ListaTokens.add(var3); ListaTokens.add(var4); 
+                                                                                                        ListaTokens.add(var5); ListaTokens.add(var6);
+                                                                                                        ListaTokens.add(var7);
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("compara",15, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-6)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;

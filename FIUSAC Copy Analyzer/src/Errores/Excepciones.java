@@ -12,18 +12,14 @@ package Errores;
 public class Excepciones {
     public String tipo;
     public String descripcion;
-    public String linea;
-    public String columna;
     
-    public Excepciones(String tipo, String descripcion, String linea, String columna){
+    public Excepciones(String tipo, String descripcion){
         this.tipo = tipo;
         this.descripcion = descripcion;
-        this.linea = linea;
-        this.columna = columna;
     }
     
     @Override
     public String toString(){
-        return this.tipo +": "+this.descripcion +" ["+ this.linea+", "+this.columna+"] ";
+        return this.tipo +": "+this.descripcion ;
     }
 }

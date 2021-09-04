@@ -15,10 +15,5 @@ import java.util.ArrayList;
 public class Error {
     
     public static ArrayList<Excepciones> ErroresCometidos = new ArrayList();
-    
-        public Error(String tipo, String descripcion, String linea, String columna){
-            Excepciones nuevo = new Excepciones(tipo, descripcion, linea, columna);
-            ErroresCometidos.add(nuevo);
-        }        
         
 }

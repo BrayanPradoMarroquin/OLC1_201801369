@@ -21,12 +21,22 @@ import java.util.ArrayList;
 import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.xy.XYSeries;
+import Errores.*;
 
 /**
  *
  * @author BRAYAN
  */
 public class Pantalla_Principal extends javax.swing.JFrame {
+    public ArrayList<Excepciones> tabladeErrores = new ArrayList();
     String cadena = "";
     Sintactico sintax;
     private MenuComponent Pestañas;
@@ -252,18 +262,91 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         for (int i = 0; i < sintax.GraficasEjecutar.size(); i++) {
             if (sintax.GraficasEjecutar.get(i).tipo.equals("GraficaBarras")) {
+                
                 NodoGrafica barras = new NodoGrafica();
                 barras = sintax.GraficasEjecutar.get(i);
                 
+                for (int j = 0; j < barras.Valores.size(); j++) {
+                    for (int k = 0; k < sintax.ListaVariables.size(); k++) {
+                        if (barras.Valores.get(j).equals(sintax.ListaVariables.get(k).Identificador)) {
+                            barras.Valores.set(j, sintax.ListaVariables.get(k).contenido);
+                        }   
+                        if (barras.Ejes.get(j).equals(sintax.ListaVariables.get(k).Identificador)) {
+                            barras.Ejes.set(j, sintax.ListaVariables.get(k).contenido);
+                        }
+                    }
+                }
+                for (int j = 0; j < sintax.ListaVariables.size(); j++) {
+                    if (barras.titulo.equals(sintax.ListaVariables.get(j).Identificador)){
+                        barras.titulo = sintax.ListaVariables.get(j).contenido;
+                    }
+                }
+                
+                for (int j = 0; j < sintax.ListaVariables.size(); j++) {
+                    if (barras.Titulox.equals(sintax.ListaVariables.get(j).Identificador)){
+                        barras.Titulox = sintax.ListaVariables.get(j).contenido;
+                    }
+                }
+                
+                for (int j = 0; j < sintax.ListaVariables.size(); j++) {
+                    if (barras.Tituloy.equals(sintax.ListaVariables.get(j).Identificador)){
+                        barras.Tituloy = sintax.ListaVariables.get(j).contenido;
+                    }
+                }
+                
+                DefaultCategoryDataset data = new DefaultCategoryDataset();
+                
+                for (int j = 0; j < barras.Ejes.size(); j++) {
+                    data.setValue(Double.parseDouble(barras.Valores.get(j)), "Resultado", barras.Ejes.get(j));
+                }
+                
+                JFreeChart GraficoBarras = ChartFactory.createBarChart3D(
+                        barras.titulo,
+                        barras.Titulox,
+                        barras.Tituloy,
+                        data,
+                        PlotOrientation.VERTICAL,
+                        false,
+                        false,
+                        false
+                );
+                
+                ChartFrame jf = new ChartFrame(barras.titulo, GraficoBarras);
+                jf.setLocationRelativeTo(null);
+                jf.setVisible(true);
             }else if (sintax.GraficasEjecutar.get(i).tipo.equals("GraficaPie")) {
+                
                 NodoGrafica circular = new NodoGrafica();
                 circular = sintax.GraficasEjecutar.get(i);
+                
+                for (int j = 0; j < circular.Valores.size(); j++) {
+                    for (int k = 0; k < sintax.ListaVariables.size(); k++) {
+                        if (circular.Valores.get(j).equals(sintax.ListaVariables.get(k).Identificador)) {
+                            circular.Valores.set(j, sintax.ListaVariables.get(k).contenido);
+                        }   
+                        if (circular.Ejes.get(j).equals(sintax.ListaVariables.get(k).Identificador)) {
+                            circular.Ejes.set(j, sintax.ListaVariables.get(k).contenido);
+                        }
+                    }
+                }
+                
+                for (int j = 0; j < sintax.ListaVariables.size(); j++) {
+                    if (circular.titulo.equals(sintax.ListaVariables.get(j).Identificador)){
+                        circular.titulo = sintax.ListaVariables.get(j).contenido;
+                    }
+                }
+                
+                DefaultPieDataset data = new DefaultPieDataset();
+                
+                
                 
             }else if (sintax.GraficasEjecutar.get(i).tipo.equals("GraficaLineas")) {
                 NodoGrafica lineal = new NodoGrafica();
                 lineal = sintax.GraficasEjecutar.get(i);
                 
             }
+            
+            
         }
     }//GEN-LAST:event_JM_ReportesMouseClicked
 
@@ -328,13 +411,13 @@ public class Pantalla_Principal extends javax.swing.JFrame {
             sintax.parse();
             JL_Console.setText(JL_Console.getText()+ "Hay "+Integer.toString(sintax.ListaVariables.size())+" variables Globales \n"); 
             JL_Console.setText(JL_Console.getText()+ "Hay "+Integer.toString(sintax.GraficasEjecutar.size())+" graficas a Realizar \n");
+            JL_Console.setText(JL_Console.getText()+ " Obtencion de Tokens");
             JL_Console.setText(JL_Console.getText()+" Obtención de Rutas exitosa. \n");
             JL_Console.setText(JL_Console.getText()+" entrada de archivos.  \n");
             BusquedadeRutas(sintax.Direcciones);
             JL_Console.setText(JL_Console.getText()+" archivos analizados. \n");
             JL_Console.setText(JL_Console.getText()+ "Analisis Correcto \n");
         } catch (Exception e) {
-            Symbol syma = sintax.getS();
             JL_Console.setText(JL_Console.getText()+"Error en el analisis Sintactico  \n");
             //JL_Console.setText(JL_Console.getText()+ "Error de Sintaxis Linea: " + (syma.right+1) + " Columna: " + (syma.left+1) + " Texto: \"" + syma.value + "\" \n");
         }

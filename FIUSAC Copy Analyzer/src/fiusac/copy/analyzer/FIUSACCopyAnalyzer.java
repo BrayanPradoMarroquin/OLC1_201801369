@@ -5,6 +5,9 @@
  */
 package fiusac.copy.analyzer;
 
+import Errores.Excepciones;
+import java.util.ArrayList;
+
 /**
  *
  * @author BRAYAN
