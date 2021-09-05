@@ -576,7 +576,11 @@ class CUP$Sintactico$actions {
 		graficabarras.tipo=var1;
                                                                           GraficasEjecutar.add(graficabarras);
                                                                           ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                          ListaTokens.add(var3);
+                                                                          ListaTokens.add(var3); 
+                                                                          graficabarras=new NodoGrafica();
+                                                                          valores = new ArrayList();
+                                                                          Ejes = new ArrayList();
+                                                                         
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -598,6 +602,10 @@ class CUP$Sintactico$actions {
                                                                                 GraficasEjecutar.add(graficabarras);
                                                                                 ListaTokens.add(var1); ListaTokens.add(var2);
                                                                                 ListaTokens.add(var3);
+                                                                                graficabarras=new NodoGrafica();
+                                                                                valores = new ArrayList();
+                                                                                Ejes = new ArrayList();
+                                                                                
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -618,7 +626,11 @@ class CUP$Sintactico$actions {
 		graficapie.tipo=var1;
                                                                         GraficasEjecutar.add(graficapie);
                                                                         ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                         ListaTokens.add(var3);
+                                                                        ListaTokens.add(var3);
+                                                                        graficapie = new NodoGrafica();
+                                                                        valores = new ArrayList();
+                                                                        Ejes = new ArrayList();
+                                                                    
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -640,6 +652,10 @@ class CUP$Sintactico$actions {
                                                                                GraficasEjecutar.add(graficapie);
                                                                                ListaTokens.add(var1); ListaTokens.add(var2);
                                                                                ListaTokens.add(var3);
+                                                                               graficapie = new NodoGrafica();
+                                                                               valores = new ArrayList();
+                                                                               Ejes = new ArrayList();
+                                                                               
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -661,6 +677,7 @@ class CUP$Sintactico$actions {
                                                                             GraficasEjecutar.add(graficalineas);
                                                                             ListaTokens.add(var1); ListaTokens.add(var2);
                                                                             ListaTokens.add(var3);
+                                                                            graficalineas = new NodoGrafica();
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-3)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -682,6 +699,7 @@ class CUP$Sintactico$actions {
                                                                                     GraficasEjecutar.add(graficalineas);
                                                                                     ListaTokens.add(var1); ListaTokens.add(var2);
                                                                                     ListaTokens.add(var3);
+                                                                                    graficalineas = new NodoGrafica();
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -703,6 +721,10 @@ class CUP$Sintactico$actions {
                                                                                             GraficasEjecutar.add(graficabarras);
                                                                                             ListaTokens.add(var1); ListaTokens.add(var2);
                                                                                             ListaTokens.add(var3);
+                                                                                            graficabarras=new NodoGrafica();
+                                                                                            valores = new ArrayList();
+                                                                                            Ejes = new ArrayList();
+                                                                                            
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -724,6 +746,10 @@ class CUP$Sintactico$actions {
                                                                                     GraficasEjecutar.add(graficabarras);
                                                                                     ListaTokens.add(var1); ListaTokens.add(var2);
                                                                                     ListaTokens.add(var3);
+                                                                                    graficabarras=new NodoGrafica();
+                                                                                    valores = new ArrayList();
+                                                                                    Ejes = new ArrayList();
+                                                                                    
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -745,6 +771,10 @@ class CUP$Sintactico$actions {
                                                                                 GraficasEjecutar.add(graficapie);
                                                                                 ListaTokens.add(var1); ListaTokens.add(var2);
                                                                                 ListaTokens.add(var3);
+                                                                                graficapie = new NodoGrafica();
+                                                                                valores = new ArrayList();
+                                                                                Ejes = new ArrayList();
+                                                                                
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -766,6 +796,10 @@ class CUP$Sintactico$actions {
                                                                                         GraficasEjecutar.add(graficapie);
                                                                                         ListaTokens.add(var1); ListaTokens.add(var2);
                                                                                         ListaTokens.add(var3);
+                                                                                        graficapie = new NodoGrafica();
+                                                                                        valores = new ArrayList();
+                                                                                        Ejes = new ArrayList();
+                                                                                        
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -787,6 +821,7 @@ class CUP$Sintactico$actions {
                                                                                     GraficasEjecutar.add(graficalineas);
                                                                                     ListaTokens.add(var1); ListaTokens.add(var2);
                                                                                     ListaTokens.add(var3);
+                                                                                    graficalineas = new NodoGrafica();
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-4)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;
@@ -808,6 +843,7 @@ class CUP$Sintactico$actions {
                                                                                             GraficasEjecutar.add(graficalineas);
                                                                                             ListaTokens.add(var1); ListaTokens.add(var2);
                                                                                             ListaTokens.add(var3);
+                                                                                            graficalineas = new NodoGrafica();
               CUP$Sintactico$result = parser.getSymbolFactory().newSymbol("graficas",4, ((java_cup.runtime.Symbol)CUP$Sintactico$stack.elementAt(CUP$Sintactico$top-5)), ((java_cup.runtime.Symbol)CUP$Sintactico$stack.peek()), RESULT);
             }
           return CUP$Sintactico$result;

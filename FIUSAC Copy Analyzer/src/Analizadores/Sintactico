@@ -87,62 +87,98 @@ cuerpo::=BPSTG:var3 IDENTIFICADOR:var1 BPEQUAL:var4 BPCADENA:var2 BPPTCOMA:var5 
 graficas::=BPGBARRAS:var1 BPLLAIZQ:var2 datosgraficabarra BPLLADER:var3 {:graficabarras.tipo=var1;
                                                                           GraficasEjecutar.add(graficabarras);
                                                                           ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                          ListaTokens.add(var3);:}
+                                                                          ListaTokens.add(var3); 
+                                                                          graficabarras=new NodoGrafica();
+                                                                          valores = new ArrayList();
+                                                                          Ejes = new ArrayList();
+                                                                         :}
 
           |BPGBARRAS:var1 BPLLAIZQ:var2 datosgraficabarra BPLLADER:var3 compara {:graficabarras.tipo=var1;
                                                                                 GraficasEjecutar.add(graficabarras);
                                                                                 ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                                ListaTokens.add(var3);:}
+                                                                                ListaTokens.add(var3);
+                                                                                graficabarras=new NodoGrafica();
+                                                                                valores = new ArrayList();
+                                                                                Ejes = new ArrayList();
+                                                                                :}
 
             |BPGPIE:var1 BPLLAIZQ:var2 datosgraficapie BPLLADER:var3 {:graficapie.tipo=var1;
                                                                         GraficasEjecutar.add(graficapie);
                                                                         ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                         ListaTokens.add(var3);:}
+                                                                        ListaTokens.add(var3);
+                                                                        graficapie = new NodoGrafica();
+                                                                        valores = new ArrayList();
+                                                                        Ejes = new ArrayList();
+                                                                    :}
 
             |BPGPIE:var1 BPLLAIZQ:var2 datosgraficapie BPLLADER:var3 compara {:graficapie.tipo=var1;
                                                                                GraficasEjecutar.add(graficapie);
                                                                                ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                               ListaTokens.add(var3);:}
+                                                                               ListaTokens.add(var3);
+                                                                               graficapie = new NodoGrafica();
+                                                                               valores = new ArrayList();
+                                                                               Ejes = new ArrayList();
+                                                                               :}
 
             |BPGLINEAS:var1 BPLLAIZQ:var2 datosgraficalineal BPLLADER:var3 {:graficalineas.tipo=var1;
                                                                             GraficasEjecutar.add(graficalineas);
                                                                             ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                            ListaTokens.add(var3);:}
+                                                                            ListaTokens.add(var3);
+                                                                            graficalineas = new NodoGrafica();:}
 
             |BPGLINEAS:var1 BPLLAIZQ:var2 datosgraficalineal BPLLADER:var3 compara{:graficalineas.tipo=var1;
                                                                                     GraficasEjecutar.add(graficalineas);
                                                                                     ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                                    ListaTokens.add(var3);:}
+                                                                                    ListaTokens.add(var3);
+                                                                                    graficalineas = new NodoGrafica();:}
 
             |graficas BPGBARRAS:var1 BPLLAIZQ:var2 datosgraficabarra BPLLADER:var3 compara {:graficabarras.tipo=var1;
                                                                                             GraficasEjecutar.add(graficabarras);
                                                                                             ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                                            ListaTokens.add(var3);:}
+                                                                                            ListaTokens.add(var3);
+                                                                                            graficabarras=new NodoGrafica();
+                                                                                            valores = new ArrayList();
+                                                                                            Ejes = new ArrayList();
+                                                                                            :}
 
             |graficas BPGBARRAS:var1 BPLLAIZQ:var2 datosgraficabarra BPLLADER:var3 {:graficabarras.tipo=var1;
                                                                                     GraficasEjecutar.add(graficabarras);
                                                                                     ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                                    ListaTokens.add(var3);:}
+                                                                                    ListaTokens.add(var3);
+                                                                                    graficabarras=new NodoGrafica();
+                                                                                    valores = new ArrayList();
+                                                                                    Ejes = new ArrayList();
+                                                                                    :}
 
             |graficas BPGPIE:var1 BPLLAIZQ:var2 datosgraficapie BPLLADER:var3 {:graficapie.tipo=var1;
                                                                                 GraficasEjecutar.add(graficapie);
                                                                                 ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                                ListaTokens.add(var3);:}
+                                                                                ListaTokens.add(var3);
+                                                                                graficapie = new NodoGrafica();
+                                                                                valores = new ArrayList();
+                                                                                Ejes = new ArrayList();
+                                                                                :}
 
             |graficas BPGPIE:var1 BPLLAIZQ:var2 datosgraficapie BPLLADER:var3 compara {:graficapie.tipo=var1;
                                                                                         GraficasEjecutar.add(graficapie);
                                                                                         ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                                        ListaTokens.add(var3);:}
+                                                                                        ListaTokens.add(var3);
+                                                                                        graficapie = new NodoGrafica();
+                                                                                        valores = new ArrayList();
+                                                                                        Ejes = new ArrayList();
+                                                                                        :}
 
             |graficas BPGLINEAS:var1 BPLLAIZQ:var2 datosgraficalineal BPLLADER:var3 {:graficalineas.tipo=var1;
                                                                                     GraficasEjecutar.add(graficalineas);
                                                                                     ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                                    ListaTokens.add(var3);:}
+                                                                                    ListaTokens.add(var3);
+                                                                                    graficalineas = new NodoGrafica();:}
 
             |graficas BPGLINEAS:var1 BPLLAIZQ:var2 datosgraficalineal BPLLADER:var3 compara {:graficalineas.tipo=var1;
                                                                                             GraficasEjecutar.add(graficalineas);
                                                                                             ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                                            ListaTokens.add(var3);:}
+                                                                                            ListaTokens.add(var3);
+                                                                                            graficalineas = new NodoGrafica();:}
             |error BPLLADER;
 
 datosgraficabarra::=datosgraficabarra titulos:var1 {:graficabarras.titulo=(String) var1;:}
