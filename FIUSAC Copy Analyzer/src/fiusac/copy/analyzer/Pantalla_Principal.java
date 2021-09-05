@@ -277,7 +277,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         for (int i = 0; i < sintax.GraficasEjecutar.size(); i++) {
             if (sintax.GraficasEjecutar.get(i).tipo.equalsIgnoreCase("GraficaBarras")) {
                 try {
-                    JL_Console.setText(JL_Console.getText()+" Generando grafica de Barras");
+                    JL_Console.setText(JL_Console.getText()+" Generando grafica de Barras\n");
                     NodoGrafica barras = new NodoGrafica();
                     barras = sintax.GraficasEjecutar.get(i);
                     
@@ -340,7 +340,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
                 try {
                     NodoGrafica circular = new NodoGrafica();
                     circular = sintax.GraficasEjecutar.get(i);
-                    JL_Console.setText(JL_Console.getText()+" Generando grafica Circular");
+                    JL_Console.setText(JL_Console.getText()+" Generando grafica Circular\n");
                     for (int j = 0; j < circular.Valores.size(); j++) {
                         for (int k = 0; k < sintax.ListaVariables.size(); k++) {
                             if (circular.Valores.get(j).equalsIgnoreCase(sintax.ListaVariables.get(k).Identificador)) {
@@ -378,12 +378,13 @@ public class Pantalla_Principal extends javax.swing.JFrame {
             }else if (sintax.GraficasEjecutar.get(i).tipo.equalsIgnoreCase("GraficaLineas")) {
                 NodoGrafica lineal = new NodoGrafica();
                 lineal = sintax.GraficasEjecutar.get(i);
-                JL_Console.setText(JL_Console.getText()+" Generando grafica de Lineas");
+                JL_Console.setText(JL_Console.getText()+" Generando grafica de Lineas\n");
             }
             
             
         }
         Reportehtml();
+        ReporteErrores();
         System.out.println(grafics);
     }//GEN-LAST:event_JM_ReportesMouseClicked
 
@@ -580,4 +581,63 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+
+    private void ReporteErrores() {
+        System.out.println("Reporte de Errores");
+        LocalDate diaactual = LocalDate.now();
+        LocalTime horaactual = LocalTime.now();
+        File Report;
+        FileWriter w;
+        BufferedWriter wb;
+        PrintWriter wr;
+        
+        try {
+            String primera = "<!DOCTYPE html> \n";
+            primera = primera + "<html lang=\"en\"> \n";
+            primera = primera + "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
+                        "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                        "    <title>Document</title>\n" +
+                        "    <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We\" crossorigin=\"anonymous\">\n" +
+                        "</head> \n";
+            primera = primera + "<body> \n";
+            primera = primera + "<nav class=\"navbar navbar-dark bg-primary\">\n" +
+                        "        <a class=\"navbar-brand\" href=\"#\">REPORTES FIUSAC COPY ANALIZER <br> Brayan Hamllelo Estevem Prado Marroquin <br> Carnet: 201801369</a>\n" +
+                        "        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" +
+                        "          <span class=\"navbar-toggler-icon\"></span>\n" +
+                        "        </button>\n" +
+                        "      </nav>";
+            primera = primera +"<h3>\n" +"        <small class=\"text-muted\">"+diaactual+" a las "+horaactual+"</small>\n" +"      </h3>";
+            primera = primera + "<table class=\"table table-striped table-hover\">\n" +
+                                "        <thead>\n" +
+                                "          <td>tipo</td>\n" +
+                                "          <td>Error</td>\n" +
+                                "          <td>Fila</td>\n" +
+                                "          <td>Columna</td>\n" +
+                                "        </thead>\n" +
+                                "        <tbody>";
+            
+            for (int i = 0; i < Errores.Error.ErroresCometidos.size(); i++) {
+                primera = primera + "<tr>";
+                primera = primera + "<td>"+Errores.Error.ErroresCometidos.get(i).tipo+"</td>\n" +
+                        "            <td>"+Errores.Error.ErroresCometidos.get(i).descripcion+"</td>\n" +
+                        "            <td>"+Errores.Error.ErroresCometidos.get(i).fila+"</td>\n" +
+                        "            <td>"+Errores.Error.ErroresCometidos.get(i).Columna+"</td>";
+                primera = primera + "</tr>";
+            }
+            primera = primera + "</tbody>\n" +"</table>\n </body>\n" +"</html>";
+            
+            Report  = new File("Reporte de Errores.html");
+            w=new FileWriter(Report);
+            wb = new BufferedWriter(w);
+            wr = new PrintWriter(wb);
+            
+            wr.write(primera);
+            wr.close();
+            wb.close();
+        } catch (Exception e) {
+        }
+    }
+    
 }
