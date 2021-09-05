@@ -29,7 +29,6 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.xy.XYSeries;
-import Errores.*;
 
 /**
  *
@@ -39,6 +38,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     public ArrayList<Excepciones> tabladeErrores = new ArrayList();
     String cadena = "";
     Sintactico sintax;
+    analizadorJs.Sintactico sintaxJS1, sintaxJS2;
     private MenuComponent Pestañas;
 
     /**
@@ -262,7 +262,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         for (int i = 0; i < sintax.GraficasEjecutar.size(); i++) {
             if (sintax.GraficasEjecutar.get(i).tipo.equals("GraficaBarras")) {
-                
+                JL_Console.setText(JL_Console.getText()+" Generando grafica de Barras");
                 NodoGrafica barras = new NodoGrafica();
                 barras = sintax.GraficasEjecutar.get(i);
                 
@@ -318,7 +318,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
                 
                 NodoGrafica circular = new NodoGrafica();
                 circular = sintax.GraficasEjecutar.get(i);
-                
+                JL_Console.setText(JL_Console.getText()+" Generando grafica Circular");
                 for (int j = 0; j < circular.Valores.size(); j++) {
                     for (int k = 0; k < sintax.ListaVariables.size(); k++) {
                         if (circular.Valores.get(j).equals(sintax.ListaVariables.get(k).Identificador)) {
@@ -343,7 +343,7 @@ public class Pantalla_Principal extends javax.swing.JFrame {
             }else if (sintax.GraficasEjecutar.get(i).tipo.equals("GraficaLineas")) {
                 NodoGrafica lineal = new NodoGrafica();
                 lineal = sintax.GraficasEjecutar.get(i);
-                
+                JL_Console.setText(JL_Console.getText()+" Generando grafica de Lineas");
             }
             
             
@@ -437,7 +437,21 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         for (int i = 0; i < carpeta1.length; i++) {
             for (int j = 0; j < carpeta2.length; j++) {
                 if (carpeta1[i].equals(carpeta2[j])) {
-                    System.out.println(carpeta1[i]+ " == " + carpeta2[j]);
+                    File archivo1 = new File(rut1validar1.substring(1, rut1validar1.length()-1)+"\\"+carpeta1[i]);
+                    File archivo2 = new File(rut1validar1.substring(1, rut1validar1.length()-1)+"\\"+carpeta2[i]);
+        
+                    try {            
+                        String st1  = new String(Files.readAllBytes(archivo1.toPath()));
+                        String st2  = new String(Files.readAllBytes(archivo2.toPath()));
+                        //System.out.println(st1+"\n");
+                        //System.out.println(st2+"\n");
+                        sintaxJS1 = new analizadorJs.Sintactico(new analizadorJs.Lexico(new StringReader(st1)));
+                        sintaxJS2 = new analizadorJs.Sintactico(new analizadorJs.Lexico(new StringReader(st2)));
+                        JL_Console.setText(JL_Console.getText()+"Obtencion de Datos exitoso :) \n");
+                    } catch (Exception e) {
+                        System.out.println("Error fatal en compilación de entrada.");
+                        System.out.println("Causa: "+e.getCause());
+                    }
                 }
             }
         }

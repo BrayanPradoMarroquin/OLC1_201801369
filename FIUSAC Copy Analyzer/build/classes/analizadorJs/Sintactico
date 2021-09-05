@@ -1,4 +1,4 @@
-package analizadores;
+package analizadorJs;
 import java_cup.runtime.*;
 import java.util.ArrayList;
 
@@ -12,127 +12,481 @@ parser code
 terminal String BPCLASS, BPVAR, BPLET, BPCNST;
 terminal String BPIF,BPELSE, BPFOR;
 terminal String BPWHILE, BPDO, BPSWITCH, BPCASE;
-terminal String BPCONS,BPLOG;
+terminal String BPCONS;
 terminal String BPRQRE, BPBREAK, BPPTCOMA, BPDOSPUNTOS;
 terminal String BPPUNTO, BPCOMA, BPPARIZQ, BPPARDER;
 terminal String BPLLAIZQ, BPLLADER, BPDEFAULT;
 terminal String BPMAS, BPGUION, BPPOR, BPPON, BPDIVIDIR, BPMAYOR, BPMENOR;
-terminal String BPPREGUNTA, BPMOD, BPYAND, BPOOR, BPEQUAL, BPEQUALCONDITION;
+terminal String BPMOD, BPYAND, BPOOR, BPEQUAL, BPEQUALCONDITION;
 terminal String BPNOTEQUALS, BPMAYOREQUALS, BPMENOREQUALS, BPNEG;
-terminal String IDENTIFICADOR, BPCADENA, DD, ENTERO, BPFALSE, BPTRUE;
+terminal String IDENTIFICADOR, BPCADENA, DD, BPFALSE, BPTRUE, BPAUMENTO, BPDISMINUIR;
+terminal String LINECOMMENT, MULTILINECOMMENT, BPRUTA;
 
 
-non terminal ini, event, cuerpoclase, params, data, condicion, binario, cond, declaracion, tipo, par, inc, cuerpocase;
+non terminal ini, procesos, parametros, variable, impresion, opmate, concatenar, condicion, forvariable, condicionfor, foraumento, casos, signos, comentario, siguiente;
 
 start with ini;
 
-ini::= event ;
+ini::=ini comentario BPCLASS IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER {::}
+    |ini BPCLASS IDENTIFICADOR BPLLAIZQ comentario procesos BPLLADER {::}
+    |ini BPCLASS IDENTIFICADOR BPLLAIZQ procesos comentario BPLLADER {::}
+    |ini BPCLASS IDENTIFICADOR BPLLAIZQ procesos BPLLADER{::}
 
-event::=
-        BPCLASS IDENTIFICADOR BPLLAIZQ cuerpoclase BPLLADER {::}
-        |IDENTIFICADOR BPPARIZQ params BPPARDER BPLLAIZQ cuerpoclase BPLLADER{::}
-        |IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ cuerpoclase BPLLADER {::}
+    |ini IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER {::}
+    |ini IDENTIFICADOR BPPARIZQ parametros BPPARDER BPLLAIZQ procesos BPLLADER {::}
+//    |ini IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA{::}
+//    |ini IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {::}
+//    |ini IDENTIFICADOR BPPARIZQ BPPARDER{::}
+//    |ini IDENTIFICADOR BPPARIZQ parametros BPPARDER{::}
+    |ini BPVAR IDENTIFICADOR BPEQUAL variable {::}
+    |ini BPLET IDENTIFICADOR BPEQUAL variable {::}
+    |ini BPCNST IDENTIFICADOR BPEQUAL variable {::}
+    |ini BPVAR IDENTIFICADOR {::}
+    |ini BPLET IDENTIFICADOR {::}
+    |ini BPCNST IDENTIFICADOR {::}
+    |ini BPVAR IDENTIFICADOR BPPTCOMA {::}
+    |ini BPLET IDENTIFICADOR BPPTCOMA {::}
+    |ini BPCNST IDENTIFICADOR BPPTCOMA {::}
+    |BPCLASS IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER {::}
+    |IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER {::}
+    |IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA{::}
+    |IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {::}
+    |IDENTIFICADOR BPPARIZQ BPPARDER{::}
+    |IDENTIFICADOR BPPARIZQ parametros BPPARDER{::}
+    |IDENTIFICADOR BPPARIZQ parametros BPPARDER BPLLAIZQ procesos BPLLADER {::}
+    |BPVAR IDENTIFICADOR BPEQUAL variable {::}
+    |BPLET IDENTIFICADOR BPEQUAL variable {::}
+    |BPCNST IDENTIFICADOR BPEQUAL variable {::}
+    |BPVAR IDENTIFICADOR {::}
+    |BPLET IDENTIFICADOR {::}
+    |BPCNST IDENTIFICADOR {::}
+    |BPVAR IDENTIFICADOR BPPTCOMA {::}
+    |BPLET IDENTIFICADOR BPPTCOMA {::}
+    |BPCNST IDENTIFICADOR BPPTCOMA {::}
 ;
 
-cuerpoclase::=
-            cuerpoclase BPVAR IDENTIFICADOR BPEQUAL data BPPTCOMA{::}
-            |cuerpoclase BPLET IDENTIFICADOR BPEQUAL data BPPTCOMA{::}
-            |cuerpoclase BPCNST IDENTIFICADOR BPEQUAL data BPPTCOMA{::}
-            |cuerpoclase BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER {::}
-            |cuerpoclase BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER BPELSE BPLLAIZQ cuerpoclase BPLLADER{::}
-            |cuerpoclase BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER BPELSE BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER{::}
-            |cuerpoclase BPFOR BPPARIZQ declaracion BPPTCOMA par BPPTCOMA inc BPPARDER BPLLAIZQ cuerpoclase BPLLADER {::}
-            |cuerpoclase BPWHILE BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPBREAK BPLLADER {::}
-            |cuerpoclase BPWHILE BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER {::}
-            |cuerpoclase BPDO BPLLAIZQ cuerpoclase BPLLADER BPWHILE BPPARIZQ condicion BPPARDER BPPTCOMA {::}
-            |cuerpoclase BPSWITCH BPPARIZQ IDENTIFICADOR BPPARDER BPLLAIZQ cuerpocase BPLLADER {::}
-            |cuerpoclase IDENTIFICADOR BPPARIZQ params BPPARDER BPPTCOMA {::}
-            |cuerpoclase IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA {::}
-            |cuerpoclase BPVAR IDENTIFICADOR BPEQUAL BPRQRE BPPARIZQ BPCADENA BPPARDER {::}
-            |cuerpoclase BPLET IDENTIFICADOR BPEQUAL BPRQRE BPPARIZQ BPCADENA BPPARDER {::}
-            |cuerpoclase BPCNST IDENTIFICADOR BPEQUAL BPRQRE BPPARIZQ BPCADENA BPPARDER {::}
-            |cuerpoclase BPCONS BPPUNTO BPLOG BPPARIZQ consola BPPARDER BPPTCOMA {::}
-            |BPVAR IDENTIFICADOR BPEQUAL data BPPTCOMA{::}
-            |BPLET IDENTIFICADOR BPEQUAL data BPPTCOMA{::}
-            |BPCNST IDENTIFICADOR BPEQUAL data BPPTCOMA{::}
-            |BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER {::}
-            |BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER BPELSE BPLLAIZQ cuerpoclase BPLLADER{::}
-            |BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER BPELSE BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpoclase BPLLADER{::}
-            |BPFOR BPPARIZQ declaracion BPPTCOMA par BPPTCOMA inc BPPARDER BPLLAIZQ cuerpo BPLLADER {::}
-            |BPWHILE BPPARIZQ condicion BPPARDER BPLLAIZQ cuerpo BPLLADER {::}
-            |BPDO BPLLAIZQ cuerpoclase BPLLADER BPWHILE BPPARIZQ condicion BPPARDER BPPTCOMA {::}
-            |BPSWITCH BPPARIZQ IDENTIFICADOR BPPARDER BPLLAIZQ cuerpocase BPLLADER {::}
-            |IDENTIFICADOR BPPARIZQ params BPPARDER BPPTCOMA {::}
-            |IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA {::}
-            |BPVAR IDENTIFICADOR BPEQUAL BPRQRE BPPARIZQ BPCADENA BPPARDER {::}
-            |BPLET IDENTIFICADOR BPEQUAL BPRQRE BPPARIZQ BPCADENA BPPARDER {::}
-            |BPCNST IDENTIFICADOR BPEQUAL BPRQRE BPPARIZQ BPCADENA BPPARDER {::}
-            |BPCONS BPPUNTO BPLOG BPPARIZQ consola BPPARDER BPPTCOMA {::}
+comentario::=comentario LINECOMMENT {::}
+           |comentario MULTILINECOMMENT {::}
+           |LINECOMMENT{::}
+           |MULTILINECOMMENT{::}
 ;
 
-params::=
-        params IDENTIFICADOR {::}
-        |params BPCOMA {::}
-        |IDENTIFICADOR {::}
+parametros::=IDENTIFICADOR {::}
+          |parametros BPCOMA IDENTIFICADOR {::}
+          |parametros signos DD {::}
+          |parametros signos BPPARIZQ variable BPPARDER {::}
 ;
 
-data::=
-        ENTERO {::}
-        |DECIMAL {::}
+variable::=BPCADENA BPPTCOMA{::}
         |BPCADENA {::}
-        |IDENTIFICADOR {::}
+        |BPRUTA BPPTCOMA {::}
+        |BPRUTA {::}
+        |DD BPPTCOMA{::}
+        |DD {::}
+        |DD signos DD BPPTCOMA{::}
+        |DD signos DD {::}
+//        |DD signos IDENTIFICADOR BPPTCOMA{::}
+//        |DD signos IDENTIFICADOR {::}
+//        |IDENTIFICADOR signos DD BPPTCOMA{::}
+//        |IDENTIFICADOR signos DD {::}
+//        |IDENTIFICADOR signos IDENTIFICADOR BPPTCOMA{::}
+//        |IDENTIFICADOR signos IDENTIFICADOR{::}
+        |BPTRUE BPPTCOMA{::}
         |BPTRUE {::}
+        |BPFALSE BPPTCOMA {::}
         |BPFALSE {::}
+        |BPPARIZQ opmate BPPARDER opmate BPPTCOMA {::}
+        |BPPARIZQ opmate BPPARDER opmate {::}
+
+        |BPPARIZQ opmate BPPARDER BPGUION DD BPPTCOMA {::}
+        |BPPARIZQ opmate BPPARDER BPGUION DD {::}
+        |BPPARIZQ opmate BPPARDER BPMAS DD BPPTCOMA {::}
+        |BPPARIZQ opmate BPPARDER BPMAS DD {::}
+        |BPPARIZQ opmate BPPARDER BPPOR DD BPPTCOMA {::}
+        |BPPARIZQ opmate BPPARDER BPPOR DD {::}
+        |BPPARIZQ opmate BPPARDER BPDIVIDIR DD BPPTCOMA {::}
+        |BPPARIZQ opmate BPPARDER BPDIVIDIR DD {::}
+        |BPPARIZQ opmate BPPARDER BPPON DD BPPTCOMA {::}
+        |BPPARIZQ opmate BPPARDER BPPON DD {::}
+        |BPPARIZQ opmate BPPARDER BPMOD DD BPPTCOMA {::}
+        |BPPARIZQ opmate BPPARDER BPMOD DD {::}
+
+        |BPPARIZQ opmate BPPARDER BPGUION opmate BPPTCOMA {::}
+        |BPPARIZQ opmate BPPARDER BPGUION opmate {::}
+        |BPPARIZQ opmate BPPARDER BPMAS opmate BPPTCOMA {::}
+        |BPPARIZQ opmate BPPARDER BPMAS opmate {::}
+        |BPPARIZQ opmate BPPARDER BPPOR opmate BPPTCOMA {::}
+        |BPPARIZQ opmate BPPARDER BPPOR opmate {::}
+        |BPPARIZQ opmate BPPARDER BPDIVIDIR opmate BPPTCOMA {::}
+        |BPPARIZQ opmate BPPARDER BPDIVIDIR opmate {::}
+        |BPPARIZQ opmate BPPARDER BPPON opmate BPPTCOMA {::}
+        |BPPARIZQ opmate BPPARDER BPPON opmate {::}
+        |BPPARIZQ opmate BPPARDER BPMOD opmate BPPTCOMA {::}
+        |BPPARIZQ opmate BPPARDER BPMOD opmate {::}
+
+        |BPPARIZQ opmate BPPARDER BPPTCOMA{::}
+        |BPPARIZQ opmate BPPARDER {::}
+        |BPRQRE BPPARIZQ BPCADENA BPPARDER BPPTCOMA {::}
+        |BPRQRE BPPARIZQ BPCADENA BPPARDER {::}
+
+        |signos DD signos IDENTIFICADOR signos DD {::}
+        |signos DD signos IDENTIFICADOR signos DD BPPTCOMA{::}
+        |signos DD signos IDENTIFICADOR signos DD signos variable {::}
+        |DD signos IDENTIFICADOR signos DD {::}
+        |DD signos IDENTIFICADOR signos DD BPPTCOMA{::}
+        |DD signos IDENTIFICADOR signos DD signos variable {::}
+
+        |signos DD signos IDENTIFICADOR signos IDENTIFICADOR {::}
+        |signos DD signos IDENTIFICADOR signos IDENTIFICADOR BPPTCOMA{::}
+        |signos DD signos IDENTIFICADOR signos IDENTIFICADOR signos variable {::}
+        |DD signos IDENTIFICADOR signos IDENTIFICADOR {::}
+        |DD signos IDENTIFICADOR signos IDENTIFICADOR BPPTCOMA {::}
+        |DD signos IDENTIFICADOR signos IDENTIFICADOR signos variable {::}
+
+        |signos IDENTIFICADOR signos DD signos DD {::}
+        |signos IDENTIFICADOR signos DD signos DD BPPTCOMA{::}
+        |signos IDENTIFICADOR signos DD signos DD signos variable {::}
+        |IDENTIFICADOR signos DD signos DD {::}
+        |IDENTIFICADOR signos DD signos DD BPPTCOMA{::}
+        |IDENTIFICADOR signos DD signos DD signos variable {::}
+
+        |signos IDENTIFICADOR signos IDENTIFICADOR signos DD {::}
+        |signos IDENTIFICADOR signos IDENTIFICADOR signos DD BPPTCOMA{::}
+        |signos IDENTIFICADOR signos IDENTIFICADOR signos DD signos variable {::}
+        |IDENTIFICADOR signos IDENTIFICADOR signos DD {::}
+        |IDENTIFICADOR signos IDENTIFICADOR signos DD BPPTCOMA{::}
+        |IDENTIFICADOR signos IDENTIFICADOR signos DD signos variable {::}
+
+        |signos IDENTIFICADOR signos DD signos IDENTIFICADOR {::}
+        |signos IDENTIFICADOR signos DD signos IDENTIFICADOR BPPTCOMA{::}
+        |signos IDENTIFICADOR signos DD signos IDENTIFICADOR signos variable {::}
+        |IDENTIFICADOR signos DD signos IDENTIFICADOR {::}
+        |IDENTIFICADOR signos DD signos IDENTIFICADOR BPPTCOMA{::}
+        |IDENTIFICADOR signos DD signos IDENTIFICADOR signos variable {::}
+
+        |signos DD signos DD signos IDENTIFICADOR {::}
+        |signos DD signos DD signos IDENTIFICADOR BPPTCOMA{::}
+        |signos DD signos DD signos IDENTIFICADOR signos variable {::}
+        |DD signos DD signos IDENTIFICADOR {::}
+        |DD signos DD signos IDENTIFICADOR BPPTCOMA {::}
+        |DD signos DD signos IDENTIFICADOR signos variable {::}
+
+        |signos IDENTIFICADOR signos IDENTIFICADOR signos IDENTIFICADOR {::}
+        |signos IDENTIFICADOR signos IDENTIFICADOR signos IDENTIFICADOR BPPTCOMA {::}
+        |signos IDENTIFICADOR signos IDENTIFICADOR signos IDENTIFICADOR signos variable {::}
+        |IDENTIFICADOR signos IDENTIFICADOR signos IDENTIFICADOR {::}
+        |IDENTIFICADOR signos IDENTIFICADOR signos IDENTIFICADOR BPPTCOMA {::}
+        |IDENTIFICADOR signos IDENTIFICADOR signos IDENTIFICADOR signos variable {::} 
 ;
 
-condicion::=
-            condicion binario IDENTIFICADOR cond data {::}
-            |IDENTIFICADOR cond data {::}
-            |BPNEG IDENTIFICADOR cond data {::}
+signos::=BPMAS {::}
+       |BPGUION {::}
+       |BPPOR {::}
+       |BPDIVIDIR {::}
+       |BPPON {::}
+       |BPMOD {::}
 ;
 
-binario::=
-            BPYAND {::}
-            |BPOOR {::}
-            |BPNEG {::}
+procesos::=procesos IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER {::}
+        |procesos IDENTIFICADOR BPPARIZQ parametros BPPARDER BPLLAIZQ procesos BPLLADER {::}
+        |procesos BPVAR IDENTIFICADOR BPEQUAL variable {::}
+        |procesos BPLET IDENTIFICADOR BPEQUAL variable {::}
+        |procesos BPCNST IDENTIFICADOR BPEQUAL variable {::}
+        |procesos BPVAR IDENTIFICADOR {::}
+        |procesos BPLET IDENTIFICADOR {::}
+        |procesos BPCNST IDENTIFICADOR {::}
+        |procesos BPVAR IDENTIFICADOR BPPTCOMA {::}
+        |procesos BPLET IDENTIFICADOR BPPTCOMA {::}
+        |procesos BPCNST IDENTIFICADOR BPPTCOMA {::}
+        |procesos BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER siguiente {::}
+        |procesos BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {::}
+        |procesos BPFOR BPPARIZQ forvariable condicionfor foraumento BPPARDER BPLLAIZQ procesos BPLLADER {::}
+        |procesos BPWHILE BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {::}
+        |procesos BPDO BPLLAIZQ procesos BPLLADER BPWHILE BPPARIZQ condicion BPPARDER {::}
+        |procesos BPDO BPLLAIZQ procesos BPLLADER BPWHILE BPPARIZQ condicion BPPARDER BPPTCOMA {::}
+        |procesos BPSWITCH BPPARIZQ IDENTIFICADOR BPPARDER BPLLAIZQ casos BPLLADER
+        |procesos BPCONS BPPARIZQ impresion BPPARDER BPPTCOMA {::}
+        |procesos BPCONS BPPARIZQ impresion BPPARDER {::}
+        |procesos IDENTIFICADOR BPEQUAL IDENTIFICADOR {::}
+        |procesos IDENTIFICADOR BPEQUAL concatenar {::}
+        |procesos IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ parametros BPPARDER {::}
+        |procesos IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ BPPARDER {::}
+        |procesos IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {::}
+        |procesos IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA{::}         
+        |procesos IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {::}
+        |procesos IDENTIFICADOR BPPARIZQ parametros BPPARDER {::}
+
+        |IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER {::} 
+        |IDENTIFICADOR BPPARIZQ parametros BPPARDER BPLLAIZQ procesos BPLLADER {::}
+        |BPVAR IDENTIFICADOR BPEQUAL variable {::}
+        |BPLET IDENTIFICADOR BPEQUAL variable {::}
+        |BPCNST IDENTIFICADOR BPEQUAL variable {::}
+        |BPVAR IDENTIFICADOR {::}
+        |BPLET IDENTIFICADOR {::}
+        |BPCNST IDENTIFICADOR {::}
+        |BPVAR IDENTIFICADOR BPPTCOMA {::}
+        |BPLET IDENTIFICADOR BPPTCOMA {::}
+        |BPCNST IDENTIFICADOR BPPTCOMA {::}
+        |BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER siguiente {::}
+        |BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {::}
+        |BPFOR BPPARIZQ forvariable condicionfor foraumento BPPARDER BPLLAIZQ procesos BPLLADER {::}
+        |BPWHILE BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {::}
+        |BPDO BPLLAIZQ procesos BPLLADER BPWHILE BPPARIZQ condicion BPPARDER {::}
+        |BPDO BPLLAIZQ procesos BPLLADER BPWHILE BPPARIZQ condicion BPPARDER BPPTCOMA {::}
+        |BPSWITCH BPPARIZQ IDENTIFICADOR BPPARDER BPLLAIZQ casos BPLLADER {::}
+        |BPCONS BPPARIZQ impresion BPPARDER BPPTCOMA {::}
+        |BPCONS BPPARIZQ impresion BPPARDER {::}
+        |IDENTIFICADOR BPEQUAL IDENTIFICADOR {::}
+        |IDENTIFICADOR BPEQUAL concatenar {::}
+//        |IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ parametros BPPARDER {::}
+//        |IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ BPPARDER {::} 
+//        |IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {::}
+//        |IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA{::}
+        |IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {::}
+        |IDENTIFICADOR BPPARIZQ parametros BPPARDER {::}
 ;
 
-cond::=
-        BPEQUALCONDITION {::}
-        |BPNOTEQUALS {::}
-        |BPMENOR {::}
-        |BPMAYOR {::}
-        |BPMENOREQUALS {::}
-        |BPMAYOREQUALS {::}
+siguiente::=siguiente BPELSE BPLLAIZQ procesos BPLLADER {::}
+          |siguiente BPELSE BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {::}
+          |BPELSE BPLLAIZQ procesos BPLLADER {::}
+          |BPELSE BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {::}
 ;
 
-declaracion::=
-            tipo IDENTIFICADOR BPEQUAL data {::}
-            |IDENTIFICADOR BPEQUAL data {::}
-
-tipo::=
-        BPVAR {::}
-        |BPLET {::}
-        |BPCNST {::}
+concatenar::=concatenar BPMAS IDENTIFICADOR {::}
+          |concatenar BPMAS DD {::}
+          |concatenar BPMAS BPCADENA {::}
+          |concatenar BPMAS BPRUTA {::}
+          |IDENTIFICADOR BPMAS DD {::}
+          |IDENTIFICADOR BPMAS BPCADENA {::}
+          |IDENTIFICADOR BPMAS BPRUTA {::}
+          |DD BPMAS IDENTIFICADOR {::}
+          |BPCADENA BPMAS IDENTIFICADOR {::}
+          |BPRUTA BPMAS IDENTIFICADOR {::}
+          |IDENTIFICADOR BPMAS IDENTIFICADOR {::}
 ;
 
-par::=
-        IDENTIFICADOR cond IDENTIFICADOR {::}
-        |IDENTIFICADOR cond ENTERO {::}
+forvariable::=BPVAR IDENTIFICADOR BPEQUAL variable {::}
+             |BPLET IDENTIFICADOR BPEQUAL variable {::}
+             |IDENTIFICADOR BPEQUAL IDENTIFICADOR BPPTCOMA {::}
+             |IDENTIFICADOR opmate BPPTCOMA {::}
+             |IDENTIFICADOR BPPTCOMA {::}
+             |IDENTIFICADOR BPEQUAL variable {::}
 ;
 
-inc::=
-        IDENTIFICADOR BPMAS BPMAS {::}
-        |IDENTIFICADOR BPMAS ENTERO {::}
-        |IDENTIFICADOR BPGUION BPGUION {::}
-        |IDENTIFICADOR BPGUION ENTERO {::}
-        |BPMAS BPMAS IDENTIFICADOR {::}
-        |BPGUION BPGUION IDENTIFICADOR {::}
+condicionfor::=IDENTIFICADOR BPMAYOR IDENTIFICADOR BPPTCOMA {::}
+             |IDENTIFICADOR BPMENOR IDENTIFICADOR BPPTCOMA {::}
+             |IDENTIFICADOR BPMAYOREQUALS IDENTIFICADOR BPPTCOMA {::}
+             |IDENTIFICADOR BPMENOREQUALS IDENTIFICADOR BPPTCOMA {::}
+             |IDENTIFICADOR BPMAYOR DD BPPTCOMA {::}
+             |IDENTIFICADOR BPMENOR DD BPPTCOMA {::}
+             |IDENTIFICADOR BPMAYOREQUALS DD BPPTCOMA {::}
+             |IDENTIFICADOR BPMENOREQUALS DD BPPTCOMA {::}
+             |IDENTIFICADOR BPMAYOR opmate BPPTCOMA {::}
+             |IDENTIFICADOR BPMENOR opmate BPPTCOMA {::}
+             |IDENTIFICADOR BPMAYOREQUALS opmate BPPTCOMA {::}
+             |IDENTIFICADOR BPMENOREQUALS opmate BPPTCOMA {::}
 ;
 
-cuerpocase::=
-            cuerpocase BPCASE ENTERO BPDOSPUNTOS cuerpoclase BPBREAK BPPTCOMA {::}
-            |BPCASE ENTERO BPDOSPUNTOS cuerpoclase BPBREAK BPPTCOMA {::}
-            |BPDEFAULT BPDOSPUNTOS cuerpoclase BPBREAK BPPTCOMA {::}
+foraumento::=IDENTIFICADOR BPAUMENTO {::}
+         |IDENTIFICADOR BPDISMINUIR {::}
+         |IDENTIFICADOR BPMAS BPEQUAL DD {::}
+//         |IDENTIFICADOR BPMENOR BPEQUAL DD {::}
 ;
-            
+
+condicion::=condicion BPCADENA BPEQUALCONDITION BPCADENA {::}
+          |condicion DD BPEQUALCONDITION DD {::}
+          |condicion DD BPMAYOR DD {::}
+          |condicion DD BPMENOR DD {::}
+          |condicion DD BPMAYOREQUALS DD {::}
+          |condicion DD BPMENOREQUALS DD {::}
+          
+          |condicion opmate BPEQUALCONDITION DD {::}
+          |condicion opmate BPMAYOR DD {::}
+          |condicion opmate BPMENOR DD {::}
+          |condicion opmate BPMAYOREQUALS DD {::}
+          |condicion opmate BPMENOREQUALS DD {::}
+          |condicion opmate BPEQUALCONDITION IDENTIFICADOR {::}
+          |condicion opmate BPMAYOR IDENTIFICADOR {::}
+          |condicion opmate BPMENOR IDENTIFICADOR {::}
+          |condicion opmate BPMAYOREQUALS IDENTIFICADOR {::}
+          |condicion opmate BPMENOREQUALS IDENTIFICADOR {::}
+
+          |condicion IDENTIFICADOR BPEQUALCONDITION DD {::}
+          |condicion IDENTIFICADOR BPMAYOR DD signos DD{::}
+          |condicion IDENTIFICADOR BPMAYOR IDENTIFICADOR signos DD{::}
+          |condicion IDENTIFICADOR BPMAYOR DD signos IDENTIFICADOR{::}
+          |condicion IDENTIFICADOR BPMAYOR BPPARIZQ opmate BPPARDER{::}
+
+          |condicion IDENTIFICADOR BPEQUALCONDITION BPTRUE {::}
+          |condicion IDENTIFICADOR BPEQUALCONDITION BPFALSE {::}
+          |condicion IDENTIFICADOR BPEQUALCONDITION BPCADENA {::}
+          |condicion IDENTIFICADOR BPMAYOR DD {::}
+
+          |condicion IDENTIFICADOR BPMENOR DD {::}
+          |condicion IDENTIFICADOR BPMENOR DD signos DD{::}
+          |condicion IDENTIFICADOR BPMENOR IDENTIFICADOR signos DD{::}
+          |condicion IDENTIFICADOR BPMENOR DD signos IDENTIFICADOR{::}
+          |condicion IDENTIFICADOR BPMENOR BPPARIZQ opmate BPPARDER{::}
+
+          |condicion IDENTIFICADOR BPMAYOREQUALS DD {::}
+          |condicion IDENTIFICADOR BPMAYOREQUALS DD signos DD{::}
+          |condicion IDENTIFICADOR BPMAYOREQUALS IDENTIFICADOR signos DD{::}
+          |condicion IDENTIFICADOR BPMAYOREQUALS DD signos IDENTIFICADOR{::}
+          |condicion IDENTIFICADOR BPMAYOREQUALS BPPARIZQ opmate BPPARDER{::}
+
+          |condicion IDENTIFICADOR BPMENOREQUALS DD {::}
+          |condicion IDENTIFICADOR BPMENOREQUALS DD signos DD{::}
+          |condicion IDENTIFICADOR BPMENOREQUALS IDENTIFICADOR signos DD{::}
+          |condicion IDENTIFICADOR BPMENOREQUALS DD signos IDENTIFICADOR{::}
+          |condicion IDENTIFICADOR BPMENOREQUALS BPPARIZQ opmate BPPARDER{::}
+
+          |condicion IDENTIFICADOR BPMAYOR IDENTIFICADOR {::}
+          |condicion IDENTIFICADOR BPMENOR IDENTIFICADOR {::}
+          |condicion IDENTIFICADOR BPMAYOREQUALS IDENTIFICADOR {::}
+          |condicion IDENTIFICADOR BPMENOREQUALS IDENTIFICADOR {::}
+          |condicion IDENTIFICADOR BPEQUALCONDITION IDENTIFICADOR {::}
+          |condicion DD BPNEG DD {::}
+          |condicion BPCADENA BPNEG BPCADENA {::}
+          |condicion IDENTIFICADOR BPNEG DD {::}
+          |condicion IDENTIFICADOR BPNEG BPTRUE {::}
+          |condicion IDENTIFICADOR BPNEG BPFALSE {::}
+          |condicion IDENTIFICADOR BPNEG BPCADENA {::}
+          |condicion IDENTIFICADOR BPNEG IDENTIFICADOR {::}
+          |condicion BPNOTEQUALS IDENTIFICADOR {::}
+          |condicion BPPARIZQ condicion BPPARDER {::}
+          |condicion IDENTIFICADOR {::}
+          |condicion BPOOR {::}
+          |condicion BPYAND {::}
+
+          |BPCADENA BPEQUALCONDITION BPCADENA {::}
+          |DD BPEQUALCONDITION DD {::}
+          |DD BPMAYOR DD {::}
+          |DD BPMENOR DD {::}
+          |DD BPMAYOREQUALS DD {::}
+          |DD BPMENOREQUALS DD {::}
+
+          |opmate BPEQUALCONDITION DD {::}
+          |opmate BPMAYOR DD {::}
+          |opmate BPMENOR DD {::}
+          |opmate BPMAYOREQUALS DD {::}
+          |opmate BPMENOREQUALS DD {::}
+          |opmate BPNEG DD {::}
+          
+          |opmate BPEQUALCONDITION IDENTIFICADOR {::}
+          |opmate BPMAYOR IDENTIFICADOR {::}
+          |opmate BPMENOR IDENTIFICADOR {::}
+          |opmate BPMAYOREQUALS IDENTIFICADOR {::}
+          |opmate BPMENOREQUALS IDENTIFICADOR {::}
+          |opmate BPNEG IDENTIFICADOR {::}
+          
+          |IDENTIFICADOR {::}
+
+          |IDENTIFICADOR BPEQUALCONDITION DD {::}
+          |IDENTIFICADOR BPEQUALCONDITION DD signos DD{::}
+          |IDENTIFICADOR BPEQUALCONDITION IDENTIFICADOR signos DD{::}
+          |IDENTIFICADOR BPEQUALCONDITION DD signos IDENTIFICADOR{::}
+          |IDENTIFICADOR BPEQUALCONDITION BPPARIZQ opmate BPPARDER{::}
+
+          |IDENTIFICADOR BPEQUALCONDITION BPTRUE {::}
+          |IDENTIFICADOR BPEQUALCONDITION BPFALSE {::}
+          |IDENTIFICADOR BPEQUALCONDITION BPCADENA {::}
+
+          |IDENTIFICADOR BPMAYOR DD {::}
+          |IDENTIFICADOR BPMAYOR DD signos DD{::}
+          |IDENTIFICADOR BPMAYOR IDENTIFICADOR signos DD{::}
+          |IDENTIFICADOR BPMAYOR DD signos IDENTIFICADOR{::}
+          |IDENTIFICADOR BPMAYOR BPPARIZQ opmate BPPARDER{::}
+
+          |IDENTIFICADOR BPMENOR DD {::}
+          |IDENTIFICADOR BPMENOR DD signos DD{::}
+          |IDENTIFICADOR BPMENOR IDENTIFICADOR signos DD{::}
+          |IDENTIFICADOR BPMENOR DD signos IDENTIFICADOR{::}
+          |IDENTIFICADOR BPMENOR BPPARIZQ opmate BPPARDER{::}
+
+          |IDENTIFICADOR BPMAYOREQUALS DD {::}
+          |IDENTIFICADOR BPMAYOREQUALS DD signos DD{::}
+          |IDENTIFICADOR BPMAYOREQUALS IDENTIFICADOR signos DD{::}
+          |IDENTIFICADOR BPMAYOREQUALS DD signos IDENTIFICADOR{::}
+          |IDENTIFICADOR BPMAYOREQUALS BPPARIZQ opmate BPPARDER{::}
+
+          |IDENTIFICADOR BPMENOREQUALS DD {::}
+          |IDENTIFICADOR BPMENOREQUALS DD signos DD{::}
+          |IDENTIFICADOR BPMENOREQUALS IDENTIFICADOR signos DD{::}
+          |IDENTIFICADOR BPMENOREQUALS DD signos IDENTIFICADOR{::}
+          |IDENTIFICADOR BPMENOREQUALS BPPARIZQ opmate BPPARDER{::}
+
+          |IDENTIFICADOR BPMAYOR IDENTIFICADOR {::}
+          |IDENTIFICADOR BPMENOR IDENTIFICADOR {::}
+          |IDENTIFICADOR BPMAYOREQUALS IDENTIFICADOR {::}
+          |IDENTIFICADOR BPMENOREQUALS IDENTIFICADOR {::}
+
+          |IDENTIFICADOR BPEQUALCONDITION IDENTIFICADOR {::}
+          |DD BPNEG DD {::}
+          |BPCADENA BPNEG BPCADENA {::}
+          |IDENTIFICADOR BPNEG DD {::}
+          |IDENTIFICADOR BPNEG BPTRUE {::}
+          |IDENTIFICADOR BPNEG BPFALSE {::}
+          |IDENTIFICADOR BPNEG BPCADENA {::}
+          |IDENTIFICADOR BPNEG IDENTIFICADOR {::}
+          |BPNOTEQUALS IDENTIFICADOR {::}
+
+          |BPPARIZQ condicion BPPARDER {::}
+;
+
+
+casos::=casos BPCASE DD BPDOSPUNTOS procesos BPBREAK BPPTCOMA {::}             
+       |casos BPDEFAULT BPDOSPUNTOS procesos BPBREAK BPPTCOMA {::}
+       |casos BPDEFAULT BPDOSPUNTOS procesos {::}
+       |casos BPCASE BPCADENA BPDOSPUNTOS procesos BPBREAK BPPTCOMA {::}
+       |BPCASE DD BPDOSPUNTOS procesos BPBREAK BPPTCOMA {::}
+       |BPDEFAULT BPDOSPUNTOS procesos BPBREAK BPPTCOMA {::}
+       |BPDEFAULT BPDOSPUNTOS procesos {::}
+       |BPCASE BPCADENA BPDOSPUNTOS procesos BPBREAK BPPTCOMA {::}
+;
+
+impresion::=impresion BPMAS DD {::}
+           |impresion BPMAS BPCADENA {::}
+           |impresion BPMAS BPNOTEQUALS IDENTIFICADOR {::}
+           |impresion BPMAS IDENTIFICADOR {::}
+           |impresion BPMAS BPPARIZQ opmate BPPARDER
+           |BPCADENA {::}
+           |IDENTIFICADOR {::}
+           |DD {::}
+           |BPGUION DD {::}
+           |BPGUION BPPARIZQ opmate BPPARDER {::}
+           |BPGUION BPPARIZQ DD BPPARDER {::}
+           |BPGUION BPPARIZQ IDENTIFICADOR BPPARDER {::}
+           |BPPARIZQ opmate BPPARDER {::}
+           |IDENTIFICADOR BPAUMENTO {::}
+           |IDENTIFICADOR BPDISMINUIR {::}
+           |BPNOTEQUALS IDENTIFICADOR {::}
+;
+
+opmate::=opmate BPPARIZQ opmate BPPARDER {::}
+        |opmate DD BPPON DD {::}
+        |opmate DD BPDIVIDIR DD {::}
+        |opmate DD BPMOD DD {::}
+        |opmate DD BPPOR DD {::}
+        |opmate DD BPMAS DD {::}
+        |opmate DD BPGUION DD {::}
+        |opmate DD BPPON IDENTIFICADOR {::}
+        |opmate DD BPDIVIDIR IDENTIFICADOR {::}
+        |opmate DD BPMOD IDENTIFICADOR {::}
+        |opmate DD BPPOR IDENTIFICADOR {::}
+        |opmate DD BPMAS IDENTIFICADOR {::}
+        |opmate DD BPGUION IDENTIFICADOR {::}
+
+        |BPPARIZQ opmate BPPARDER {::}
+        |DD BPPON DD {::}
+        |DD BPDIVIDIR DD {::}
+        |DD BPMOD DD {::}
+        |DD BPPOR DD {::}
+        |DD BPMAS DD {::}
+        |DD BPGUION DD {::}
+        |DD BPPON IDENTIFICADOR {::}
+        |DD BPDIVIDIR IDENTIFICADOR {::}
+        |DD BPMOD IDENTIFICADOR {::}
+        |DD BPPOR IDENTIFICADOR {::}
+        |DD BPMAS IDENTIFICADOR {::}
+        |DD BPGUION IDENTIFICADOR {::}
+;            
