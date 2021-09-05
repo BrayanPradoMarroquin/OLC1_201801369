@@ -16,14 +16,18 @@ import java.io.FileReader;
 import java.io.Reader;
 import Errores.*;
 import InformacionPublica.*;
+import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.CategoryDataset;
@@ -263,93 +267,105 @@ public class Pantalla_Principal extends javax.swing.JFrame {
 
     private void JM_ReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JM_ReportesMouseClicked
         // TODO add your handling code here:
+        int contadorBarras = 0;
+        int contadorCircular =0;
+        int contadorLineal =0;
         for (int i = 0; i < sintax.GraficasEjecutar.size(); i++) {
             if (sintax.GraficasEjecutar.get(i).tipo.equalsIgnoreCase("GraficaBarras")) {
-                JL_Console.setText(JL_Console.getText()+" Generando grafica de Barras");
-                NodoGrafica barras = new NodoGrafica();
-                barras = sintax.GraficasEjecutar.get(i);
-                
-                for (int j = 0; j < barras.Valores.size(); j++) {
-                    for (int k = 0; k < sintax.ListaVariables.size(); k++) {
-                        if (barras.Valores.get(j).equalsIgnoreCase(sintax.ListaVariables.get(k).Identificador)) {
-                            barras.Valores.set(j, sintax.ListaVariables.get(k).contenido);
-                        }   
-                        if (barras.Ejes.get(j).equalsIgnoreCase(sintax.ListaVariables.get(k).Identificador)) {
-                            barras.Ejes.set(j, sintax.ListaVariables.get(k).contenido);
+                try {
+                    JL_Console.setText(JL_Console.getText()+" Generando grafica de Barras");
+                    NodoGrafica barras = new NodoGrafica();
+                    barras = sintax.GraficasEjecutar.get(i);
+                    
+                    for (int j = 0; j < barras.Valores.size(); j++) {
+                        for (int k = 0; k < sintax.ListaVariables.size(); k++) {
+                            if (barras.Valores.get(j).equalsIgnoreCase(sintax.ListaVariables.get(k).Identificador)) {
+                                barras.Valores.set(j, sintax.ListaVariables.get(k).contenido);
+                            }
+                            if (barras.Ejes.get(j).equalsIgnoreCase(sintax.ListaVariables.get(k).Identificador)) {
+                                barras.Ejes.set(j, sintax.ListaVariables.get(k).contenido);
+                            }
                         }
                     }
-                }
-                for (int j = 0; j < sintax.ListaVariables.size(); j++) {
-                    if (barras.titulo.equalsIgnoreCase(sintax.ListaVariables.get(j).Identificador)){
-                        barras.titulo = sintax.ListaVariables.get(j).contenido;
+                    for (int j = 0; j < sintax.ListaVariables.size(); j++) {
+                        if (barras.titulo.equalsIgnoreCase(sintax.ListaVariables.get(j).Identificador)){
+                            barras.titulo = sintax.ListaVariables.get(j).contenido;
+                        }
                     }
-                }
-                
-                for (int j = 0; j < sintax.ListaVariables.size(); j++) {
-                    if (barras.Titulox.equalsIgnoreCase(sintax.ListaVariables.get(j).Identificador)){
-                        barras.Titulox = sintax.ListaVariables.get(j).contenido;
+                    
+                    for (int j = 0; j < sintax.ListaVariables.size(); j++) {
+                        if (barras.Titulox.equalsIgnoreCase(sintax.ListaVariables.get(j).Identificador)){
+                            barras.Titulox = sintax.ListaVariables.get(j).contenido;
+                        }
                     }
-                }
-                
-                for (int j = 0; j < sintax.ListaVariables.size(); j++) {
-                    if (barras.Tituloy.equalsIgnoreCase(sintax.ListaVariables.get(j).Identificador)){
-                        barras.Tituloy = sintax.ListaVariables.get(j).contenido;
+                    
+                    for (int j = 0; j < sintax.ListaVariables.size(); j++) {
+                        if (barras.Tituloy.equalsIgnoreCase(sintax.ListaVariables.get(j).Identificador)){
+                            barras.Tituloy = sintax.ListaVariables.get(j).contenido;
+                        }
                     }
+                    
+                    DefaultCategoryDataset data = new DefaultCategoryDataset();
+                    
+                    for (int j = 0; j < barras.Ejes.size(); j++) {
+                        data.setValue(Double.parseDouble(barras.Valores.get(j)), "Resultado", barras.Ejes.get(j));
+                    }
+                    
+                    JFreeChart GraficoBarras = ChartFactory.createBarChart3D(
+                            barras.titulo,
+                            barras.Titulox,
+                            barras.Tituloy,
+                            data,
+                            PlotOrientation.VERTICAL,
+                            false,
+                            false,
+                            false
+                    );
+                    int width = 640;
+                    int height = 480;
+                    File ImagenBarra = new File( "GraficaBarras-"+Integer.toString(contadorBarras++)+".jpeg" );
+                    ChartUtilities.saveChartAsJPEG(ImagenBarra, GraficoBarras, width, height);
+                } catch (IOException ex) {
+                    Logger.getLogger(Pantalla_Principal.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
-                DefaultCategoryDataset data = new DefaultCategoryDataset();
-                
-                for (int j = 0; j < barras.Ejes.size(); j++) {
-                    data.setValue(Double.parseDouble(barras.Valores.get(j)), "Resultado", barras.Ejes.get(j));
-                }
-                
-                JFreeChart GraficoBarras = ChartFactory.createBarChart3D(
-                        barras.titulo,
-                        barras.Titulox,
-                        barras.Tituloy,
-                        data,
-                        PlotOrientation.VERTICAL,
-                        false,
-                        false,
-                        false
-                );
-                
-                ChartFrame jf = new ChartFrame(barras.titulo, GraficoBarras);
-                jf.setLocationRelativeTo(null);
-                jf.setVisible(true);
             }else if (sintax.GraficasEjecutar.get(i).tipo.equalsIgnoreCase("GraficaPie")) {
                 
-                NodoGrafica circular = new NodoGrafica();
-                circular = sintax.GraficasEjecutar.get(i);
-                JL_Console.setText(JL_Console.getText()+" Generando grafica Circular");
-                for (int j = 0; j < circular.Valores.size(); j++) {
-                    for (int k = 0; k < sintax.ListaVariables.size(); k++) {
-                        if (circular.Valores.get(j).equalsIgnoreCase(sintax.ListaVariables.get(k).Identificador)) {
-                            circular.Valores.set(j, sintax.ListaVariables.get(k).contenido);
-                        }   
-                        if (circular.Ejes.get(j).equalsIgnoreCase(sintax.ListaVariables.get(k).Identificador)) {
-                            circular.Ejes.set(j, sintax.ListaVariables.get(k).contenido);
+                try {
+                    NodoGrafica circular = new NodoGrafica();
+                    circular = sintax.GraficasEjecutar.get(i);
+                    JL_Console.setText(JL_Console.getText()+" Generando grafica Circular");
+                    for (int j = 0; j < circular.Valores.size(); j++) {
+                        for (int k = 0; k < sintax.ListaVariables.size(); k++) {
+                            if (circular.Valores.get(j).equalsIgnoreCase(sintax.ListaVariables.get(k).Identificador)) {
+                                circular.Valores.set(j, sintax.ListaVariables.get(k).contenido);
+                            }
+                            if (circular.Ejes.get(j).equalsIgnoreCase(sintax.ListaVariables.get(k).Identificador)) {
+                                circular.Ejes.set(j, sintax.ListaVariables.get(k).contenido);
+                            }
                         }
                     }
-                }
-                
-                for (int j = 0; j < sintax.ListaVariables.size(); j++) {
-                    if (circular.titulo.equalsIgnoreCase(sintax.ListaVariables.get(j).Identificador)){
-                        circular.titulo = sintax.ListaVariables.get(j).contenido;
+                    
+                    for (int j = 0; j < sintax.ListaVariables.size(); j++) {
+                        if (circular.titulo.equalsIgnoreCase(sintax.ListaVariables.get(j).Identificador)){
+                            circular.titulo = sintax.ListaVariables.get(j).contenido;
+                        }
                     }
+                    
+                    DefaultPieDataset data = new DefaultPieDataset();
+                    
+                    for (int j = 0; j < circular.Ejes.size(); j++) {
+                        data.setValue( circular.Ejes.get(j), Double.parseDouble(circular.Valores.get(j)));
+                    }
+                    
+                    JFreeChart GraficoCircular = ChartFactory.createPieChart(circular.tipo, data);
+                    int width = 640;
+                    int height = 480;
+                    File ImagenBarra = new File( "GraficaCircular-"+Integer.toString(contadorCircular++)+".jpeg" );
+                    ChartUtilities.saveChartAsJPEG(ImagenBarra, GraficoCircular, width, height);
+                } catch (IOException ex) {
+                    Logger.getLogger(Pantalla_Principal.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                DefaultPieDataset data = new DefaultPieDataset();
-                
-                for (int j = 0; j < circular.Ejes.size(); j++) {
-                    data.setValue( circular.Ejes.get(j), Double.parseDouble(circular.Valores.get(j)));
-                }
-                
-                JFreeChart GraficoCircular = ChartFactory.createPieChart(circular.tipo, data);
-                
-                ChartFrame jf = new ChartFrame(circular.titulo, GraficoCircular);
-                jf.setLocationRelativeTo(null);
-                jf.setVisible(true);
                 
             }else if (sintax.GraficasEjecutar.get(i).tipo.equalsIgnoreCase("GraficaLineas")) {
                 NodoGrafica lineal = new NodoGrafica();
