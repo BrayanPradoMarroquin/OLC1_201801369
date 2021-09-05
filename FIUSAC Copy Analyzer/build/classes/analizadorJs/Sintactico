@@ -1,12 +1,11 @@
 package analizadorJs;
 import java_cup.runtime.*;
 import java.util.ArrayList;
+import InformacionPublica.*;
 
 parser code 
 {:
-    public String Resulto = "";
-    
-    
+    public ArrayList<NodoinformacionJS> Informacion = new ArrayList();
 :} 
 
 terminal String BPCLASS, BPVAR, BPLET, BPCNST;
@@ -27,53 +26,49 @@ non terminal ini, procesos, parametros, variable, impresion, opmate, concatenar,
 
 start with ini;
 
-ini::=ini comentario BPCLASS IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER {::}
-    |ini BPCLASS IDENTIFICADOR BPLLAIZQ comentario procesos BPLLADER {::}
-    |ini BPCLASS IDENTIFICADOR BPLLAIZQ procesos comentario BPLLADER {::}
-    |ini BPCLASS IDENTIFICADOR BPLLAIZQ procesos BPLLADER{::}
+ini::=ini comentario BPCLASS:var1 IDENTIFICADOR:var2 BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER {:Informacion.add(new NodoinformacionJS(var1, var2));:}
+    |ini BPCLASS:var1 IDENTIFICADOR:var2 BPLLAIZQ comentario procesos BPLLADER:var3 {:Informacion.add(new NodoinformacionJS(var1, var2));:}
+    |ini BPCLASS:var1 IDENTIFICADOR:var2 BPLLAIZQ procesos comentario BPLLADER:var3 {:Informacion.add(new NodoinformacionJS(var1, var2));:}
+    |ini BPCLASS:var1 IDENTIFICADOR:var2 BPLLAIZQ procesos BPLLADER:var3 {:Informacion.add(new NodoinformacionJS(var1, var2));:}
 
-    |ini IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER {::}
-    |ini IDENTIFICADOR BPPARIZQ parametros BPPARDER BPLLAIZQ procesos BPLLADER {::}
-//    |ini IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA{::}
-//    |ini IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {::}
-//    |ini IDENTIFICADOR BPPARIZQ BPPARDER{::}
-//    |ini IDENTIFICADOR BPPARIZQ parametros BPPARDER{::}
-    |ini BPVAR IDENTIFICADOR BPEQUAL variable {::}
-    |ini BPLET IDENTIFICADOR BPEQUAL variable {::}
-    |ini BPCNST IDENTIFICADOR BPEQUAL variable {::}
-    |ini BPVAR IDENTIFICADOR {::}
-    |ini BPLET IDENTIFICADOR {::}
-    |ini BPCNST IDENTIFICADOR {::}
-    |ini BPVAR IDENTIFICADOR BPPTCOMA {::}
-    |ini BPLET IDENTIFICADOR BPPTCOMA {::}
-    |ini BPCNST IDENTIFICADOR BPPTCOMA {::}
-    |BPCLASS IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER {::}
-    |IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER {::}
-    |IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA{::}
-    |IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {::}
-    |IDENTIFICADOR BPPARIZQ BPPARDER{::}
-    |IDENTIFICADOR BPPARIZQ parametros BPPARDER{::}
-    |IDENTIFICADOR BPPARIZQ parametros BPPARDER BPLLAIZQ procesos BPLLADER {::}
-    |BPVAR IDENTIFICADOR BPEQUAL variable {::}
-    |BPLET IDENTIFICADOR BPEQUAL variable {::}
-    |BPCNST IDENTIFICADOR BPEQUAL variable {::}
-    |BPVAR IDENTIFICADOR {::}
-    |BPLET IDENTIFICADOR {::}
-    |BPCNST IDENTIFICADOR {::}
-    |BPVAR IDENTIFICADOR BPPTCOMA {::}
-    |BPLET IDENTIFICADOR BPPTCOMA {::}
-    |BPCNST IDENTIFICADOR BPPTCOMA {::}
+    |ini IDENTIFICADOR:var1 BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER:var3 {:Informacion.add(new NodoinformacionJS("Metodo", var1)); Informacion.add(new NodoinformacionJS("llaveMetodo", var3));:}
+    |ini IDENTIFICADOR:var1 BPPARIZQ parametros BPPARDER BPLLAIZQ procesos BPLLADER:var3 {:Informacion.add(new NodoinformacionJS("Metodo", var1)); Informacion.add(new NodoinformacionJS("llaveMetodo", var3));:}
+    |ini BPVAR IDENTIFICADOR:var1 BPEQUAL variable {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |ini BPLET IDENTIFICADOR:var1 BPEQUAL variable {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |ini BPCNST IDENTIFICADOR:var1 BPEQUAL variable {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |ini BPVAR IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |ini BPLET IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |ini BPCNST IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |ini BPVAR IDENTIFICADOR:var1 BPPTCOMA {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |ini BPLET IDENTIFICADOR:var1 BPPTCOMA {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |ini BPCNST IDENTIFICADOR:var1 BPPTCOMA {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |BPCLASS:var1 IDENTIFICADOR:var2 BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER:var3 {:Informacion.add(new NodoinformacionJS(var1, var2)); :}
+    |IDENTIFICADOR:var1 BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER:var3 {:Informacion.add(new NodoinformacionJS("Metodo", var1)); Informacion.add(new NodoinformacionJS("llaveMetodo", var3));:}
+    |IDENTIFICADOR:var1 BPPARIZQ BPPARDER BPPTCOMA{:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+    |IDENTIFICADOR:var1 BPPARIZQ parametros BPPARDER BPPTCOMA {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+    |IDENTIFICADOR:var1 BPPARIZQ BPPARDER{:Informacion.add(new NodoinformacionJS("contenido", var1));:}
+    |IDENTIFICADOR:var1 BPPARIZQ parametros BPPARDER{:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+    |IDENTIFICADOR:var1 BPPARIZQ parametros BPPARDER BPLLAIZQ procesos BPLLADER:var3 {:Informacion.add(new NodoinformacionJS("Metodo", var1)); Informacion.add(new NodoinformacionJS("llaveMetodo", var3));:}
+    |BPVAR IDENTIFICADOR:var1 BPEQUAL variable {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |BPLET IDENTIFICADOR:var1 BPEQUAL variable {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |BPCNST IDENTIFICADOR:var1 BPEQUAL variable {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |BPVAR IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |BPLET IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |BPCNST IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |BPVAR IDENTIFICADOR:var1 BPPTCOMA {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |BPLET IDENTIFICADOR:var1 BPPTCOMA {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+    |BPCNST IDENTIFICADOR:var1 BPPTCOMA {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
 ;
 
-comentario::=comentario LINECOMMENT {::}
-           |comentario MULTILINECOMMENT {::}
-           |LINECOMMENT{::}
-           |MULTILINECOMMENT{::}
+comentario::=comentario LINECOMMENT:var1 {:Informacion.add(new NodoinformacionJS("Comentario", var1));:}
+           |comentario MULTILINECOMMENT:var1 {:Informacion.add(new NodoinformacionJS("Comentario", var1));:}
+           |LINECOMMENT:var1 {:Informacion.add(new NodoinformacionJS("Comentario", var1));:}
+           |MULTILINECOMMENT:var1 {:Informacion.add(new NodoinformacionJS("Comentario", var1));:}
 ;
 
-parametros::=IDENTIFICADOR {::}
-          |parametros BPCOMA IDENTIFICADOR {::}
-          |parametros signos DD {::}
+parametros::=IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Parametro", var1));:}
+          |parametros BPCOMA IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Parametro", var1));:}
+          |parametros signos DD:var1 {:Informacion.add(new NodoinformacionJS("Parametro", var1));:}
           |parametros signos BPPARIZQ variable BPPARDER {::}
 ;
 
@@ -85,12 +80,6 @@ variable::=BPCADENA BPPTCOMA{::}
         |DD {::}
         |DD signos DD BPPTCOMA{::}
         |DD signos DD {::}
-//        |DD signos IDENTIFICADOR BPPTCOMA{::}
-//        |DD signos IDENTIFICADOR {::}
-//        |IDENTIFICADOR signos DD BPPTCOMA{::}
-//        |IDENTIFICADOR signos DD {::}
-//        |IDENTIFICADOR signos IDENTIFICADOR BPPTCOMA{::}
-//        |IDENTIFICADOR signos IDENTIFICADOR{::}
         |BPTRUE BPPTCOMA{::}
         |BPTRUE {::}
         |BPFALSE BPPTCOMA {::}
@@ -187,69 +176,69 @@ signos::=BPMAS {::}
        |BPMOD {::}
 ;
 
-procesos::=procesos IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER {::}
-        |procesos IDENTIFICADOR BPPARIZQ parametros BPPARDER BPLLAIZQ procesos BPLLADER {::}
-        |procesos BPVAR IDENTIFICADOR BPEQUAL variable {::}
-        |procesos BPLET IDENTIFICADOR BPEQUAL variable {::}
-        |procesos BPCNST IDENTIFICADOR BPEQUAL variable {::}
-        |procesos BPVAR IDENTIFICADOR {::}
-        |procesos BPLET IDENTIFICADOR {::}
-        |procesos BPCNST IDENTIFICADOR {::}
-        |procesos BPVAR IDENTIFICADOR BPPTCOMA {::}
-        |procesos BPLET IDENTIFICADOR BPPTCOMA {::}
-        |procesos BPCNST IDENTIFICADOR BPPTCOMA {::}
-        |procesos BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER siguiente {::}
-        |procesos BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {::}
-        |procesos BPFOR BPPARIZQ forvariable condicionfor foraumento BPPARDER BPLLAIZQ procesos BPLLADER {::}
-        |procesos BPWHILE BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {::}
-        |procesos BPDO BPLLAIZQ procesos BPLLADER BPWHILE BPPARIZQ condicion BPPARDER {::}
-        |procesos BPDO BPLLAIZQ procesos BPLLADER BPWHILE BPPARIZQ condicion BPPARDER BPPTCOMA {::}
-        |procesos BPSWITCH BPPARIZQ IDENTIFICADOR BPPARDER BPLLAIZQ casos BPLLADER
-        |procesos BPCONS BPPARIZQ impresion BPPARDER BPPTCOMA {::}
-        |procesos BPCONS BPPARIZQ impresion BPPARDER {::}
-        |procesos IDENTIFICADOR BPEQUAL IDENTIFICADOR {::}
-        |procesos IDENTIFICADOR BPEQUAL concatenar {::}
-        |procesos IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ parametros BPPARDER {::}
-        |procesos IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ BPPARDER {::}
-        |procesos IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {::}
-        |procesos IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA{::}         
-        |procesos IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {::}
-        |procesos IDENTIFICADOR BPPARIZQ parametros BPPARDER {::}
+procesos::=procesos IDENTIFICADOR:var1 BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER:var3 {:Informacion.add(new NodoinformacionJS("Metodo", var1)); Informacion.add(new NodoinformacionJS("llaveMetodo", var3));:}
+        |procesos IDENTIFICADOR:var1 BPPARIZQ parametros BPPARDER BPLLAIZQ procesos BPLLADER:var3 {:Informacion.add(new NodoinformacionJS("Metodo", var1)); Informacion.add(new NodoinformacionJS("llaveMetodo", var3));:}
+        |procesos BPVAR IDENTIFICADOR:var1 BPEQUAL variable {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |procesos BPLET IDENTIFICADOR:var1 BPEQUAL variable {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |procesos BPCNST IDENTIFICADOR:var1 BPEQUAL variable {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |procesos BPVAR IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |procesos BPLET IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |procesos BPCNST IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |procesos BPVAR IDENTIFICADOR:var1 BPPTCOMA {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |procesos BPLET IDENTIFICADOR:var1 BPPTCOMA {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |procesos BPCNST IDENTIFICADOR:var1 BPPTCOMA {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |procesos BPIF:var1 BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER siguiente {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |procesos BPIF:var1 BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |procesos BPFOR:var1 BPPARIZQ forvariable condicionfor foraumento BPPARDER BPLLAIZQ procesos BPLLADER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |procesos BPWHILE:var1 BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |procesos BPDO:var1 BPLLAIZQ procesos BPLLADER BPWHILE BPPARIZQ condicion BPPARDER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |procesos BPDO:var1 BPLLAIZQ procesos BPLLADER BPWHILE BPPARIZQ condicion BPPARDER BPPTCOMA {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |procesos BPSWITCH:var1 BPPARIZQ IDENTIFICADOR BPPARDER BPLLAIZQ casos BPLLADER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |procesos BPCONS:var1 BPPARIZQ impresion:var2 BPPARDER BPPTCOMA {:Informacion.add(new NodoinformacionJS("Contenido", var1+var2));:}
+        |procesos BPCONS:var1 BPPARIZQ impresion BPPARDER {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |procesos IDENTIFICADOR:var1 BPEQUAL IDENTIFICADOR {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |procesos IDENTIFICADOR:var1 BPEQUAL concatenar {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |procesos IDENTIFICADOR:var1 BPPUNTO IDENTIFICADOR BPPARIZQ parametros BPPARDER {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |procesos IDENTIFICADOR:var1 BPPUNTO IDENTIFICADOR BPPARIZQ BPPARDER {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |procesos IDENTIFICADOR:var1 BPPUNTO IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |procesos IDENTIFICADOR:var1 BPPUNTO IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA{:Informacion.add(new NodoinformacionJS("Contenido", var1));:}         
+        |procesos IDENTIFICADOR:var1 BPPARIZQ parametros BPPARDER BPPTCOMA {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |procesos IDENTIFICADOR:var1 BPPARIZQ parametros BPPARDER {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
 
-        |IDENTIFICADOR BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER {::} 
-        |IDENTIFICADOR BPPARIZQ parametros BPPARDER BPLLAIZQ procesos BPLLADER {::}
-        |BPVAR IDENTIFICADOR BPEQUAL variable {::}
-        |BPLET IDENTIFICADOR BPEQUAL variable {::}
-        |BPCNST IDENTIFICADOR BPEQUAL variable {::}
-        |BPVAR IDENTIFICADOR {::}
-        |BPLET IDENTIFICADOR {::}
-        |BPCNST IDENTIFICADOR {::}
-        |BPVAR IDENTIFICADOR BPPTCOMA {::}
-        |BPLET IDENTIFICADOR BPPTCOMA {::}
-        |BPCNST IDENTIFICADOR BPPTCOMA {::}
-        |BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER siguiente {::}
-        |BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {::}
-        |BPFOR BPPARIZQ forvariable condicionfor foraumento BPPARDER BPLLAIZQ procesos BPLLADER {::}
-        |BPWHILE BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {::}
-        |BPDO BPLLAIZQ procesos BPLLADER BPWHILE BPPARIZQ condicion BPPARDER {::}
-        |BPDO BPLLAIZQ procesos BPLLADER BPWHILE BPPARIZQ condicion BPPARDER BPPTCOMA {::}
-        |BPSWITCH BPPARIZQ IDENTIFICADOR BPPARDER BPLLAIZQ casos BPLLADER {::}
-        |BPCONS BPPARIZQ impresion BPPARDER BPPTCOMA {::}
-        |BPCONS BPPARIZQ impresion BPPARDER {::}
-        |IDENTIFICADOR BPEQUAL IDENTIFICADOR {::}
-        |IDENTIFICADOR BPEQUAL concatenar {::}
-//        |IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ parametros BPPARDER {::}
-//        |IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ BPPARDER {::} 
-//        |IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {::}
-//        |IDENTIFICADOR BPPUNTO IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA{::}
-        |IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {::}
-        |IDENTIFICADOR BPPARIZQ parametros BPPARDER {::}
+        |IDENTIFICADOR:var1 BPPARIZQ BPPARDER BPLLAIZQ procesos BPLLADER:var3 {:Informacion.add(new NodoinformacionJS("Metodo", var1)); Informacion.add(new NodoinformacionJS("llaveMetodo", var3));:} 
+        |IDENTIFICADOR:var1 BPPARIZQ parametros BPPARDER BPLLAIZQ procesos BPLLADER:var3 {:Informacion.add(new NodoinformacionJS("Metodo", var1)); Informacion.add(new NodoinformacionJS("llaveMetodo", var3));:}
+        |BPVAR IDENTIFICADOR:var1 BPEQUAL variable {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |BPLET IDENTIFICADOR:var1 BPEQUAL variable {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |BPCNST IDENTIFICADOR:var1 BPEQUAL variable {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |BPVAR IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |BPLET IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |BPCNST IDENTIFICADOR:var1 {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |BPVAR IDENTIFICADOR:var1 BPPTCOMA {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |BPLET IDENTIFICADOR:var1 BPPTCOMA {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |BPCNST IDENTIFICADOR:var1 BPPTCOMA {:Informacion.add(new NodoinformacionJS("Variable", var1));:}
+        |BPIF:var1 BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER siguiente {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |BPIF:var1 BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |BPFOR:var1 BPPARIZQ forvariable condicionfor foraumento BPPARDER BPLLAIZQ procesos BPLLADER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |BPWHILE:var1 BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |BPDO:var1 BPLLAIZQ procesos BPLLADER BPWHILE BPPARIZQ condicion BPPARDER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |BPDO:var1 BPLLAIZQ procesos BPLLADER BPWHILE BPPARIZQ condicion BPPARDER BPPTCOMA {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |BPSWITCH:var1 BPPARIZQ IDENTIFICADOR BPPARDER BPLLAIZQ casos BPLLADER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+        |BPCONS:var1 BPPARIZQ impresion BPPARDER BPPTCOMA {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |BPCONS:var1 BPPARIZQ impresion BPPARDER {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |IDENTIFICADOR:var1 BPEQUAL IDENTIFICADOR {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |IDENTIFICADOR:var1 BPEQUAL concatenar {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |IDENTIFICADOR:var1 BPPUNTO IDENTIFICADOR BPPARIZQ parametros BPPARDER {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |IDENTIFICADOR:var1 BPPUNTO IDENTIFICADOR BPPARIZQ BPPARDER {:Informacion.add(new NodoinformacionJS("Contenido", var1));:} 
+        |IDENTIFICADOR:var1 BPPUNTO IDENTIFICADOR BPPARIZQ parametros BPPARDER BPPTCOMA {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |IDENTIFICADOR:var1 BPPUNTO IDENTIFICADOR BPPARIZQ BPPARDER BPPTCOMA{:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |IDENTIFICADOR:var1 BPPARIZQ parametros BPPARDER BPPTCOMA {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
+        |IDENTIFICADOR:var1 BPPARIZQ parametros BPPARDER {:Informacion.add(new NodoinformacionJS("Contenido", var1));:}
 ;
 
-siguiente::=siguiente BPELSE BPLLAIZQ procesos BPLLADER {::}
-          |siguiente BPELSE BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {::}
-          |BPELSE BPLLAIZQ procesos BPLLADER {::}
-          |BPELSE BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {::}
+siguiente::=siguiente BPELSE:var1 BPLLAIZQ procesos BPLLADER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+          |siguiente BPELSE:var1 BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+          |BPELSE:var1 BPLLAIZQ procesos BPLLADER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+          |BPELSE:var1 BPIF BPPARIZQ condicion BPPARDER BPLLAIZQ procesos BPLLADER {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
 ;
 
 concatenar::=concatenar BPMAS IDENTIFICADOR {::}
@@ -434,23 +423,23 @@ condicion::=condicion BPCADENA BPEQUALCONDITION BPCADENA {::}
 ;
 
 
-casos::=casos BPCASE DD BPDOSPUNTOS procesos BPBREAK BPPTCOMA {::}             
-       |casos BPDEFAULT BPDOSPUNTOS procesos BPBREAK BPPTCOMA {::}
-       |casos BPDEFAULT BPDOSPUNTOS procesos {::}
-       |casos BPCASE BPCADENA BPDOSPUNTOS procesos BPBREAK BPPTCOMA {::}
-       |BPCASE DD BPDOSPUNTOS procesos BPBREAK BPPTCOMA {::}
-       |BPDEFAULT BPDOSPUNTOS procesos BPBREAK BPPTCOMA {::}
-       |BPDEFAULT BPDOSPUNTOS procesos {::}
-       |BPCASE BPCADENA BPDOSPUNTOS procesos BPBREAK BPPTCOMA {::}
+casos::=casos BPCASE:var1 DD BPDOSPUNTOS procesos BPBREAK BPPTCOMA {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}             
+       |casos BPDEFAULT:var1 BPDOSPUNTOS procesos BPBREAK BPPTCOMA {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+       |casos BPDEFAULT:var1 BPDOSPUNTOS procesos {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+       |casos BPCASE:var1 BPCADENA BPDOSPUNTOS procesos BPBREAK BPPTCOMA {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+       |BPCASE:var1 DD BPDOSPUNTOS procesos BPBREAK BPPTCOMA {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+       |BPDEFAULT:var1 BPDOSPUNTOS procesos BPBREAK BPPTCOMA {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+       |BPDEFAULT:var1 BPDOSPUNTOS procesos {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
+       |BPCASE:var1 BPCADENA BPDOSPUNTOS procesos BPBREAK BPPTCOMA {:Informacion.add(new NodoinformacionJS("Sentencia", var1));:}
 ;
 
-impresion::=impresion BPMAS DD {::}
-           |impresion BPMAS BPCADENA {::}
-           |impresion BPMAS BPNOTEQUALS IDENTIFICADOR {::}
-           |impresion BPMAS IDENTIFICADOR {::}
+impresion::=impresion BPMAS DD:var1 {:RESULT=var1;:}
+           |impresion BPMAS BPCADENA:var1 {:RESULT=var1;:}
+           |impresion BPMAS BPNOTEQUALS IDENTIFICADOR:var1 {:RESULT=var1;:}
+           |impresion BPMAS IDENTIFICADOR:var1 {:RESULT=var1;:}
            |impresion BPMAS BPPARIZQ opmate BPPARDER
-           |BPCADENA {::}
-           |IDENTIFICADOR {::}
+           |BPCADENA:var1 {:RESULT=var1;:}
+           |IDENTIFICADOR:var1 {:RESULT=var1;:}
            |DD {::}
            |BPGUION DD {::}
            |BPGUION BPPARIZQ opmate BPPARDER {::}

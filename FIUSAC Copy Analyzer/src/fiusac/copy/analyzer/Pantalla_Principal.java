@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.Reader;
 import Errores.*;
+import InformacionPublica.*;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
@@ -35,7 +36,10 @@ import org.jfree.data.xy.XYSeries;
  * @author BRAYAN
  */
 public class Pantalla_Principal extends javax.swing.JFrame {
-    public ArrayList<Excepciones> tabladeErrores = new ArrayList();
+    private ArrayList<Archivo_Entrante> ArchivosComparados = new ArrayList();
+    private ArrayList<Archivo_Entrante> Archivos1 = new ArrayList();
+    private ArrayList<Archivo_Entrante> Archivos2 = new ArrayList();
+    private ArrayList<Excepciones> tabladeErrores = new ArrayList();
     String cadena = "";
     Sintactico sintax;
     analizadorJs.Sintactico sintaxJS1, sintaxJS2;
@@ -261,35 +265,35 @@ public class Pantalla_Principal extends javax.swing.JFrame {
     private void JM_ReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JM_ReportesMouseClicked
         // TODO add your handling code here:
         for (int i = 0; i < sintax.GraficasEjecutar.size(); i++) {
-            if (sintax.GraficasEjecutar.get(i).tipo.equals("GraficaBarras")) {
+            if (sintax.GraficasEjecutar.get(i).tipo.equalsIgnoreCase("GraficaBarras")) {
                 JL_Console.setText(JL_Console.getText()+" Generando grafica de Barras");
                 NodoGrafica barras = new NodoGrafica();
                 barras = sintax.GraficasEjecutar.get(i);
                 
                 for (int j = 0; j < barras.Valores.size(); j++) {
                     for (int k = 0; k < sintax.ListaVariables.size(); k++) {
-                        if (barras.Valores.get(j).equals(sintax.ListaVariables.get(k).Identificador)) {
+                        if (barras.Valores.get(j).equalsIgnoreCase(sintax.ListaVariables.get(k).Identificador)) {
                             barras.Valores.set(j, sintax.ListaVariables.get(k).contenido);
                         }   
-                        if (barras.Ejes.get(j).equals(sintax.ListaVariables.get(k).Identificador)) {
+                        if (barras.Ejes.get(j).equalsIgnoreCase(sintax.ListaVariables.get(k).Identificador)) {
                             barras.Ejes.set(j, sintax.ListaVariables.get(k).contenido);
                         }
                     }
                 }
                 for (int j = 0; j < sintax.ListaVariables.size(); j++) {
-                    if (barras.titulo.equals(sintax.ListaVariables.get(j).Identificador)){
+                    if (barras.titulo.equalsIgnoreCase(sintax.ListaVariables.get(j).Identificador)){
                         barras.titulo = sintax.ListaVariables.get(j).contenido;
                     }
                 }
                 
                 for (int j = 0; j < sintax.ListaVariables.size(); j++) {
-                    if (barras.Titulox.equals(sintax.ListaVariables.get(j).Identificador)){
+                    if (barras.Titulox.equalsIgnoreCase(sintax.ListaVariables.get(j).Identificador)){
                         barras.Titulox = sintax.ListaVariables.get(j).contenido;
                     }
                 }
                 
                 for (int j = 0; j < sintax.ListaVariables.size(); j++) {
-                    if (barras.Tituloy.equals(sintax.ListaVariables.get(j).Identificador)){
+                    if (barras.Tituloy.equalsIgnoreCase(sintax.ListaVariables.get(j).Identificador)){
                         barras.Tituloy = sintax.ListaVariables.get(j).contenido;
                     }
                 }
@@ -314,33 +318,41 @@ public class Pantalla_Principal extends javax.swing.JFrame {
                 ChartFrame jf = new ChartFrame(barras.titulo, GraficoBarras);
                 jf.setLocationRelativeTo(null);
                 jf.setVisible(true);
-            }else if (sintax.GraficasEjecutar.get(i).tipo.equals("GraficaPie")) {
+            }else if (sintax.GraficasEjecutar.get(i).tipo.equalsIgnoreCase("GraficaPie")) {
                 
                 NodoGrafica circular = new NodoGrafica();
                 circular = sintax.GraficasEjecutar.get(i);
                 JL_Console.setText(JL_Console.getText()+" Generando grafica Circular");
                 for (int j = 0; j < circular.Valores.size(); j++) {
                     for (int k = 0; k < sintax.ListaVariables.size(); k++) {
-                        if (circular.Valores.get(j).equals(sintax.ListaVariables.get(k).Identificador)) {
+                        if (circular.Valores.get(j).equalsIgnoreCase(sintax.ListaVariables.get(k).Identificador)) {
                             circular.Valores.set(j, sintax.ListaVariables.get(k).contenido);
                         }   
-                        if (circular.Ejes.get(j).equals(sintax.ListaVariables.get(k).Identificador)) {
+                        if (circular.Ejes.get(j).equalsIgnoreCase(sintax.ListaVariables.get(k).Identificador)) {
                             circular.Ejes.set(j, sintax.ListaVariables.get(k).contenido);
                         }
                     }
                 }
                 
                 for (int j = 0; j < sintax.ListaVariables.size(); j++) {
-                    if (circular.titulo.equals(sintax.ListaVariables.get(j).Identificador)){
+                    if (circular.titulo.equalsIgnoreCase(sintax.ListaVariables.get(j).Identificador)){
                         circular.titulo = sintax.ListaVariables.get(j).contenido;
                     }
                 }
                 
                 DefaultPieDataset data = new DefaultPieDataset();
                 
+                for (int j = 0; j < circular.Ejes.size(); j++) {
+                    data.setValue( circular.Ejes.get(j), Double.parseDouble(circular.Valores.get(j)));
+                }
                 
+                JFreeChart GraficoCircular = ChartFactory.createPieChart(circular.tipo, data);
                 
-            }else if (sintax.GraficasEjecutar.get(i).tipo.equals("GraficaLineas")) {
+                ChartFrame jf = new ChartFrame(circular.titulo, GraficoCircular);
+                jf.setLocationRelativeTo(null);
+                jf.setVisible(true);
+                
+            }else if (sintax.GraficasEjecutar.get(i).tipo.equalsIgnoreCase("GraficaLineas")) {
                 NodoGrafica lineal = new NodoGrafica();
                 lineal = sintax.GraficasEjecutar.get(i);
                 JL_Console.setText(JL_Console.getText()+" Generando grafica de Lineas");
@@ -432,11 +444,13 @@ public class Pantalla_Principal extends javax.swing.JFrame {
         
         String[] carpeta1 = rut1.list();
         String[] carpeta2 = rut2.list();
-        
+        NodoMetodo Method = new NodoMetodo();
+        NodoClase clasesita = new NodoClase();
+        Archivo_Entrante Arch = new Archivo_Entrante();
         JL_Console.setText(JL_Console.getText()+" Detectando Archivos con el mismo nombre. \n");
         for (int i = 0; i < carpeta1.length; i++) {
             for (int j = 0; j < carpeta2.length; j++) {
-                if (carpeta1[i].equals(carpeta2[j])) {
+                if (carpeta1[i].equalsIgnoreCase(carpeta2[j])) {
                     File archivo1 = new File(rut1validar1.substring(1, rut1validar1.length()-1)+"\\"+carpeta1[i]);
                     File archivo2 = new File(rut1validar1.substring(1, rut1validar1.length()-1)+"\\"+carpeta2[i]);
         
@@ -447,7 +461,17 @@ public class Pantalla_Principal extends javax.swing.JFrame {
                         //System.out.println(st2+"\n");
                         sintaxJS1 = new analizadorJs.Sintactico(new analizadorJs.Lexico(new StringReader(st1)));
                         sintaxJS2 = new analizadorJs.Sintactico(new analizadorJs.Lexico(new StringReader(st2)));
+                        try {
+                            sintaxJS1.parse();
+                            sintaxJS2.parse();
+                            JL_Console.setText(JL_Console.getText()+"Recoleccion de Datos exitoso :) \n");
+                        } catch (Exception e) {
+                            JL_Console.setText(JL_Console.getText()+"Los archivos contienen erroes \n");
+                        }
                         JL_Console.setText(JL_Console.getText()+"Obtencion de Datos exitoso :) \n");
+                        for (int k = 0; k < sintaxJS1.Informacion.size(); k++) {
+                            System.out.println(sintaxJS1.Informacion.get(k).tipo+" -> "+sintaxJS1.Informacion.get(k).Identificador);
+                        }
                     } catch (Exception e) {
                         System.out.println("Error fatal en compilación de entrada.");
                         System.out.println("Causa: "+e.getCause());
