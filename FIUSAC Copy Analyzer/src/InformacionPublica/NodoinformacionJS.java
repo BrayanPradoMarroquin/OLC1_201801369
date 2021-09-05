@@ -12,9 +12,17 @@ package InformacionPublica;
 public class NodoinformacionJS {
     public String tipo;
     public String Identificador;
+    public int lugar;
     
-    public NodoinformacionJS(String tipo, String contendio){
+    public NodoinformacionJS(String tipo, String contendio, int lugar){
         this.tipo = tipo;
         this.Identificador = contendio;
+        this.lugar = lugar;
+    }
+
+    public NodoinformacionJS(String comentario, String var1) {
+        this.tipo = tipo;
+        this.Identificador = var1;
+        this.lugar = 0;
     }
 }

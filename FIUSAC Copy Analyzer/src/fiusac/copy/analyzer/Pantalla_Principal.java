@@ -36,10 +36,9 @@ import org.jfree.data.xy.XYSeries;
  * @author BRAYAN
  */
 public class Pantalla_Principal extends javax.swing.JFrame {
-    private ArrayList<Archivo_Entrante> ArchivosComparados = new ArrayList();
-    private ArrayList<Archivo_Entrante> Archivos1 = new ArrayList();
-    private ArrayList<Archivo_Entrante> Archivos2 = new ArrayList();
-    private ArrayList<Excepciones> tabladeErrores = new ArrayList();
+    ArrayList<Archivo_Entrante> informacion = new ArrayList();
+    Archivo_Entrante arch1 = new Archivo_Entrante();
+    Archivo_Entrante arch2 = new Archivo_Entrante();
     String cadena = "";
     Sintactico sintax;
     analizadorJs.Sintactico sintaxJS1, sintaxJS2;
@@ -466,12 +465,38 @@ public class Pantalla_Principal extends javax.swing.JFrame {
                             sintaxJS2.parse();
                             JL_Console.setText(JL_Console.getText()+"Recoleccion de Datos exitoso :) \n");
                         } catch (Exception e) {
-                            JL_Console.setText(JL_Console.getText()+"Los archivos contienen erroes \n");
+                            JL_Console.setText(JL_Console.getText()+"Los archivos contienen errores \n");
                         }
                         JL_Console.setText(JL_Console.getText()+"Obtencion de Datos exitoso :) \n");
+                        arch1.Nombres = carpeta1[i];
                         for (int k = 0; k < sintaxJS1.Informacion.size(); k++) {
-                            System.out.println(sintaxJS1.Informacion.get(k).tipo+" -> "+sintaxJS1.Informacion.get(k).Identificador);
+                            if (sintaxJS1.Informacion.get(k).tipo.equalsIgnoreCase("class")) {
+                                arch1.clases++;
+                            }else if (sintaxJS1.Informacion.get(k).tipo.equalsIgnoreCase("Variable")) {
+                                arch1.Variables++;
+                            }else if (sintaxJS1.Informacion.get(k).tipo.equalsIgnoreCase("Metodo")) {
+                                arch1.Metodos++;
+                            }else if (sintaxJS1.Informacion.get(k).tipo.equalsIgnoreCase("Comentario")) {
+                                arch1.Comentarios++;
+                            }
                         }
+                        informacion.add(arch1);
+                        arch1 = null;
+                        
+                        arch2.Nombres = carpeta2[i];
+                        for (int k = 0; k < sintaxJS1.Informacion.size(); k++) {
+                            if (sintaxJS2.Informacion.get(k).tipo.equalsIgnoreCase("class")) {
+                                arch2.clases++;
+                            }else if (sintaxJS2.Informacion.get(k).tipo.equalsIgnoreCase("Variable")) {
+                                arch2.Variables++;
+                            }else if (sintaxJS2.Informacion.get(k).tipo.equalsIgnoreCase("Metodo")) {
+                                arch2.Metodos++;
+                            }else if (sintaxJS2.Informacion.get(k).tipo.equalsIgnoreCase("Comentario")) {
+                                arch2.Comentarios++;
+                            }
+                        }
+                        informacion.add(arch2);
+                        arch2 = null;
                     } catch (Exception e) {
                         System.out.println("Error fatal en compilación de entrada.");
                         System.out.println("Causa: "+e.getCause());

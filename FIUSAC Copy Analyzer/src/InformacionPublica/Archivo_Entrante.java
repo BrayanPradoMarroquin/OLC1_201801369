@@ -12,22 +12,24 @@ import java.util.ArrayList;
  * @author BRAYAN
  */
 public class Archivo_Entrante {
-    public NodoClase Clase;
-    public int CantidadVariable;
-    public NodoMetodo Metodos;
-    public ArrayList<String> Comentarios;
+    public String Nombres;
+    public int clases;
+    public int Variables;
+    public int Metodos;
+    public int Comentarios;
     
     public Archivo_Entrante(){
-        this.Clase = null;
-        this.CantidadVariable = 0;
-        this.Metodos = null;
-        this.Comentarios = null;
+        this.Nombres = "";
+        this.clases = 0;
+        this.Variables = 0;
+        this.Metodos = 0;
+        this.Comentarios = 0;
     }
     
-    public Archivo_Entrante(NodoClase clase, NodoMetodo Method, String coment){
-        this.Clase = clase;
-        this.CantidadVariable = +1;
-        this.Metodos = Method;
-        this.Comentarios.add(coment);
+    public Archivo_Entrante(int clase, int variables, int metodos, int comentarios){
+        this.clases = this.clases + clase;
+        this.Variables = this.Variables + variables;
+        this.Metodos = this.Metodos+ metodos;
+        this.Comentarios = this.Comentarios + comentarios;
     }
 }

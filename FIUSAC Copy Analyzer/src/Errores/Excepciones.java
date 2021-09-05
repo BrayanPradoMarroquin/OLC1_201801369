@@ -12,10 +12,14 @@ package Errores;
 public class Excepciones {
     public String tipo;
     public String descripcion;
+    public int fila;
+    public int Columna;
     
-    public Excepciones(String tipo, String descripcion){
+    public Excepciones(String tipo, String descripcion, int fila, int columna){
         this.tipo = tipo;
         this.descripcion = descripcion;
+        this.fila = fila;
+        this.Columna = columna;
     }
     
     @Override
