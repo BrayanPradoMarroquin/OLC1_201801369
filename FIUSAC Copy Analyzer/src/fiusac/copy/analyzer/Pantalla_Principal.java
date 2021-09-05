@@ -9,17 +9,20 @@ import analizadores.Lexico;
 import analizadores.Sintactico;
 import fiusac.copy.analyzer.Pestañas;
 import java.awt.MenuComponent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.Reader;
+import java.io.*;
 import Errores.*;
 import InformacionPublica.*;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Files;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java_cup.runtime.Symbol;
@@ -41,6 +44,7 @@ import org.jfree.data.xy.XYSeries;
  */
 public class Pantalla_Principal extends javax.swing.JFrame {
     ArrayList<Archivo_Entrante> informacion = new ArrayList();
+    ArrayList<String> grafics = new ArrayList();
     Archivo_Entrante arch1 = new Archivo_Entrante();
     Archivo_Entrante arch2 = new Archivo_Entrante();
     String cadena = "";
@@ -323,8 +327,10 @@ public class Pantalla_Principal extends javax.swing.JFrame {
                     );
                     int width = 640;
                     int height = 480;
-                    File ImagenBarra = new File( "GraficaBarras-"+Integer.toString(contadorBarras++)+".jpeg" );
+                    String nombre = "GraficaBarras-"+Integer.toString(contadorBarras++)+".jpeg" ;
+                    File ImagenBarra = new File( nombre);
                     ChartUtilities.saveChartAsJPEG(ImagenBarra, GraficoBarras, width, height);
+                    grafics.add(nombre);
                 } catch (IOException ex) {
                     Logger.getLogger(Pantalla_Principal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -361,8 +367,10 @@ public class Pantalla_Principal extends javax.swing.JFrame {
                     JFreeChart GraficoCircular = ChartFactory.createPieChart(circular.tipo, data);
                     int width = 640;
                     int height = 480;
-                    File ImagenBarra = new File( "GraficaCircular-"+Integer.toString(contadorCircular++)+".jpeg" );
+                    String nombre = "GraficaCircular-"+Integer.toString(contadorCircular++)+".jpeg" ;
+                    File ImagenBarra = new File( nombre);
                     ChartUtilities.saveChartAsJPEG(ImagenBarra, GraficoCircular, width, height);
+                    grafics.add(nombre);
                 } catch (IOException ex) {
                     Logger.getLogger(Pantalla_Principal.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -375,6 +383,8 @@ public class Pantalla_Principal extends javax.swing.JFrame {
             
             
         }
+        Reportehtml();
+        System.out.println(grafics);
     }//GEN-LAST:event_JM_ReportesMouseClicked
 
     /**
@@ -521,6 +531,53 @@ public class Pantalla_Principal extends javax.swing.JFrame {
                     }
                 }
             }
+        }
+    }
+
+    private void Reportehtml() {
+        System.out.println("Hola soy la graficadora");
+        LocalDate diaactual = LocalDate.now();
+        LocalTime horaactual = LocalTime.now();
+        File Report;
+        FileWriter w;
+        BufferedWriter wb;
+        PrintWriter wr;
+        
+        try {
+            String primera = "<!DOCTYPE html> \n";
+            primera = primera + "<html lang=\"en\"> \n";
+            primera = primera + "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n" +
+                        "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                        "    <title>Document</title>\n" +
+                        "    <link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css\" rel=\"stylesheet\" integrity=\"sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We\" crossorigin=\"anonymous\">\n" +
+                        "</head> \n";
+            primera = primera + "<body> \n";
+            primera = primera + "<nav class=\"navbar navbar-dark bg-primary\">\n" +
+                        "        <a class=\"navbar-brand\" href=\"#\">REPORTES FIUSAC COPY ANALIZER <br> Brayan Hamllelo Estevem Prado Marroquin <br> Carnet: 201801369</a>\n" +
+                        "        <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavAltMarkup\" aria-controls=\"navbarNavAltMarkup\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" +
+                        "          <span class=\"navbar-toggler-icon\"></span>\n" +
+                        "        </button>\n" +
+                        "      </nav>";
+            primera = primera +"<h3>\n" +"        <small class=\"text-muted\">"+diaactual+" a las "+horaactual+"</small>\n" +"      </h3>";
+            
+            for (int i = 0; i < grafics.size(); i++) {
+                primera = primera + "      <div class=\"text-center\">";
+                primera = primera + "           <img src=\""+grafics.get(i)+"\" class=\"rounded\" alt=\"...\">";
+                primera = primera + "</div>";
+            }
+            primera = primera + "</body>\n" +"</html>";
+            
+            Report  = new File("Reporte Estadistico.html");
+            w=new FileWriter(Report);
+            wb = new BufferedWriter(w);
+            wr = new PrintWriter(wb);
+            
+            wr.write(primera);
+            wr.close();
+            wb.close();
+        } catch (Exception e) {
         }
     }
 }
