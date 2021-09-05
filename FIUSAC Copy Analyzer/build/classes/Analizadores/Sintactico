@@ -23,7 +23,20 @@ parser code
     
     public Symbol getS(){
         return this.s;
-    }  
+    } 
+
+    public void syntax_error(Symbol s){ 
+        System.out.println("Error Sintáctico en la Línea " + (s.left) +
+        " Columna "+s.right+ ". No se esperaba este componente: " +s.value+".");
+        Errores.Error.ErroresCometidos.add(new Excepciones("Sintactico", "Este es un error sintactico: "+s.value, s.left, s.right));
+    } 
+
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        System.out.println("Error síntactico irrecuperable en la Línea " + 
+        (s.left)+ " Columna "+s.right+". Componente " + s.value + 
+        " no reconocido."); 
+        Errores.Error.ErroresCometidos.add(new Excepciones("Sintactico", "Este es un error sintactico: "+s.value, s.left, s.right));
+    } 
 :} 
 
 terminal String BPDEG, BPGRE, BPSTG, BPDOUBLE;
@@ -46,14 +59,16 @@ non terminal ArrayList<String> contenidox, contenidov, ejesx, valores, compara;
 
 start with ini;
 
-ini::=BPGRE:var1 BPLLAIZQ:var2 contenidogeneral BPLLADER:var3 {:ListaTokens.add(var1); ListaTokens.add(var2); ListaTokens.add(var3);:};
+ini::=BPGRE:var1 BPLLAIZQ:var2 contenidogeneral BPLLADER:var3 {:ListaTokens.add(var1); ListaTokens.add(var2); ListaTokens.add(var3);:}
+    |error BPLLADER;
 
 contenidogeneral::=BPDEG:var1 BPLLAIZQ:var2 cuerpo BPLLADER:var3 graficas {:ListaTokens.add(var1); ListaTokens.add(var2);
                                                                             ListaTokens.add(var3);:}
                   |compara BPDEG:var1 BPLLAIZQ:var2 cuerpo BPLLADER:var3 graficas {:ListaTokens.add(var1); ListaTokens.add(var2);
                                                                                     ListaTokens.add(var3);:}
                   |BPDEG:var1 BPLLAIZQ:var2 cuerpo BPLLADER:var3 compara graficas {:ListaTokens.add(var1); ListaTokens.add(var2);
-                                                                                    ListaTokens.add(var3);:};
+                                                                                    ListaTokens.add(var3);:}
+                  |error BPLLADER;
 
 cuerpo::=BPSTG:var3 IDENTIFICADOR:var1 BPEQUAL:var4 BPCADENA:var2 BPPTCOMA:var5  {:ListaVariables.add(new NodoVariable(var1, var2));
                                                                                    ListaTokens.add(var3); ListaTokens.add(var4);
@@ -67,7 +82,7 @@ cuerpo::=BPSTG:var3 IDENTIFICADOR:var1 BPEQUAL:var4 BPCADENA:var2 BPPTCOMA:var5 
         |cuerpo BPDOUBLE:var3 IDENTIFICADOR:var1 BPEQUAL:var4 DD:var2 BPPTCOMA:var5 {:ListaVariables.add(new NodoVariable(var1, var2));
                                                                                       ListaTokens.add(var3); ListaTokens.add(var4);
                                                                                       ListaTokens.add(var5);:}
-;
+        |error BPPTCOMA;
 
 graficas::=BPGBARRAS:var1 BPLLAIZQ:var2 datosgraficabarra BPLLADER:var3 {:graficabarras.tipo=var1;
                                                                           GraficasEjecutar.add(graficabarras);
@@ -128,7 +143,7 @@ graficas::=BPGBARRAS:var1 BPLLAIZQ:var2 datosgraficabarra BPLLADER:var3 {:grafic
                                                                                             GraficasEjecutar.add(graficalineas);
                                                                                             ListaTokens.add(var1); ListaTokens.add(var2);
                                                                                             ListaTokens.add(var3);:}
-;
+            |error BPLLADER;
 
 datosgraficabarra::=datosgraficabarra titulos:var1 {:graficabarras.titulo=(String) var1;:}
             |datosgraficabarra ejesx:var1 {:graficabarras.Ejes=var1;:}

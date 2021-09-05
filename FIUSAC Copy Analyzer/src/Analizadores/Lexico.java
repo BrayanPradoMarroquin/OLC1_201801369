@@ -1,6 +1,6 @@
 package analizadores;
+import Errores.Excepciones;
 import java_cup.runtime.*; 
-
 
 public class Lexico implements java_cup.runtime.Scanner {
 	private final int YY_BUFFER_SIZE = 512;
@@ -528,6 +528,7 @@ public class Lexico implements java_cup.runtime.Scanner {
 					case 3:
 						{
     System.out.println("Este es un error lexico: "+yytext()+", en la linea: "+yyline+", en la columna: "+yychar);
+    Errores.Error.ErroresCometidos.add(new Excepciones("Lexico", "Este es un error lexico: "+yytext(), yyline, yychar));
   }
 					case -4:
 						break;
@@ -662,6 +663,7 @@ public class Lexico implements java_cup.runtime.Scanner {
 					case 37:
 						{
     System.out.println("Este es un error lexico: "+yytext()+", en la linea: "+yyline+", en la columna: "+yychar);
+    Errores.Error.ErroresCometidos.add(new Excepciones("Lexico", "Este es un error lexico: "+yytext(), yyline, yychar));
   }
 					case -37:
 						break;
@@ -684,6 +686,7 @@ public class Lexico implements java_cup.runtime.Scanner {
 					case 43:
 						{
     System.out.println("Este es un error lexico: "+yytext()+", en la linea: "+yyline+", en la columna: "+yychar);
+    Errores.Error.ErroresCometidos.add(new Excepciones("Lexico", "Este es un error lexico: "+yytext(), yyline, yychar));
   }
 					case -42:
 						break;
@@ -694,6 +697,7 @@ public class Lexico implements java_cup.runtime.Scanner {
 					case 46:
 						{
     System.out.println("Este es un error lexico: "+yytext()+", en la linea: "+yyline+", en la columna: "+yychar);
+    Errores.Error.ErroresCometidos.add(new Excepciones("Lexico", "Este es un error lexico: "+yytext(), yyline, yychar));
   }
 					case -44:
 						break;
@@ -704,6 +708,7 @@ public class Lexico implements java_cup.runtime.Scanner {
 					case 49:
 						{
     System.out.println("Este es un error lexico: "+yytext()+", en la linea: "+yyline+", en la columna: "+yychar);
+    Errores.Error.ErroresCometidos.add(new Excepciones("Lexico", "Este es un error lexico: "+yytext(), yyline, yychar));
   }
 					case -46:
 						break;
