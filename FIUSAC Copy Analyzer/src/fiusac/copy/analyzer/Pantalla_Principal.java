@@ -12,14 +12,9 @@ import java.awt.MenuComponent;
 import java.io.*;
 import Errores.*;
 import InformacionPublica.*;
-import java.io.IOException;
-import java.io.StringReader;
 import java.nio.file.Files;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
+import java.time.*;
+import java.util.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -29,7 +24,6 @@ import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
@@ -37,6 +31,7 @@ import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 /**
  *
@@ -378,6 +373,34 @@ public class Pantalla_Principal extends javax.swing.JFrame {
             }else if (sintax.GraficasEjecutar.get(i).tipo.equalsIgnoreCase("GraficaLineas")) {
                 NodoGrafica lineal = new NodoGrafica();
                 lineal = sintax.GraficasEjecutar.get(i);
+                
+                XYSeries oSeries = new XYSeries(sintax.GraficasEjecutar.get(i).titulo);
+                
+                for (int j = 0; j < informacion.size(); j++) {
+                    try {
+                        String nombreC = sintax.GraficasEjecutar.get(i).Titulox.substring(1, sintax.GraficasEjecutar.get(i).Titulox.length()-1);
+                        if (nombreC.equalsIgnoreCase(informacion.get(i).Nombres)) {
+                            oSeries.add(1, informacion.get(i).clases);
+                            oSeries.add(2, informacion.get(i).Metodos);
+                            oSeries.add(3, informacion.get(i).Variables);
+                            oSeries.add(4, informacion.get(i).Comentarios);
+                        }
+                        XYSeriesCollection oDataset = new XYSeriesCollection();
+                        oDataset.addSeries(oSeries);
+                        
+                        JFreeChart graficaLineas = ChartFactory.createXYLineChart(informacion.get(i).Nombres, "Informacion", "cantidad", oDataset, PlotOrientation.VERTICAL, false, false, false);
+                        
+                        int width = 640;
+                        int height = 480;
+                        String nombre = "GraficaLineal-"+Integer.toString(contadorLineal++)+".jpeg" ;
+                        File ImagenBarra = new File( nombre);
+                        ChartUtilities.saveChartAsJPEG(ImagenBarra, graficaLineas, width, height);
+                        grafics.add(nombre);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Pantalla_Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                
                 JL_Console.setText(JL_Console.getText()+" Generando grafica de Lineas\n");
             }
             
