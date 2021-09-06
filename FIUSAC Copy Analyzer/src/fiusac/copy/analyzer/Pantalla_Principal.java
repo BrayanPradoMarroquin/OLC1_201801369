@@ -379,11 +379,11 @@ public class Pantalla_Principal extends javax.swing.JFrame {
                 for (int j = 0; j < informacion.size(); j++) {
                     try {
                         String nombreC = sintax.GraficasEjecutar.get(i).Titulox.substring(1, sintax.GraficasEjecutar.get(i).Titulox.length()-1);
-                        if (nombreC.equalsIgnoreCase(informacion.get(i).Nombres)) {
-                            oSeries.add(1, informacion.get(i).clases);
-                            oSeries.add(2, informacion.get(i).Metodos);
-                            oSeries.add(3, informacion.get(i).Variables);
-                            oSeries.add(4, informacion.get(i).Comentarios);
+                        if (nombreC.equalsIgnoreCase(informacion.get(j).Nombres)) {
+                            oSeries.add(1, informacion.get(j).clases);
+                            oSeries.add(2, informacion.get(j).Metodos);
+                            oSeries.add(3, informacion.get(j).Variables);
+                            oSeries.add(4, informacion.get(j).Comentarios);
                         }
                         XYSeriesCollection oDataset = new XYSeriesCollection();
                         oDataset.addSeries(oSeries);
